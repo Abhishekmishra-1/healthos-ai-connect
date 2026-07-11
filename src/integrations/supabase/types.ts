@@ -14,16 +14,249 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      health_events: {
+        Row: {
+          created_at: string
+          description: string | null
+          event_type: string
+          id: string
+          occurred_at: string
+          ref_id: string | null
+          ref_table: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          event_type: string
+          id?: string
+          occurred_at?: string
+          ref_id?: string | null
+          ref_table?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          event_type?: string
+          id?: string
+          occurred_at?: string
+          ref_id?: string | null
+          ref_table?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      lab_reports: {
+        Row: {
+          analysis: Json | null
+          created_at: string
+          file_name: string | null
+          file_path: string
+          id: string
+          lab_name: string | null
+          mime_type: string | null
+          report_type: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          analysis?: Json | null
+          created_at?: string
+          file_name?: string | null
+          file_path: string
+          id?: string
+          lab_name?: string | null
+          mime_type?: string | null
+          report_type?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          analysis?: Json | null
+          created_at?: string
+          file_name?: string | null
+          file_path?: string
+          id?: string
+          lab_name?: string | null
+          mime_type?: string | null
+          report_type?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      medicine_reminders: {
+        Row: {
+          active: boolean
+          created_at: string
+          dosage: string | null
+          end_date: string | null
+          food_timing: string | null
+          frequency: string | null
+          id: string
+          medicine_name: string
+          notes: string | null
+          start_date: string
+          times: string[]
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          dosage?: string | null
+          end_date?: string | null
+          food_timing?: string | null
+          frequency?: string | null
+          id?: string
+          medicine_name: string
+          notes?: string | null
+          start_date?: string
+          times?: string[]
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          dosage?: string | null
+          end_date?: string | null
+          food_timing?: string | null
+          frequency?: string | null
+          id?: string
+          medicine_name?: string
+          notes?: string | null
+          start_date?: string
+          times?: string[]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      prescriptions: {
+        Row: {
+          analysis: Json | null
+          clinic_name: string | null
+          created_at: string
+          doctor_name: string | null
+          file_name: string | null
+          file_path: string
+          id: string
+          mime_type: string | null
+          notes: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          analysis?: Json | null
+          clinic_name?: string | null
+          created_at?: string
+          doctor_name?: string | null
+          file_name?: string | null
+          file_path: string
+          id?: string
+          mime_type?: string | null
+          notes?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          analysis?: Json | null
+          clinic_name?: string | null
+          created_at?: string
+          doctor_name?: string | null
+          file_name?: string | null
+          file_path?: string
+          id?: string
+          mime_type?: string | null
+          notes?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          allergies: string | null
+          blood_group: string | null
+          city: string | null
+          created_at: string
+          date_of_birth: string | null
+          emergency_contact_name: string | null
+          emergency_contact_phone: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          state: string | null
+          updated_at: string
+        }
+        Insert: {
+          allergies?: string | null
+          blood_group?: string | null
+          city?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+        }
+        Update: {
+          allergies?: string | null
+          blood_group?: string | null
+          city?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "patient" | "pharmacy" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +383,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["patient", "pharmacy", "admin"],
+    },
   },
 } as const
