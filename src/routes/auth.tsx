@@ -1,0 +1,136 @@
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
+import { Sparkles, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+
+export const Route = createFileRoute("/auth")({
+  ssr: false,
+  head: () => ({
+    meta: [
+      { title: "Sign in — HealthOS AI" },
+      { name: "description", content: "Sign in or create your HealthOS AI account to access your health records, reminders, and AI insights." },
+    ],
+  }),
+  component: AuthPage,
+});
+
+function AuthPage() {
+  const navigate = useNavigate();
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) navigate({ to: "/app" });
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      if (session) navigate({ to: "/app" });
+    });
+    return () => sub.subscription.unsubscribe();
+  }, [navigate]);
+
+  async function handleEmail(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (mode === "signup") {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: window.location.origin + "/app",
+            data: { full_name: name },
+          },
+        });
+        if (error) throw error;
+        toast.success("Account created. Check your email if confirmation is required.");
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+      }
+    } catch (err: any) {
+      toast.error(err.message ?? "Authentication failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleGoogle() {
+    setLoading(true);
+    try {
+      const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/auth" });
+      if (result.error) throw result.error;
+    } catch (err: any) {
+      toast.error(err.message ?? "Google sign-in failed");
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="relative min-h-dvh overflow-hidden bg-background text-foreground">
+      <div className="pointer-events-none absolute inset-0 -z-10 gradient-mesh opacity-70" />
+      <div className="mx-auto flex min-h-dvh max-w-md flex-col justify-center px-6 py-12">
+        <Link to="/" className="mb-8 flex items-center gap-2">
+          <span className="grid h-9 w-9 place-items-center rounded-xl gradient-brand text-white shadow-glow">
+            <Sparkles className="h-4 w-4" />
+          </span>
+          <span className="text-[15px] font-semibold tracking-tight">HealthOS <span className="gradient-brand-text">AI</span></span>
+        </Link>
+
+        <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-glow">
+          <h1 className="text-2xl font-semibold tracking-tight">
+            {mode === "signin" ? "Welcome back" : "Create your account"}
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {mode === "signin" ? "Sign in to your health dashboard." : "Start managing your family's health, intelligently."}
+          </p>
+
+          <button
+            onClick={handleGoogle}
+            disabled={loading}
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold hover:bg-secondary disabled:opacity-60"
+          >
+            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.9 32.3 29.4 35.5 24 35.5c-6.4 0-11.6-5.2-11.6-11.5S17.6 12.5 24 12.5c2.9 0 5.6 1.1 7.6 2.9l5.7-5.7C33.6 6.4 29.1 4.5 24 4.5 13.2 4.5 4.5 13.2 4.5 24S13.2 43.5 24 43.5 43.5 34.8 43.5 24c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.6 15.7 18.9 12.5 24 12.5c2.9 0 5.6 1.1 7.6 2.9l5.7-5.7C33.6 6.4 29.1 4.5 24 4.5 16.2 4.5 9.4 8.9 6.3 14.7z"/><path fill="#4CAF50" d="M24 43.5c5 0 9.5-1.9 12.9-5l-6-4.9c-2 1.4-4.4 2.4-6.9 2.4-5.3 0-9.8-3.2-11.3-7.7l-6.5 5C9.3 39 16.1 43.5 24 43.5z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.3 5.6l6 4.9c-.4.4 6.5-4.8 6.5-14.5 0-1.2-.1-2.4-.4-3.5z"/></svg>
+            Continue with Google
+          </button>
+
+          <div className="my-6 flex items-center gap-3 text-xs text-muted-foreground">
+            <div className="h-px flex-1 bg-border" />or<div className="h-px flex-1 bg-border" />
+          </div>
+
+          <form onSubmit={handleEmail} className="space-y-3">
+            {mode === "signup" && (
+              <input required placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)}
+                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary" />
+            )}
+            <input required type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary" />
+            <input required type="password" placeholder="Password" minLength={6} value={password} onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary" />
+            <button disabled={loading}
+              className="flex w-full items-center justify-center gap-2 rounded-full gradient-brand px-4 py-2.5 text-sm font-semibold text-white shadow-glow disabled:opacity-60">
+              {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+              {mode === "signin" ? "Sign in" : "Create account"}
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-muted-foreground">
+            {mode === "signin" ? "New here?" : "Already have an account?"}{" "}
+            <button onClick={() => setMode(mode === "signin" ? "signup" : "signin")} className="font-semibold gradient-brand-text">
+              {mode === "signin" ? "Create an account" : "Sign in"}
+            </button>
+          </p>
+        </div>
+
+        <p className="mt-6 text-center text-xs text-muted-foreground">
+          By continuing you agree to our <Link to="/terms" className="underline">Terms</Link> and <Link to="/privacy" className="underline">Privacy Policy</Link>.
+        </p>
+      </div>
+    </div>
+  );
+}
