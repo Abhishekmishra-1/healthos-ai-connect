@@ -81,11 +81,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "HealthOS AI — The Intelligent Healthcare Network for India" },
       { name: "description", content: "One platform for medicines, doctors, labs, ambulances, and home care. Healthcare made intelligent for every Indian family, in every town and village." },
       { name: "author", content: "HealthOS AI" },
-      { property: "og:title", content: "HealthOS AI — The Intelligent Healthcare Network" },
-      { property: "og:description", content: "One platform. Every healthcare need. Built for Tier 2 & Tier 3 India." },
+      { property: "og:title", content: "HealthOS AI — The Intelligent Healthcare Network for India" },
+      { property: "og:description", content: "One platform for medicines, doctors, labs, ambulances, and home care. Healthcare made intelligent for every Indian family, in every town and village." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@HealthOSAI" },
+      { name: "twitter:title", content: "HealthOS AI — The Intelligent Healthcare Network for India" },
+      { name: "twitter:description", content: "One platform for medicines, doctors, labs, ambulances, and home care. Healthcare made intelligent for every Indian family, in every town and village." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/48d4750c-4e3a-4be4-a408-4069a03d754d/id-preview-7fb70e5d--0741b89d-a0a9-4ce5-9236-435134075cff.lovable.app-1783714422376.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/48d4750c-4e3a-4be4-a408-4069a03d754d/id-preview-7fb70e5d--0741b89d-a0a9-4ce5-9236-435134075cff.lovable.app-1783714422376.png" },
     ],
     links: [
       {
