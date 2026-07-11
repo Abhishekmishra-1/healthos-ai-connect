@@ -50,11 +50,11 @@ export function SiteNav() {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Link to="/contact" className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">
+          <Link to="/auth" className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">
             Sign in
           </Link>
           <Link
-            to="/contact"
+            to="/auth"
             className="rounded-full gradient-brand px-4 py-2 text-sm font-semibold text-white shadow-glow transition hover:opacity-90"
           >
             Get started
@@ -83,7 +83,7 @@ export function SiteNav() {
               </Link>
             ))}
             <Link
-              to="/contact"
+              to="/auth"
               onClick={() => setOpen(false)}
               className="mt-1 rounded-2xl gradient-brand px-4 py-3 text-center text-sm font-semibold text-white"
             >
