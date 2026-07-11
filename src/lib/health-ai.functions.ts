@@ -10,12 +10,13 @@ async function fetchFileAsDataUrl(
   supabase: any,
   bucket: string,
   path: string,
-): Promise<{ dataUrl: string; mime: string }> {
+): Promise<{ dataUrl: string; bytes: Uint8Array; mime: string }> {
   const { data, error } = await supabase.storage.from(bucket).download(path);
   if (error || !data) throw new Error(error?.message ?? "File not found");
-  const buf = Buffer.from(await data.arrayBuffer());
+  const bytes = new Uint8Array(await data.arrayBuffer());
+  const buf = Buffer.from(bytes);
   const mime = data.type || "application/octet-stream";
-  return { dataUrl: `data:${mime};base64,${buf.toString("base64")}`, mime };
+  return { dataUrl: `data:${mime};base64,${buf.toString("base64")}`, bytes, mime };
 }
 
 function extractJson(text: string): any {
@@ -44,7 +45,7 @@ export const analyzePrescription = createServerFn({ method: "POST" })
       .single();
     if (error || !row) throw new Error("Prescription not found");
 
-    const { dataUrl, mime } = await fetchFileAsDataUrl(supabase, "prescriptions", row.file_path);
+    const { dataUrl, bytes, mime } = await fetchFileAsDataUrl(supabase, "prescriptions", row.file_path);
 
     const gateway = createLovableAiGatewayProvider(key);
     const isImage = mime.startsWith("image/");
@@ -65,11 +66,8 @@ export const analyzePrescription = createServerFn({ method: "POST" })
               text: `Extract medicines from this prescription image. For each medicine include: name, dosage, frequency, duration, food_timing (one of "before food", "after food", "with food", or ""), purpose (one plain-English sentence), side_effects (array of 2-4 short plain-English strings). Also include doctor_name, clinic_name if visible, and a short summary in simple English (max 3 sentences). Return JSON: { "doctor_name": string|null, "clinic_name": string|null, "summary": string, "medicines": [ { "name": string, "dosage": string, "frequency": string, "duration": string, "food_timing": string, "purpose": string, "side_effects": string[] } ] }`,
             },
             isImage
-              ? { type: "image_url" as const, image_url: { url: dataUrl } }
-              : {
-                  type: "file" as const,
-                  file: { filename: row.file_name ?? "prescription", file_data: dataUrl },
-                },
+              ? { type: "image" as const, image: dataUrl }
+              : { type: "file" as const, data: bytes, mediaType: mime },
           ],
         },
       ],
@@ -125,7 +123,7 @@ export const analyzeLabReport = createServerFn({ method: "POST" })
       .single();
     if (error || !row) throw new Error("Report not found");
 
-    const { dataUrl, mime } = await fetchFileAsDataUrl(supabase, "lab-reports", row.file_path);
+    const { dataUrl, bytes, mime } = await fetchFileAsDataUrl(supabase, "lab-reports", row.file_path);
     const isImage = mime.startsWith("image/");
 
     const gateway = createLovableAiGatewayProvider(key);
@@ -145,11 +143,8 @@ export const analyzeLabReport = createServerFn({ method: "POST" })
               text: `Analyze this lab report. Return JSON: { "lab_name": string|null, "report_type": string|null, "summary": string (3-4 plain-English sentences), "abnormal_values": [ { "test": string, "value": string, "reference_range": string, "meaning": string (plain English, 1-2 sentences) } ], "normal_values": [ { "test": string, "value": string } ], "questions_for_doctor": string[] (3-5 concise questions) }. Do not diagnose. Never recommend medication.`,
             },
             isImage
-              ? { type: "image_url" as const, image_url: { url: dataUrl } }
-              : {
-                  type: "file" as const,
-                  file: { filename: row.file_name ?? "report", file_data: dataUrl },
-                },
+              ? { type: "image" as const, image: dataUrl }
+              : { type: "file" as const, data: bytes, mediaType: mime },
           ],
         },
       ],
