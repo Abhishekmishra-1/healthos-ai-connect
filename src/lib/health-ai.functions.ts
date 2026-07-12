@@ -212,3 +212,34 @@ export const generateHealthInsights = createServerFn({ method: "POST" })
       return { insights: [] };
     }
   });
+
+/* -------- AI Health Assistant chat -------- */
+export const askHealthAssistant = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) =>
+    z
+      .object({
+        messages: z
+          .array(z.object({ role: z.enum(["user", "assistant"]), content: z.string() }))
+          .min(1)
+          .max(30),
+      })
+      .parse(d),
+  )
+  .handler(async ({ data }) => {
+    const key = process.env.LOVABLE_API_KEY;
+    if (!key) throw new Error("Missing LOVABLE_API_KEY");
+    const gateway = createLovableAiGatewayProvider(key);
+    const { text } = await generateText({
+      model: gateway(MODEL),
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are HealthOS AI Copilot for Indian patients. Give short, warm, plain-English guidance about medicines, symptoms, lab reports and general wellness. Never diagnose. Always recommend consulting a doctor for anything serious. Prefer bullet points. Keep answers under 180 words.",
+        },
+        ...data.messages,
+      ],
+    });
+    return { reply: text };
+  });
