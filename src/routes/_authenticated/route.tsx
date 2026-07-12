@@ -124,7 +124,7 @@ function AuthenticatedLayout() {
                 />
               </div>
               <button className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full hover:bg-secondary" aria-label="Notifications">
-                <Bell className="h-4.5 w-4.5" />
+                <Bell className="h-5 w-5" />
                 <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
               </button>
               <Link to="/app/profile" className="grid h-10 w-10 shrink-0 place-items-center rounded-full gradient-brand text-sm font-semibold text-white shadow-glow" aria-label="Profile">
