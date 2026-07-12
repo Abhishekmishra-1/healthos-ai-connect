@@ -27,8 +27,16 @@ import { Route as AuthenticatedUploadReportRouteImport } from './routes/_authent
 import { Route as AuthenticatedUploadPrescriptionRouteImport } from './routes/_authenticated/upload-prescription'
 import { Route as AuthenticatedTimelineRouteImport } from './routes/_authenticated/timeline'
 import { Route as AuthenticatedRemindersRouteImport } from './routes/_authenticated/reminders'
+import { Route as AuthenticatedRecordsRouteImport } from './routes/_authenticated/records'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedOrdersRouteImport } from './routes/_authenticated/orders'
+import { Route as AuthenticatedMedicineRouteImport } from './routes/_authenticated/medicine'
+import { Route as AuthenticatedLabsRouteImport } from './routes/_authenticated/labs'
+import { Route as AuthenticatedEmergencyRouteImport } from './routes/_authenticated/emergency'
+import { Route as AuthenticatedDoctorsRouteImport } from './routes/_authenticated/doctors'
+import { Route as AuthenticatedAppointmentsRouteImport } from './routes/_authenticated/appointments'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedAiAssistantRouteImport } from './routes/_authenticated/ai-assistant'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -121,16 +129,58 @@ const AuthenticatedRemindersRoute = AuthenticatedRemindersRouteImport.update({
   path: '/reminders',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRecordsRoute = AuthenticatedRecordsRouteImport.update({
+  id: '/records',
+  path: '/records',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedOrdersRoute = AuthenticatedOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMedicineRoute = AuthenticatedMedicineRouteImport.update({
+  id: '/medicine',
+  path: '/medicine',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedLabsRoute = AuthenticatedLabsRouteImport.update({
+  id: '/labs',
+  path: '/labs',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEmergencyRoute = AuthenticatedEmergencyRouteImport.update({
+  id: '/emergency',
+  path: '/emergency',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDoctorsRoute = AuthenticatedDoctorsRouteImport.update({
+  id: '/doctors',
+  path: '/doctors',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppointmentsRoute =
+  AuthenticatedAppointmentsRouteImport.update({
+    id: '/appointments',
+    path: '/appointments',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   id: '/app',
   path: '/app',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAiAssistantRoute =
+  AuthenticatedAiAssistantRouteImport.update({
+    id: '/ai-assistant',
+    path: '/ai-assistant',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -145,8 +195,16 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/ai-assistant': typeof AuthenticatedAiAssistantRoute
   '/app': typeof AuthenticatedAppRoute
+  '/appointments': typeof AuthenticatedAppointmentsRoute
+  '/doctors': typeof AuthenticatedDoctorsRoute
+  '/emergency': typeof AuthenticatedEmergencyRoute
+  '/labs': typeof AuthenticatedLabsRoute
+  '/medicine': typeof AuthenticatedMedicineRoute
+  '/orders': typeof AuthenticatedOrdersRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/records': typeof AuthenticatedRecordsRoute
   '/reminders': typeof AuthenticatedRemindersRoute
   '/timeline': typeof AuthenticatedTimelineRoute
   '/upload-prescription': typeof AuthenticatedUploadPrescriptionRoute
@@ -166,8 +224,16 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/ai-assistant': typeof AuthenticatedAiAssistantRoute
   '/app': typeof AuthenticatedAppRoute
+  '/appointments': typeof AuthenticatedAppointmentsRoute
+  '/doctors': typeof AuthenticatedDoctorsRoute
+  '/emergency': typeof AuthenticatedEmergencyRoute
+  '/labs': typeof AuthenticatedLabsRoute
+  '/medicine': typeof AuthenticatedMedicineRoute
+  '/orders': typeof AuthenticatedOrdersRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/records': typeof AuthenticatedRecordsRoute
   '/reminders': typeof AuthenticatedRemindersRoute
   '/timeline': typeof AuthenticatedTimelineRoute
   '/upload-prescription': typeof AuthenticatedUploadPrescriptionRoute
@@ -189,8 +255,16 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/_authenticated/ai-assistant': typeof AuthenticatedAiAssistantRoute
   '/_authenticated/app': typeof AuthenticatedAppRoute
+  '/_authenticated/appointments': typeof AuthenticatedAppointmentsRoute
+  '/_authenticated/doctors': typeof AuthenticatedDoctorsRoute
+  '/_authenticated/emergency': typeof AuthenticatedEmergencyRoute
+  '/_authenticated/labs': typeof AuthenticatedLabsRoute
+  '/_authenticated/medicine': typeof AuthenticatedMedicineRoute
+  '/_authenticated/orders': typeof AuthenticatedOrdersRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/records': typeof AuthenticatedRecordsRoute
   '/_authenticated/reminders': typeof AuthenticatedRemindersRoute
   '/_authenticated/timeline': typeof AuthenticatedTimelineRoute
   '/_authenticated/upload-prescription': typeof AuthenticatedUploadPrescriptionRoute
@@ -212,8 +286,16 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/terms'
+    | '/ai-assistant'
     | '/app'
+    | '/appointments'
+    | '/doctors'
+    | '/emergency'
+    | '/labs'
+    | '/medicine'
+    | '/orders'
     | '/profile'
+    | '/records'
     | '/reminders'
     | '/timeline'
     | '/upload-prescription'
@@ -233,8 +315,16 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/terms'
+    | '/ai-assistant'
     | '/app'
+    | '/appointments'
+    | '/doctors'
+    | '/emergency'
+    | '/labs'
+    | '/medicine'
+    | '/orders'
     | '/profile'
+    | '/records'
     | '/reminders'
     | '/timeline'
     | '/upload-prescription'
@@ -255,8 +345,16 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/terms'
+    | '/_authenticated/ai-assistant'
     | '/_authenticated/app'
+    | '/_authenticated/appointments'
+    | '/_authenticated/doctors'
+    | '/_authenticated/emergency'
+    | '/_authenticated/labs'
+    | '/_authenticated/medicine'
+    | '/_authenticated/orders'
     | '/_authenticated/profile'
+    | '/_authenticated/records'
     | '/_authenticated/reminders'
     | '/_authenticated/timeline'
     | '/_authenticated/upload-prescription'
@@ -409,11 +507,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRemindersRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/records': {
+      id: '/_authenticated/records'
+      path: '/records'
+      fullPath: '/records'
+      preLoaderRoute: typeof AuthenticatedRecordsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/orders': {
+      id: '/_authenticated/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof AuthenticatedOrdersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/medicine': {
+      id: '/_authenticated/medicine'
+      path: '/medicine'
+      fullPath: '/medicine'
+      preLoaderRoute: typeof AuthenticatedMedicineRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/labs': {
+      id: '/_authenticated/labs'
+      path: '/labs'
+      fullPath: '/labs'
+      preLoaderRoute: typeof AuthenticatedLabsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/emergency': {
+      id: '/_authenticated/emergency'
+      path: '/emergency'
+      fullPath: '/emergency'
+      preLoaderRoute: typeof AuthenticatedEmergencyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/doctors': {
+      id: '/_authenticated/doctors'
+      path: '/doctors'
+      fullPath: '/doctors'
+      preLoaderRoute: typeof AuthenticatedDoctorsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/appointments': {
+      id: '/_authenticated/appointments'
+      path: '/appointments'
+      fullPath: '/appointments'
+      preLoaderRoute: typeof AuthenticatedAppointmentsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/app': {
@@ -423,12 +570,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/ai-assistant': {
+      id: '/_authenticated/ai-assistant'
+      path: '/ai-assistant'
+      fullPath: '/ai-assistant'
+      preLoaderRoute: typeof AuthenticatedAiAssistantRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAiAssistantRoute: typeof AuthenticatedAiAssistantRoute
   AuthenticatedAppRoute: typeof AuthenticatedAppRoute
+  AuthenticatedAppointmentsRoute: typeof AuthenticatedAppointmentsRoute
+  AuthenticatedDoctorsRoute: typeof AuthenticatedDoctorsRoute
+  AuthenticatedEmergencyRoute: typeof AuthenticatedEmergencyRoute
+  AuthenticatedLabsRoute: typeof AuthenticatedLabsRoute
+  AuthenticatedMedicineRoute: typeof AuthenticatedMedicineRoute
+  AuthenticatedOrdersRoute: typeof AuthenticatedOrdersRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedRecordsRoute: typeof AuthenticatedRecordsRoute
   AuthenticatedRemindersRoute: typeof AuthenticatedRemindersRoute
   AuthenticatedTimelineRoute: typeof AuthenticatedTimelineRoute
   AuthenticatedUploadPrescriptionRoute: typeof AuthenticatedUploadPrescriptionRoute
@@ -436,8 +598,16 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAiAssistantRoute: AuthenticatedAiAssistantRoute,
   AuthenticatedAppRoute: AuthenticatedAppRoute,
+  AuthenticatedAppointmentsRoute: AuthenticatedAppointmentsRoute,
+  AuthenticatedDoctorsRoute: AuthenticatedDoctorsRoute,
+  AuthenticatedEmergencyRoute: AuthenticatedEmergencyRoute,
+  AuthenticatedLabsRoute: AuthenticatedLabsRoute,
+  AuthenticatedMedicineRoute: AuthenticatedMedicineRoute,
+  AuthenticatedOrdersRoute: AuthenticatedOrdersRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedRecordsRoute: AuthenticatedRecordsRoute,
   AuthenticatedRemindersRoute: AuthenticatedRemindersRoute,
   AuthenticatedTimelineRoute: AuthenticatedTimelineRoute,
   AuthenticatedUploadPrescriptionRoute: AuthenticatedUploadPrescriptionRoute,
