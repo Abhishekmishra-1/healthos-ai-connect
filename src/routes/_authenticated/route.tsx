@@ -83,7 +83,7 @@ function AuthenticatedLayout() {
             <span className="text-[15px] font-semibold tracking-tight">HealthOS <span className="gradient-brand-text">AI</span></span>
           </Link>
           <nav className="flex-1 space-y-1 overflow-y-auto pr-1">
-            {sideNav.map((item, idx) => {
+            {sideNav.map((item) => {
               const active = pathname === item.to;
               return (
                 <Link key={item.label} to={item.to}
