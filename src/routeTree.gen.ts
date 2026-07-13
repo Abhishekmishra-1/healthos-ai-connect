@@ -42,6 +42,7 @@ import { Route as AuthenticatedPatientDoctorsRouteImport } from './routes/_authe
 import { Route as AuthenticatedPatientDashboardRouteImport } from './routes/_authenticated/patient/dashboard'
 import { Route as AuthenticatedPatientAppointmentsRouteImport } from './routes/_authenticated/patient/appointments'
 import { Route as AuthenticatedPatientAiAssistantRouteImport } from './routes/_authenticated/patient/ai-assistant'
+import { Route as AuthenticatedDoctorDashboardRouteImport } from './routes/_authenticated/doctor/dashboard'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -223,6 +224,12 @@ const AuthenticatedPatientAiAssistantRoute =
     path: '/ai-assistant',
     getParentRoute: () => AuthenticatedPatientRouteRoute,
   } as any)
+const AuthenticatedDoctorDashboardRoute =
+  AuthenticatedDoctorDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedDoctorRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -240,9 +247,10 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
-  '/doctor': typeof AuthenticatedDoctorRouteRoute
+  '/doctor': typeof AuthenticatedDoctorRouteRouteWithChildren
   '/patient': typeof AuthenticatedPatientRouteRouteWithChildren
   '/demo/$kind': typeof DemoKindRoute
+  '/doctor/dashboard': typeof AuthenticatedDoctorDashboardRoute
   '/patient/ai-assistant': typeof AuthenticatedPatientAiAssistantRoute
   '/patient/appointments': typeof AuthenticatedPatientAppointmentsRoute
   '/patient/dashboard': typeof AuthenticatedPatientDashboardRoute
@@ -274,9 +282,10 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
-  '/doctor': typeof AuthenticatedDoctorRouteRoute
+  '/doctor': typeof AuthenticatedDoctorRouteRouteWithChildren
   '/patient': typeof AuthenticatedPatientRouteRouteWithChildren
   '/demo/$kind': typeof DemoKindRoute
+  '/doctor/dashboard': typeof AuthenticatedDoctorDashboardRoute
   '/patient/ai-assistant': typeof AuthenticatedPatientAiAssistantRoute
   '/patient/appointments': typeof AuthenticatedPatientAppointmentsRoute
   '/patient/dashboard': typeof AuthenticatedPatientDashboardRoute
@@ -310,9 +319,10 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
-  '/_authenticated/doctor': typeof AuthenticatedDoctorRouteRoute
+  '/_authenticated/doctor': typeof AuthenticatedDoctorRouteRouteWithChildren
   '/_authenticated/patient': typeof AuthenticatedPatientRouteRouteWithChildren
   '/demo/$kind': typeof DemoKindRoute
+  '/_authenticated/doctor/dashboard': typeof AuthenticatedDoctorDashboardRoute
   '/_authenticated/patient/ai-assistant': typeof AuthenticatedPatientAiAssistantRoute
   '/_authenticated/patient/appointments': typeof AuthenticatedPatientAppointmentsRoute
   '/_authenticated/patient/dashboard': typeof AuthenticatedPatientDashboardRoute
@@ -349,6 +359,7 @@ export interface FileRouteTypes {
     | '/doctor'
     | '/patient'
     | '/demo/$kind'
+    | '/doctor/dashboard'
     | '/patient/ai-assistant'
     | '/patient/appointments'
     | '/patient/dashboard'
@@ -383,6 +394,7 @@ export interface FileRouteTypes {
     | '/doctor'
     | '/patient'
     | '/demo/$kind'
+    | '/doctor/dashboard'
     | '/patient/ai-assistant'
     | '/patient/appointments'
     | '/patient/dashboard'
@@ -418,6 +430,7 @@ export interface FileRouteTypes {
     | '/_authenticated/doctor'
     | '/_authenticated/patient'
     | '/demo/$kind'
+    | '/_authenticated/doctor/dashboard'
     | '/_authenticated/patient/ai-assistant'
     | '/_authenticated/patient/appointments'
     | '/_authenticated/patient/dashboard'
@@ -687,8 +700,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPatientAiAssistantRouteImport
       parentRoute: typeof AuthenticatedPatientRouteRoute
     }
+    '/_authenticated/doctor/dashboard': {
+      id: '/_authenticated/doctor/dashboard'
+      path: '/dashboard'
+      fullPath: '/doctor/dashboard'
+      preLoaderRoute: typeof AuthenticatedDoctorDashboardRouteImport
+      parentRoute: typeof AuthenticatedDoctorRouteRoute
+    }
   }
 }
+
+interface AuthenticatedDoctorRouteRouteChildren {
+  AuthenticatedDoctorDashboardRoute: typeof AuthenticatedDoctorDashboardRoute
+}
+
+const AuthenticatedDoctorRouteRouteChildren: AuthenticatedDoctorRouteRouteChildren =
+  {
+    AuthenticatedDoctorDashboardRoute: AuthenticatedDoctorDashboardRoute,
+  }
+
+const AuthenticatedDoctorRouteRouteWithChildren =
+  AuthenticatedDoctorRouteRoute._addFileChildren(
+    AuthenticatedDoctorRouteRouteChildren,
+  )
 
 interface AuthenticatedPatientRouteRouteChildren {
   AuthenticatedPatientAiAssistantRoute: typeof AuthenticatedPatientAiAssistantRoute
@@ -734,12 +768,12 @@ const AuthenticatedPatientRouteRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDoctorRouteRoute: typeof AuthenticatedDoctorRouteRoute
+  AuthenticatedDoctorRouteRoute: typeof AuthenticatedDoctorRouteRouteWithChildren
   AuthenticatedPatientRouteRoute: typeof AuthenticatedPatientRouteRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDoctorRouteRoute: AuthenticatedDoctorRouteRoute,
+  AuthenticatedDoctorRouteRoute: AuthenticatedDoctorRouteRouteWithChildren,
   AuthenticatedPatientRouteRoute: AuthenticatedPatientRouteRouteWithChildren,
 }
 
