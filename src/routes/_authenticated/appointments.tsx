@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarCheck, Video, MapPin, Clock } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/appointments")({
+export const Route = createFileRoute("/_authenticated/dashboardointments")({
   head: () => ({ meta: [{ title: "Appointments — HealthOS AI" }] }),
   component: AppointmentsPage,
 });
@@ -23,7 +23,7 @@ export function AppointmentsPage() {
           <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Appointments</h1>
           <p className="mt-2 text-sm text-muted-foreground">Manage your video and in-clinic consultations.</p>
         </div>
-        <Link to="/app/doctors" className="rounded-full gradient-brand px-4 py-2 text-sm font-semibold text-white shadow-glow">Book new</Link>
+        <Link to="/doctors" className="rounded-full gradient-brand px-4 py-2 text-sm font-semibold text-white shadow-glow">Book new</Link>
       </div>
 
       <section>

@@ -87,7 +87,7 @@ export function LabsPage() {
             <p className="text-xs text-muted-foreground">Download PDF or ask AI to explain.</p>
           </div>
         </div>
-        <Link to="/app/records" className="rounded-full bg-secondary px-4 py-2 text-sm font-semibold">View</Link>
+        <Link to="/records" className="rounded-full bg-secondary px-4 py-2 text-sm font-semibold">View</Link>
       </div>
     </div>
   );

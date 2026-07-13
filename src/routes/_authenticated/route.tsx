@@ -19,29 +19,29 @@ export const Route = createFileRoute("/_authenticated")({
 });
 
 const sideNav = [
-  { to: "/app", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/app/ai-assistant", label: "AI Assistant", icon: Bot },
-  { to: "/app/medicine", label: "Medicine", icon: Pill },
-  { to: "/app/doctors", label: "Doctors", icon: Stethoscope },
-  { to: "/app/labs", label: "Labs", icon: FlaskConical },
-  { to: "/app/records", label: "Health Records", icon: FolderHeart },
-  { to: "/app/emergency", label: "Emergency", icon: Siren },
-  { to: "/app/orders", label: "Orders", icon: ShoppingBag },
-  { to: "/app/appointments", label: "Appointments", icon: CalendarCheck },
-  { to: "/app/reminders", label: "Reminders", icon: Pill },
-  { to: "/app/profile", label: "Family & Profile", icon: Users },
-  { to: "/app/profile", label: "Wallet", icon: Wallet },
-  { to: "/app/profile", label: "Settings", icon: Settings },
-  { to: "/app/profile", label: "Support", icon: LifeBuoy },
+  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/ai-assistant", label: "AI Assistant", icon: Bot },
+  { to: "/medicine", label: "Medicine", icon: Pill },
+  { to: "/doctors", label: "Doctors", icon: Stethoscope },
+  { to: "/labs", label: "Labs", icon: FlaskConical },
+  { to: "/records", label: "Health Records", icon: FolderHeart },
+  { to: "/emergency", label: "Emergency", icon: Siren },
+  { to: "/orders", label: "Orders", icon: ShoppingBag },
+  { to: "/appointments", label: "Appointments", icon: CalendarCheck },
+  { to: "/reminders", label: "Reminders", icon: Pill },
+  { to: "/profile", label: "Family & Profile", icon: Users },
+  { to: "/profile", label: "Wallet", icon: Wallet },
+  { to: "/profile", label: "Settings", icon: Settings },
+  { to: "/profile", label: "Support", icon: LifeBuoy },
 ] as const;
 
 const bottomNav = [
-  { to: "/app", label: "Home", icon: Home },
-  { to: "/app/medicine", label: "Medicine", icon: Pill },
-  { to: "/app/doctors", label: "Doctors", icon: Stethoscope },
-  { to: "/app/labs", label: "Labs", icon: FlaskConical },
-  { to: "/app/records", label: "Records", icon: FolderHeart },
-  { to: "/app/profile", label: "Profile", icon: UserIcon },
+  { to: "/dashboard", label: "Home", icon: Home },
+  { to: "/medicine", label: "Medicine", icon: Pill },
+  { to: "/doctors", label: "Doctors", icon: Stethoscope },
+  { to: "/labs", label: "Labs", icon: FlaskConical },
+  { to: "/records", label: "Records", icon: FolderHeart },
+  { to: "/profile", label: "Profile", icon: UserIcon },
 ] as const;
 
 function AuthenticatedLayout() {
@@ -75,7 +75,7 @@ function AuthenticatedLayout() {
           "fixed inset-y-0 left-0 z-40 flex w-72 flex-col border-r border-border/60 bg-card/70 px-4 py-6 backdrop-blur-xl transition-transform md:sticky md:top-0 md:h-dvh md:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}>
-          <Link to="/app" className="mb-8 flex items-center gap-2 px-2">
+          <Link to="/dashboard" className="mb-8 flex items-center gap-2 px-2">
             <span className="grid h-9 w-9 place-items-center rounded-xl gradient-brand text-white shadow-glow"><Sparkles className="h-4 w-4" /></span>
             <span className="text-[15px] font-semibold tracking-tight">HealthOS <span className="gradient-brand-text">AI</span></span>
           </Link>
@@ -112,7 +112,7 @@ function AuthenticatedLayout() {
               >
                 {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
-              <Link to="/app" className="flex shrink-0 items-center gap-2 md:hidden">
+              <Link to="/dashboard" className="flex shrink-0 items-center gap-2 md:hidden">
                 <span className="grid h-8 w-8 place-items-center rounded-xl gradient-brand text-white shadow-glow"><Sparkles className="h-4 w-4" /></span>
               </Link>
               <div className="relative flex-1 min-w-0">
@@ -127,7 +127,7 @@ function AuthenticatedLayout() {
                 <Bell className="h-5 w-5" />
                 <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
               </button>
-              <Link to="/app/profile" className="grid h-10 w-10 shrink-0 place-items-center rounded-full gradient-brand text-sm font-semibold text-white shadow-glow" aria-label="Profile">
+              <Link to="/profile" className="grid h-10 w-10 shrink-0 place-items-center rounded-full gradient-brand text-sm font-semibold text-white shadow-glow" aria-label="Profile">
                 {initial}
               </Link>
             </div>

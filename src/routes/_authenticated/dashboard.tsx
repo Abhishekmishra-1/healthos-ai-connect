@@ -10,22 +10,22 @@ import {
   ShoppingBag, Loader2, Phone,
 } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/app")({
+export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard — HealthOS AI" }] }),
   component: Dashboard,
 });
 
 const quickActions = [
-  { to: "/app/medicine", icon: Pill, label: "Medicine Delivery", tint: "from-emerald-500/20 to-teal-500/10", color: "text-emerald-500" },
-  { to: "/app/doctors", icon: Stethoscope, label: "Doctor Consultation", tint: "from-sky-500/20 to-blue-500/10", color: "text-sky-500" },
-  { to: "/app/labs", icon: FlaskConical, label: "Lab Tests", tint: "from-fuchsia-500/20 to-purple-500/10", color: "text-fuchsia-500" },
-  { to: "/app/upload-prescription", icon: FileText, label: "Upload Prescription", tint: "from-amber-500/20 to-orange-500/10", color: "text-amber-500" },
-  { to: "/app/records", icon: FolderHeart, label: "Health Records", tint: "from-rose-500/20 to-pink-500/10", color: "text-rose-500" },
-  { to: "/app/ai-assistant", icon: Bot, label: "AI Health Assistant", tint: "from-violet-500/20 to-indigo-500/10", color: "text-violet-500" },
-  { to: "/app/labs", icon: Syringe, label: "Vaccination", tint: "from-cyan-500/20 to-sky-500/10", color: "text-cyan-500" },
-  { to: "/app/emergency", icon: Siren, label: "Emergency", tint: "from-red-500/20 to-orange-500/10", color: "text-red-500" },
-  { to: "/app/doctors", icon: Hospital, label: "Nearby Hospitals", tint: "from-indigo-500/20 to-violet-500/10", color: "text-indigo-500" },
-  { to: "/app/labs", icon: HeartPulse, label: "Health Check Packages", tint: "from-lime-500/20 to-emerald-500/10", color: "text-lime-500" },
+  { to: "/medicine", icon: Pill, label: "Medicine Delivery", tint: "from-emerald-500/20 to-teal-500/10", color: "text-emerald-500" },
+  { to: "/doctors", icon: Stethoscope, label: "Doctor Consultation", tint: "from-sky-500/20 to-blue-500/10", color: "text-sky-500" },
+  { to: "/labs", icon: FlaskConical, label: "Lab Tests", tint: "from-fuchsia-500/20 to-purple-500/10", color: "text-fuchsia-500" },
+  { to: "/upload-prescription", icon: FileText, label: "Upload Prescription", tint: "from-amber-500/20 to-orange-500/10", color: "text-amber-500" },
+  { to: "/records", icon: FolderHeart, label: "Health Records", tint: "from-rose-500/20 to-pink-500/10", color: "text-rose-500" },
+  { to: "/ai-assistant", icon: Bot, label: "AI Health Assistant", tint: "from-violet-500/20 to-indigo-500/10", color: "text-violet-500" },
+  { to: "/labs", icon: Syringe, label: "Vaccination", tint: "from-cyan-500/20 to-sky-500/10", color: "text-cyan-500" },
+  { to: "/emergency", icon: Siren, label: "Emergency", tint: "from-red-500/20 to-orange-500/10", color: "text-red-500" },
+  { to: "/doctors", icon: Hospital, label: "Nearby Hospitals", tint: "from-indigo-500/20 to-violet-500/10", color: "text-indigo-500" },
+  { to: "/labs", icon: HeartPulse, label: "Health Check Packages", tint: "from-lime-500/20 to-emerald-500/10", color: "text-lime-500" },
 ] as const;
 
 function greetingFor(hour: number) {
@@ -109,13 +109,13 @@ function Dashboard() {
             <h2 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">Your Personal AI Health Copilot</h2>
             <p className="mt-2 text-sm text-muted-foreground md:text-base">Ask anything about your health, medicines or reports. Get plain-English answers in seconds.</p>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Link to="/app/ai-assistant" className="inline-flex items-center gap-2 rounded-full gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-glow hover:opacity-90">
+              <Link to="/ai-assistant" className="inline-flex items-center gap-2 rounded-full gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-glow hover:opacity-90">
                 <Bot className="h-4 w-4" /> Start AI Chat
               </Link>
-              <Link to="/app/upload-report" className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-5 py-2.5 text-sm font-semibold backdrop-blur hover:bg-background">
+              <Link to="/upload-report" className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-5 py-2.5 text-sm font-semibold backdrop-blur hover:bg-background">
                 <Upload className="h-4 w-4" /> Upload Report
               </Link>
-              <Link to="/app/upload-prescription" className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-5 py-2.5 text-sm font-semibold backdrop-blur hover:bg-background">
+              <Link to="/upload-prescription" className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-5 py-2.5 text-sm font-semibold backdrop-blur hover:bg-background">
                 <FileText className="h-4 w-4" /> Upload Prescription
               </Link>
             </div>
@@ -157,7 +157,7 @@ function Dashboard() {
             icon={CalendarCheck}
             title="Upcoming appointment"
             empty="No upcoming appointments"
-            ctaHref="/app/appointments"
+            ctaHref="/appointments"
             ctaLabel="Book appointment"
             body={
               <div>
@@ -171,7 +171,7 @@ function Dashboard() {
             icon={ShoppingBag}
             title="Latest medicine order"
             empty="No recent orders"
-            ctaHref="/app/orders"
+            ctaHref="/orders"
             ctaLabel="View orders"
             body={
               <div>
@@ -186,7 +186,7 @@ function Dashboard() {
             title="Latest report"
             data={latestReport.data}
             empty="No lab reports yet"
-            ctaHref="/app/upload-report"
+            ctaHref="/upload-report"
             ctaLabel="Upload report"
             render={(r: any) => (
               <div>
@@ -203,7 +203,7 @@ function Dashboard() {
             title="Pending reminder"
             data={reminders.data?.[0]}
             empty="No active reminders"
-            ctaHref="/app/reminders"
+            ctaHref="/reminders"
             ctaLabel="Add reminder"
             render={(m: any) => (
               <div>
@@ -225,7 +225,7 @@ function Dashboard() {
       <section>
         <div className="mb-4 flex items-end justify-between">
           <h2 className="text-lg font-semibold tracking-tight md:text-xl">Health timeline</h2>
-          <Link to="/app/timeline" className="text-sm font-semibold gradient-brand-text">View all →</Link>
+          <Link to="/timeline" className="text-sm font-semibold gradient-brand-text">View all →</Link>
         </div>
         {events.data?.length ? (
           <ol className="relative ml-3 space-y-4 border-l border-border pl-6">
@@ -245,7 +245,7 @@ function Dashboard() {
         ) : (
           <div className="rounded-3xl border border-dashed border-border p-8 text-center">
             <p className="text-sm text-muted-foreground">Your timeline will show prescriptions, reports, vaccinations and doctor visits chronologically.</p>
-            <Link to="/app/upload-prescription" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold gradient-brand-text">
+            <Link to="/upload-prescription" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold gradient-brand-text">
               Add your first record <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
@@ -263,7 +263,7 @@ function Dashboard() {
           <a href="tel:108" className="inline-flex items-center gap-2 rounded-full bg-red-500 px-5 py-2.5 text-sm font-semibold text-white shadow-glow hover:bg-red-600">
             <Phone className="h-4 w-4" /> Call 108
           </a>
-          <Link to="/app/emergency" className="inline-flex items-center gap-2 rounded-full border border-red-500/40 px-5 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-500/10">
+          <Link to="/emergency" className="inline-flex items-center gap-2 rounded-full border border-red-500/40 px-5 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-500/10">
             Open Emergency
           </Link>
         </div>
@@ -345,7 +345,7 @@ function TodayMedicines({ reminders, loading }: { reminders: any[]; loading: boo
     <section>
       <div className="mb-4 flex items-end justify-between">
         <h2 className="text-lg font-semibold tracking-tight md:text-xl">Today's medicines</h2>
-        <Link to="/app/reminders" className="text-sm font-semibold gradient-brand-text">Manage →</Link>
+        <Link to="/reminders" className="text-sm font-semibold gradient-brand-text">Manage →</Link>
       </div>
       {loading ? (
         <div className="grid gap-2">
