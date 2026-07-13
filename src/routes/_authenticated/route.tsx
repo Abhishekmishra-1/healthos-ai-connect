@@ -29,10 +29,13 @@ const sideNav = [
   { to: "/orders", label: "Orders", icon: ShoppingBag },
   { to: "/appointments", label: "Appointments", icon: CalendarCheck },
   { to: "/reminders", label: "Reminders", icon: Pill },
-  { to: "/profile", label: "Family & Profile", icon: Users },
-  { to: "/profile", label: "Wallet", icon: Wallet },
-  { to: "/profile", label: "Settings", icon: Settings },
-  { to: "/profile", label: "Support", icon: LifeBuoy },
+  { to: "/family", label: "Family", icon: Users },
+  { to: "/wallet", label: "Wallet", icon: Wallet },
+  { to: "/insurance", label: "Insurance", icon: FolderHeart },
+  { to: "/subscription", label: "Subscription", icon: Sparkles },
+  { to: "/notifications", label: "Notifications", icon: Bell },
+  { to: "/support", label: "Support", icon: LifeBuoy },
+  { to: "/settings", label: "Settings", icon: Settings },
 ] as const;
 
 const bottomNav = [
@@ -81,7 +84,7 @@ function AuthenticatedLayout() {
           </Link>
           <nav className="flex-1 space-y-1 overflow-y-auto pr-1">
             {sideNav.map((item, idx) => {
-              const active = pathname === item.to && idx < 11;
+              const active = pathname === item.to;
               return (
                 <Link key={item.label} to={item.to}
                   className={cn(
