@@ -27,6 +27,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoKindRouteImport } from './routes/demo.$kind'
 import { Route as AuthenticatedPatientRouteRouteImport } from './routes/_authenticated/patient/route'
+import { Route as AuthenticatedDoctorRouteRouteImport } from './routes/_authenticated/doctor/route'
 import { Route as AuthenticatedPatientUploadReportRouteImport } from './routes/_authenticated/patient/upload-report'
 import { Route as AuthenticatedPatientUploadPrescriptionRouteImport } from './routes/_authenticated/patient/upload-prescription'
 import { Route as AuthenticatedPatientTimelineRouteImport } from './routes/_authenticated/patient/timeline'
@@ -132,6 +133,12 @@ const AuthenticatedPatientRouteRoute =
     path: '/patient',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDoctorRouteRoute =
+  AuthenticatedDoctorRouteRouteImport.update({
+    id: '/doctor',
+    path: '/doctor',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedPatientUploadReportRoute =
   AuthenticatedPatientUploadReportRouteImport.update({
     id: '/upload-report',
@@ -233,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/doctor': typeof AuthenticatedDoctorRouteRoute
   '/patient': typeof AuthenticatedPatientRouteRouteWithChildren
   '/demo/$kind': typeof DemoKindRoute
   '/patient/ai-assistant': typeof AuthenticatedPatientAiAssistantRoute
@@ -266,6 +274,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/doctor': typeof AuthenticatedDoctorRouteRoute
   '/patient': typeof AuthenticatedPatientRouteRouteWithChildren
   '/demo/$kind': typeof DemoKindRoute
   '/patient/ai-assistant': typeof AuthenticatedPatientAiAssistantRoute
@@ -301,6 +310,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/_authenticated/doctor': typeof AuthenticatedDoctorRouteRoute
   '/_authenticated/patient': typeof AuthenticatedPatientRouteRouteWithChildren
   '/demo/$kind': typeof DemoKindRoute
   '/_authenticated/patient/ai-assistant': typeof AuthenticatedPatientAiAssistantRoute
@@ -336,6 +346,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/terms'
+    | '/doctor'
     | '/patient'
     | '/demo/$kind'
     | '/patient/ai-assistant'
@@ -369,6 +380,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/terms'
+    | '/doctor'
     | '/patient'
     | '/demo/$kind'
     | '/patient/ai-assistant'
@@ -403,6 +415,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/terms'
+    | '/_authenticated/doctor'
     | '/_authenticated/patient'
     | '/demo/$kind'
     | '/_authenticated/patient/ai-assistant'
@@ -569,6 +582,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPatientRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/doctor': {
+      id: '/_authenticated/doctor'
+      path: '/doctor'
+      fullPath: '/doctor'
+      preLoaderRoute: typeof AuthenticatedDoctorRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/patient/upload-report': {
       id: '/_authenticated/patient/upload-report'
       path: '/upload-report'
@@ -714,10 +734,12 @@ const AuthenticatedPatientRouteRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDoctorRouteRoute: typeof AuthenticatedDoctorRouteRoute
   AuthenticatedPatientRouteRoute: typeof AuthenticatedPatientRouteRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDoctorRouteRoute: AuthenticatedDoctorRouteRoute,
   AuthenticatedPatientRouteRoute: AuthenticatedPatientRouteRouteWithChildren,
 }
 
