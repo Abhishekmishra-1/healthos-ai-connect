@@ -26,12 +26,20 @@ function AuthPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/dashboard" });
-    });
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) navigate({ to: "/dashboard" });
-    });
+    const roleMap: Record<string, string> = {
+      patient: "/patient/dashboard",
+      doctor: "/doctor/dashboard",
+      pharmacy: "/pharmacy/dashboard",
+      lab: "/lab/dashboard",
+      hospital: "/hospital/dashboard",
+    };
+    const go = async (userId: string) => {
+      const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId).limit(1).maybeSingle();
+      const r = (data?.role as string) ?? "patient";
+      navigate({ to: roleMap[r] ?? "/patient/dashboard" });
+    };
+    supabase.auth.getSession().then(({ data }) => { if (data.session) go(data.session.user.id); });
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => { if (session) go(session.user.id); });
     return () => sub.subscription.unsubscribe();
   }, [navigate]);
 
@@ -45,7 +53,7 @@ function AuthPage() {
           password,
           options: {
             emailRedirectTo: window.location.origin + "/dashboard",
-            data: { full_name: name },
+            data: { full_name: name, role },
           },
         });
         if (error) throw error;
@@ -99,10 +107,7 @@ function AuthPage() {
                   <button
                     key={r.id}
                     type="button"
-                    onClick={() => {
-                      setRole(r.id as typeof role);
-                      if (r.id !== "patient") toast.info(`${r.label} portal is launching soon. Continuing as Patient for now.`);
-                    }}
+                    onClick={() => setRole(r.id as typeof role)}
                     className={`flex flex-col items-center gap-1 rounded-2xl border px-2 py-3 text-[11px] font-medium transition ${
                       active
                         ? "border-transparent gradient-brand text-white shadow-glow"
