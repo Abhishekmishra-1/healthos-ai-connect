@@ -23,7 +23,7 @@ export function AppointmentsPage() {
           <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Appointments</h1>
           <p className="mt-2 text-sm text-muted-foreground">Manage your video and in-clinic consultations.</p>
         </div>
-        <Link to="/app/doctors" className="rounded-full gradient-brand px-4 py-2 text-sm font-semibold text-white shadow-glow">Book new</Link>
+        <Link to="/doctors" className="rounded-full gradient-brand px-4 py-2 text-sm font-semibold text-white shadow-glow">Book new</Link>
       </div>
 
       <section>

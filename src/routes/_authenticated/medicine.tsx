@@ -38,7 +38,7 @@ export function MedicinePage() {
           <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Medicine</h1>
           <p className="mt-2 text-sm text-muted-foreground">Search, compare and order from nearby pharmacies.</p>
         </div>
-        <Link to="/app/upload-prescription" className="inline-flex items-center gap-2 rounded-full gradient-brand px-4 py-2 text-sm font-semibold text-white shadow-glow">
+        <Link to="/upload-prescription" className="inline-flex items-center gap-2 rounded-full gradient-brand px-4 py-2 text-sm font-semibold text-white shadow-glow">
           <Upload className="h-4 w-4" /> Order via prescription
         </Link>
       </div>

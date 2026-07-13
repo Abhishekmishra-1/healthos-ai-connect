@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
-import { Sparkles, Loader2 } from "lucide-react";
+import { Sparkles, Loader2, User, Stethoscope, Pill, FlaskConical, Hospital } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/auth")({
@@ -19,6 +19,7 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [role, setRole] = useState<"patient" | "doctor" | "pharmacy" | "lab" | "hospital">("patient");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -26,10 +27,10 @@ function AuthPage() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/app" });
+      if (data.session) navigate({ to: "/dashboard" });
     });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) navigate({ to: "/app" });
+      if (session) navigate({ to: "/dashboard" });
     });
     return () => sub.subscription.unsubscribe();
   }, [navigate]);
@@ -43,7 +44,7 @@ function AuthPage() {
           email,
           password,
           options: {
-            emailRedirectTo: window.location.origin + "/app",
+            emailRedirectTo: window.location.origin + "/dashboard",
             data: { full_name: name },
           },
         });
@@ -83,6 +84,39 @@ function AuthPage() {
         </Link>
 
         <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-glow">
+          <div className="mb-6">
+            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Continue as</p>
+            <div className="mt-3 grid grid-cols-5 gap-2">
+              {[
+                { id: "patient", label: "Patient", icon: User },
+                { id: "doctor", label: "Doctor", icon: Stethoscope },
+                { id: "pharmacy", label: "Pharmacy", icon: Pill },
+                { id: "lab", label: "Lab", icon: FlaskConical },
+                { id: "hospital", label: "Hospital", icon: Hospital },
+              ].map((r) => {
+                const active = role === r.id;
+                return (
+                  <button
+                    key={r.id}
+                    type="button"
+                    onClick={() => {
+                      setRole(r.id as typeof role);
+                      if (r.id !== "patient") toast.info(`${r.label} portal is launching soon. Continuing as Patient for now.`);
+                    }}
+                    className={`flex flex-col items-center gap-1 rounded-2xl border px-2 py-3 text-[11px] font-medium transition ${
+                      active
+                        ? "border-transparent gradient-brand text-white shadow-glow"
+                        : "border-border bg-background text-muted-foreground hover:bg-secondary"
+                    }`}
+                  >
+                    <r.icon className="h-4 w-4" />
+                    {r.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           <h1 className="text-2xl font-semibold tracking-tight">
             {mode === "signin" ? "Welcome back" : "Create your account"}
           </h1>
