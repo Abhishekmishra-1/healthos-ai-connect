@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarCheck, Video, MapPin, Clock } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/dashboardointments")({
+export const Route = createFileRoute("/_authenticated/appointments")({
   head: () => ({ meta: [{ title: "Appointments — HealthOS AI" }] }),
   component: AppointmentsPage,
 });

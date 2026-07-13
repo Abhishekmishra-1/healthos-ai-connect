@@ -34,8 +34,8 @@ import { Route as AuthenticatedMedicineRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedLabsRouteImport } from './routes/_authenticated/labs'
 import { Route as AuthenticatedEmergencyRouteImport } from './routes/_authenticated/emergency'
 import { Route as AuthenticatedDoctorsRouteImport } from './routes/_authenticated/doctors'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAppointmentsRouteImport } from './routes/_authenticated/appointments'
-import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedAiAssistantRouteImport } from './routes/_authenticated/ai-assistant'
 
 const TermsRoute = TermsRouteImport.update({
@@ -164,17 +164,17 @@ const AuthenticatedDoctorsRoute = AuthenticatedDoctorsRouteImport.update({
   path: '/doctors',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAppointmentsRoute =
   AuthenticatedAppointmentsRouteImport.update({
     id: '/appointments',
     path: '/appointments',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
-  id: '/app',
-  path: '/app',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedAiAssistantRoute =
   AuthenticatedAiAssistantRouteImport.update({
     id: '/ai-assistant',
@@ -196,8 +196,8 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/ai-assistant': typeof AuthenticatedAiAssistantRoute
-  '/app': typeof AuthenticatedAppRoute
   '/appointments': typeof AuthenticatedAppointmentsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/doctors': typeof AuthenticatedDoctorsRoute
   '/emergency': typeof AuthenticatedEmergencyRoute
   '/labs': typeof AuthenticatedLabsRoute
@@ -225,8 +225,8 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/ai-assistant': typeof AuthenticatedAiAssistantRoute
-  '/app': typeof AuthenticatedAppRoute
   '/appointments': typeof AuthenticatedAppointmentsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/doctors': typeof AuthenticatedDoctorsRoute
   '/emergency': typeof AuthenticatedEmergencyRoute
   '/labs': typeof AuthenticatedLabsRoute
@@ -256,8 +256,8 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/_authenticated/ai-assistant': typeof AuthenticatedAiAssistantRoute
-  '/_authenticated/app': typeof AuthenticatedAppRoute
   '/_authenticated/appointments': typeof AuthenticatedAppointmentsRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/doctors': typeof AuthenticatedDoctorsRoute
   '/_authenticated/emergency': typeof AuthenticatedEmergencyRoute
   '/_authenticated/labs': typeof AuthenticatedLabsRoute
@@ -287,8 +287,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/ai-assistant'
-    | '/app'
     | '/appointments'
+    | '/dashboard'
     | '/doctors'
     | '/emergency'
     | '/labs'
@@ -316,8 +316,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/ai-assistant'
-    | '/app'
     | '/appointments'
+    | '/dashboard'
     | '/doctors'
     | '/emergency'
     | '/labs'
@@ -346,8 +346,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/_authenticated/ai-assistant'
-    | '/_authenticated/app'
     | '/_authenticated/appointments'
+    | '/_authenticated/dashboard'
     | '/_authenticated/doctors'
     | '/_authenticated/emergency'
     | '/_authenticated/labs'
@@ -556,18 +556,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDoctorsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/appointments': {
       id: '/_authenticated/appointments'
       path: '/appointments'
       fullPath: '/appointments'
       preLoaderRoute: typeof AuthenticatedAppointmentsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/app': {
-      id: '/_authenticated/app'
-      path: '/app'
-      fullPath: '/app'
-      preLoaderRoute: typeof AuthenticatedAppRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/ai-assistant': {
@@ -582,8 +582,8 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAiAssistantRoute: typeof AuthenticatedAiAssistantRoute
-  AuthenticatedAppRoute: typeof AuthenticatedAppRoute
   AuthenticatedAppointmentsRoute: typeof AuthenticatedAppointmentsRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDoctorsRoute: typeof AuthenticatedDoctorsRoute
   AuthenticatedEmergencyRoute: typeof AuthenticatedEmergencyRoute
   AuthenticatedLabsRoute: typeof AuthenticatedLabsRoute
@@ -599,8 +599,8 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAiAssistantRoute: AuthenticatedAiAssistantRoute,
-  AuthenticatedAppRoute: AuthenticatedAppRoute,
   AuthenticatedAppointmentsRoute: AuthenticatedAppointmentsRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDoctorsRoute: AuthenticatedDoctorsRoute,
   AuthenticatedEmergencyRoute: AuthenticatedEmergencyRoute,
   AuthenticatedLabsRoute: AuthenticatedLabsRoute,
