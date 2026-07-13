@@ -7,7 +7,7 @@ import { analyzePrescription } from "@/lib/health-ai.functions";
 import { FileText, Upload, Loader2, AlertCircle, Pill } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/upload-prescription")({
+export const Route = createFileRoute("/_authenticated/patient/upload-prescription")({
   head: () => ({ meta: [{ title: "Upload Prescription — HealthOS AI" }] }),
   component: UploadPrescription,
 });

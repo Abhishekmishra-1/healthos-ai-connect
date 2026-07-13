@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { askHealthAssistant } from "@/lib/health-ai.functions";
 import { Bot, Send, Loader2, Sparkles, Mic, Image as ImageIcon, ShieldAlert } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/ai-assistant")({
+export const Route = createFileRoute("/_authenticated/patient/ai-assistant")({
   head: () => ({ meta: [{ title: "AI Health Assistant — HealthOS AI" }] }),
   component: AssistantPage,
 });

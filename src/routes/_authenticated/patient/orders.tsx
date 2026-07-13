@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ShoppingBag, Truck, CheckCircle2, Clock } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/orders")({
+export const Route = createFileRoute("/_authenticated/patient/orders")({
   head: () => ({ meta: [{ title: "Orders — HealthOS AI" }] }),
   component: OrdersPage,
 });

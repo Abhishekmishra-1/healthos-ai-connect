@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FlaskConical, Home, Truck, Download, Sparkles, HeartPulse } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/labs")({
+export const Route = createFileRoute("/_authenticated/patient/labs")({
   head: () => ({ meta: [{ title: "Lab Tests — HealthOS AI" }] }),
   component: LabsPage,
 });
@@ -87,7 +87,7 @@ export function LabsPage() {
             <p className="text-xs text-muted-foreground">Download PDF or ask AI to explain.</p>
           </div>
         </div>
-        <Link to="/records" className="rounded-full bg-secondary px-4 py-2 text-sm font-semibold">View</Link>
+        <Link to="/patient/records" className="rounded-full bg-secondary px-4 py-2 text-sm font-semibold">View</Link>
       </div>
     </div>
   );

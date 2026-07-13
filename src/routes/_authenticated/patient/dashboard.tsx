@@ -10,7 +10,7 @@ import {
   ShoppingBag, Loader2, Phone,
 } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/dashboard")({
+export const Route = createFileRoute("/_authenticated/patient/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard — HealthOS AI" }] }),
   component: Dashboard,
 });
@@ -109,13 +109,13 @@ function Dashboard() {
             <h2 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">Your Personal AI Health Copilot</h2>
             <p className="mt-2 text-sm text-muted-foreground md:text-base">Ask anything about your health, medicines or reports. Get plain-English answers in seconds.</p>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Link to="/ai-assistant" className="inline-flex items-center gap-2 rounded-full gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-glow hover:opacity-90">
+              <Link to="/patient/ai-assistant" className="inline-flex items-center gap-2 rounded-full gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-glow hover:opacity-90">
                 <Bot className="h-4 w-4" /> Start AI Chat
               </Link>
-              <Link to="/upload-report" className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-5 py-2.5 text-sm font-semibold backdrop-blur hover:bg-background">
+              <Link to="/patient/upload-report" className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-5 py-2.5 text-sm font-semibold backdrop-blur hover:bg-background">
                 <Upload className="h-4 w-4" /> Upload Report
               </Link>
-              <Link to="/upload-prescription" className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-5 py-2.5 text-sm font-semibold backdrop-blur hover:bg-background">
+              <Link to="/patient/upload-prescription" className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-5 py-2.5 text-sm font-semibold backdrop-blur hover:bg-background">
                 <FileText className="h-4 w-4" /> Upload Prescription
               </Link>
             </div>
@@ -225,7 +225,7 @@ function Dashboard() {
       <section>
         <div className="mb-4 flex items-end justify-between">
           <h2 className="text-lg font-semibold tracking-tight md:text-xl">Health timeline</h2>
-          <Link to="/timeline" className="text-sm font-semibold gradient-brand-text">View all →</Link>
+          <Link to="/patient/timeline" className="text-sm font-semibold gradient-brand-text">View all →</Link>
         </div>
         {events.data?.length ? (
           <ol className="relative ml-3 space-y-4 border-l border-border pl-6">
@@ -245,7 +245,7 @@ function Dashboard() {
         ) : (
           <div className="rounded-3xl border border-dashed border-border p-8 text-center">
             <p className="text-sm text-muted-foreground">Your timeline will show prescriptions, reports, vaccinations and doctor visits chronologically.</p>
-            <Link to="/upload-prescription" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold gradient-brand-text">
+            <Link to="/patient/upload-prescription" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold gradient-brand-text">
               Add your first record <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
@@ -263,7 +263,7 @@ function Dashboard() {
           <a href="tel:108" className="inline-flex items-center gap-2 rounded-full bg-red-500 px-5 py-2.5 text-sm font-semibold text-white shadow-glow hover:bg-red-600">
             <Phone className="h-4 w-4" /> Call 108
           </a>
-          <Link to="/emergency" className="inline-flex items-center gap-2 rounded-full border border-red-500/40 px-5 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-500/10">
+          <Link to="/patient/emergency" className="inline-flex items-center gap-2 rounded-full border border-red-500/40 px-5 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-500/10">
             Open Emergency
           </Link>
         </div>
@@ -345,7 +345,7 @@ function TodayMedicines({ reminders, loading }: { reminders: any[]; loading: boo
     <section>
       <div className="mb-4 flex items-end justify-between">
         <h2 className="text-lg font-semibold tracking-tight md:text-xl">Today's medicines</h2>
-        <Link to="/reminders" className="text-sm font-semibold gradient-brand-text">Manage →</Link>
+        <Link to="/patient/reminders" className="text-sm font-semibold gradient-brand-text">Manage →</Link>
       </div>
       {loading ? (
         <div className="grid gap-2">

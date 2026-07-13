@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, Star, Video, MessageCircle, CalendarCheck, MapPin, Stethoscope } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/doctors")({
+export const Route = createFileRoute("/_authenticated/patient/doctors")({
   head: () => ({ meta: [{ title: "Doctors — HealthOS AI" }] }),
   component: DoctorsPage,
 });

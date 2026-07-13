@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/profile")({
+export const Route = createFileRoute("/_authenticated/patient/profile")({
   head: () => ({ meta: [{ title: "Profile — HealthOS AI" }] }),
   component: Profile,
 });

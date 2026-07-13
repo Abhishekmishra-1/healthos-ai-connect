@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { FileText, FlaskConical, Pill, Circle } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/timeline")({
+export const Route = createFileRoute("/_authenticated/patient/timeline")({
   head: () => ({ meta: [{ title: "Health Timeline — HealthOS AI" }] }),
   component: Timeline,
 });
