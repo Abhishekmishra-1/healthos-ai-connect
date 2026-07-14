@@ -41,12 +41,15 @@ import { Route as AuthenticatedPharmacyAnalyticsRouteImport } from './routes/_au
 import { Route as AuthenticatedPatientUploadReportRouteImport } from './routes/_authenticated/patient/upload-report'
 import { Route as AuthenticatedPatientUploadPrescriptionRouteImport } from './routes/_authenticated/patient/upload-prescription'
 import { Route as AuthenticatedPatientTimelineRouteImport } from './routes/_authenticated/patient/timeline'
+import { Route as AuthenticatedPatientSupportRouteImport } from './routes/_authenticated/patient/support'
+import { Route as AuthenticatedPatientSearchRouteImport } from './routes/_authenticated/patient/search'
 import { Route as AuthenticatedPatientRemindersRouteImport } from './routes/_authenticated/patient/reminders'
 import { Route as AuthenticatedPatientRecordsRouteImport } from './routes/_authenticated/patient/records'
 import { Route as AuthenticatedPatientProfileRouteImport } from './routes/_authenticated/patient/profile'
 import { Route as AuthenticatedPatientOrdersRouteImport } from './routes/_authenticated/patient/orders'
 import { Route as AuthenticatedPatientMedicineRouteImport } from './routes/_authenticated/patient/medicine'
 import { Route as AuthenticatedPatientLabsRouteImport } from './routes/_authenticated/patient/labs'
+import { Route as AuthenticatedPatientHospitalsRouteImport } from './routes/_authenticated/patient/hospitals'
 import { Route as AuthenticatedPatientEmergencyRouteImport } from './routes/_authenticated/patient/emergency'
 import { Route as AuthenticatedPatientDoctorsRouteImport } from './routes/_authenticated/patient/doctors'
 import { Route as AuthenticatedPatientDashboardRouteImport } from './routes/_authenticated/patient/dashboard'
@@ -246,6 +249,18 @@ const AuthenticatedPatientTimelineRoute =
     path: '/timeline',
     getParentRoute: () => AuthenticatedPatientRouteRoute,
   } as any)
+const AuthenticatedPatientSupportRoute =
+  AuthenticatedPatientSupportRouteImport.update({
+    id: '/support',
+    path: '/support',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientSearchRoute =
+  AuthenticatedPatientSearchRouteImport.update({
+    id: '/search',
+    path: '/search',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
 const AuthenticatedPatientRemindersRoute =
   AuthenticatedPatientRemindersRouteImport.update({
     id: '/reminders',
@@ -280,6 +295,12 @@ const AuthenticatedPatientLabsRoute =
   AuthenticatedPatientLabsRouteImport.update({
     id: '/labs',
     path: '/labs',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientHospitalsRoute =
+  AuthenticatedPatientHospitalsRouteImport.update({
+    id: '/hospitals',
+    path: '/hospitals',
     getParentRoute: () => AuthenticatedPatientRouteRoute,
   } as any)
 const AuthenticatedPatientEmergencyRoute =
@@ -479,12 +500,15 @@ export interface FileRoutesByFullPath {
   '/patient/dashboard': typeof AuthenticatedPatientDashboardRoute
   '/patient/doctors': typeof AuthenticatedPatientDoctorsRoute
   '/patient/emergency': typeof AuthenticatedPatientEmergencyRoute
+  '/patient/hospitals': typeof AuthenticatedPatientHospitalsRoute
   '/patient/labs': typeof AuthenticatedPatientLabsRoute
   '/patient/medicine': typeof AuthenticatedPatientMedicineRoute
   '/patient/orders': typeof AuthenticatedPatientOrdersRoute
   '/patient/profile': typeof AuthenticatedPatientProfileRoute
   '/patient/records': typeof AuthenticatedPatientRecordsRoute
   '/patient/reminders': typeof AuthenticatedPatientRemindersRoute
+  '/patient/search': typeof AuthenticatedPatientSearchRoute
+  '/patient/support': typeof AuthenticatedPatientSupportRoute
   '/patient/timeline': typeof AuthenticatedPatientTimelineRoute
   '/patient/upload-prescription': typeof AuthenticatedPatientUploadPrescriptionRoute
   '/patient/upload-report': typeof AuthenticatedPatientUploadReportRoute
@@ -543,12 +567,15 @@ export interface FileRoutesByTo {
   '/patient/dashboard': typeof AuthenticatedPatientDashboardRoute
   '/patient/doctors': typeof AuthenticatedPatientDoctorsRoute
   '/patient/emergency': typeof AuthenticatedPatientEmergencyRoute
+  '/patient/hospitals': typeof AuthenticatedPatientHospitalsRoute
   '/patient/labs': typeof AuthenticatedPatientLabsRoute
   '/patient/medicine': typeof AuthenticatedPatientMedicineRoute
   '/patient/orders': typeof AuthenticatedPatientOrdersRoute
   '/patient/profile': typeof AuthenticatedPatientProfileRoute
   '/patient/records': typeof AuthenticatedPatientRecordsRoute
   '/patient/reminders': typeof AuthenticatedPatientRemindersRoute
+  '/patient/search': typeof AuthenticatedPatientSearchRoute
+  '/patient/support': typeof AuthenticatedPatientSupportRoute
   '/patient/timeline': typeof AuthenticatedPatientTimelineRoute
   '/patient/upload-prescription': typeof AuthenticatedPatientUploadPrescriptionRoute
   '/patient/upload-report': typeof AuthenticatedPatientUploadReportRoute
@@ -609,12 +636,15 @@ export interface FileRoutesById {
   '/_authenticated/patient/dashboard': typeof AuthenticatedPatientDashboardRoute
   '/_authenticated/patient/doctors': typeof AuthenticatedPatientDoctorsRoute
   '/_authenticated/patient/emergency': typeof AuthenticatedPatientEmergencyRoute
+  '/_authenticated/patient/hospitals': typeof AuthenticatedPatientHospitalsRoute
   '/_authenticated/patient/labs': typeof AuthenticatedPatientLabsRoute
   '/_authenticated/patient/medicine': typeof AuthenticatedPatientMedicineRoute
   '/_authenticated/patient/orders': typeof AuthenticatedPatientOrdersRoute
   '/_authenticated/patient/profile': typeof AuthenticatedPatientProfileRoute
   '/_authenticated/patient/records': typeof AuthenticatedPatientRecordsRoute
   '/_authenticated/patient/reminders': typeof AuthenticatedPatientRemindersRoute
+  '/_authenticated/patient/search': typeof AuthenticatedPatientSearchRoute
+  '/_authenticated/patient/support': typeof AuthenticatedPatientSupportRoute
   '/_authenticated/patient/timeline': typeof AuthenticatedPatientTimelineRoute
   '/_authenticated/patient/upload-prescription': typeof AuthenticatedPatientUploadPrescriptionRoute
   '/_authenticated/patient/upload-report': typeof AuthenticatedPatientUploadReportRoute
@@ -675,12 +705,15 @@ export interface FileRouteTypes {
     | '/patient/dashboard'
     | '/patient/doctors'
     | '/patient/emergency'
+    | '/patient/hospitals'
     | '/patient/labs'
     | '/patient/medicine'
     | '/patient/orders'
     | '/patient/profile'
     | '/patient/records'
     | '/patient/reminders'
+    | '/patient/search'
+    | '/patient/support'
     | '/patient/timeline'
     | '/patient/upload-prescription'
     | '/patient/upload-report'
@@ -739,12 +772,15 @@ export interface FileRouteTypes {
     | '/patient/dashboard'
     | '/patient/doctors'
     | '/patient/emergency'
+    | '/patient/hospitals'
     | '/patient/labs'
     | '/patient/medicine'
     | '/patient/orders'
     | '/patient/profile'
     | '/patient/records'
     | '/patient/reminders'
+    | '/patient/search'
+    | '/patient/support'
     | '/patient/timeline'
     | '/patient/upload-prescription'
     | '/patient/upload-report'
@@ -804,12 +840,15 @@ export interface FileRouteTypes {
     | '/_authenticated/patient/dashboard'
     | '/_authenticated/patient/doctors'
     | '/_authenticated/patient/emergency'
+    | '/_authenticated/patient/hospitals'
     | '/_authenticated/patient/labs'
     | '/_authenticated/patient/medicine'
     | '/_authenticated/patient/orders'
     | '/_authenticated/patient/profile'
     | '/_authenticated/patient/records'
     | '/_authenticated/patient/reminders'
+    | '/_authenticated/patient/search'
+    | '/_authenticated/patient/support'
     | '/_authenticated/patient/timeline'
     | '/_authenticated/patient/upload-prescription'
     | '/_authenticated/patient/upload-report'
@@ -1068,6 +1107,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPatientTimelineRouteImport
       parentRoute: typeof AuthenticatedPatientRouteRoute
     }
+    '/_authenticated/patient/support': {
+      id: '/_authenticated/patient/support'
+      path: '/support'
+      fullPath: '/patient/support'
+      preLoaderRoute: typeof AuthenticatedPatientSupportRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/search': {
+      id: '/_authenticated/patient/search'
+      path: '/search'
+      fullPath: '/patient/search'
+      preLoaderRoute: typeof AuthenticatedPatientSearchRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
     '/_authenticated/patient/reminders': {
       id: '/_authenticated/patient/reminders'
       path: '/reminders'
@@ -1108,6 +1161,13 @@ declare module '@tanstack/react-router' {
       path: '/labs'
       fullPath: '/patient/labs'
       preLoaderRoute: typeof AuthenticatedPatientLabsRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/hospitals': {
+      id: '/_authenticated/patient/hospitals'
+      path: '/hospitals'
+      fullPath: '/patient/hospitals'
+      preLoaderRoute: typeof AuthenticatedPatientHospitalsRouteImport
       parentRoute: typeof AuthenticatedPatientRouteRoute
     }
     '/_authenticated/patient/emergency': {
@@ -1371,12 +1431,15 @@ interface AuthenticatedPatientRouteRouteChildren {
   AuthenticatedPatientDashboardRoute: typeof AuthenticatedPatientDashboardRoute
   AuthenticatedPatientDoctorsRoute: typeof AuthenticatedPatientDoctorsRoute
   AuthenticatedPatientEmergencyRoute: typeof AuthenticatedPatientEmergencyRoute
+  AuthenticatedPatientHospitalsRoute: typeof AuthenticatedPatientHospitalsRoute
   AuthenticatedPatientLabsRoute: typeof AuthenticatedPatientLabsRoute
   AuthenticatedPatientMedicineRoute: typeof AuthenticatedPatientMedicineRoute
   AuthenticatedPatientOrdersRoute: typeof AuthenticatedPatientOrdersRoute
   AuthenticatedPatientProfileRoute: typeof AuthenticatedPatientProfileRoute
   AuthenticatedPatientRecordsRoute: typeof AuthenticatedPatientRecordsRoute
   AuthenticatedPatientRemindersRoute: typeof AuthenticatedPatientRemindersRoute
+  AuthenticatedPatientSearchRoute: typeof AuthenticatedPatientSearchRoute
+  AuthenticatedPatientSupportRoute: typeof AuthenticatedPatientSupportRoute
   AuthenticatedPatientTimelineRoute: typeof AuthenticatedPatientTimelineRoute
   AuthenticatedPatientUploadPrescriptionRoute: typeof AuthenticatedPatientUploadPrescriptionRoute
   AuthenticatedPatientUploadReportRoute: typeof AuthenticatedPatientUploadReportRoute
@@ -1390,12 +1453,15 @@ const AuthenticatedPatientRouteRouteChildren: AuthenticatedPatientRouteRouteChil
     AuthenticatedPatientDashboardRoute: AuthenticatedPatientDashboardRoute,
     AuthenticatedPatientDoctorsRoute: AuthenticatedPatientDoctorsRoute,
     AuthenticatedPatientEmergencyRoute: AuthenticatedPatientEmergencyRoute,
+    AuthenticatedPatientHospitalsRoute: AuthenticatedPatientHospitalsRoute,
     AuthenticatedPatientLabsRoute: AuthenticatedPatientLabsRoute,
     AuthenticatedPatientMedicineRoute: AuthenticatedPatientMedicineRoute,
     AuthenticatedPatientOrdersRoute: AuthenticatedPatientOrdersRoute,
     AuthenticatedPatientProfileRoute: AuthenticatedPatientProfileRoute,
     AuthenticatedPatientRecordsRoute: AuthenticatedPatientRecordsRoute,
     AuthenticatedPatientRemindersRoute: AuthenticatedPatientRemindersRoute,
+    AuthenticatedPatientSearchRoute: AuthenticatedPatientSearchRoute,
+    AuthenticatedPatientSupportRoute: AuthenticatedPatientSupportRoute,
     AuthenticatedPatientTimelineRoute: AuthenticatedPatientTimelineRoute,
     AuthenticatedPatientUploadPrescriptionRoute:
       AuthenticatedPatientUploadPrescriptionRoute,
@@ -1475,13 +1541,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

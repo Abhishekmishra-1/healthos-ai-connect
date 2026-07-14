@@ -4,9 +4,9 @@ import { SimplePage } from "@/components/site/simple-page";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy — HealthOS AI" },
-      { name: "description", content: "How HealthOS AI collects, uses and protects your health information." },
-      { property: "og:title", content: "HealthOS AI Privacy" },
+      { title: "Privacy — MEDOOGLE AI" },
+      { name: "description", content: "How MEDOOGLE AI collects, uses and protects your health information." },
+      { property: "og:title", content: "MEDOOGLE AI Privacy" },
       { property: "og:description", content: "Your health data belongs to you. Always." },
     ],
   }),
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/privacy")({
 function Privacy() {
   return (
     <SimplePage eyebrow="Legal" title={<>Privacy <span className="gradient-brand-text">Policy</span></>}
-      description="This page is maintained by HealthOS AI to describe how we handle your personal and health information.">
+      description="This page is maintained by MEDOOGLE AI to describe how we handle your personal and health information.">
       <div className="prose prose-neutral mt-10 max-w-none text-foreground/85">
         <h2>Overview</h2>
         <p>Your health data belongs to you. We collect only what is required to deliver the services you request, store it encrypted, and never sell it to third parties.</p>

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { FlaskConical, Home, Truck, Download, Sparkles, HeartPulse } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/patient/labs")({
-  head: () => ({ meta: [{ title: "Lab Tests — HealthOS AI" }] }),
+  head: () => ({ meta: [{ title: "Lab Tests — MEDOOGLE AI" }] }),
   component: LabsPage,
 });
 

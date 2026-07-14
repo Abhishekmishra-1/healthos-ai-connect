@@ -4,9 +4,9 @@ import { SimplePage } from "@/components/site/simple-page";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Blog — HealthOS AI" },
+      { title: "Blog — MEDOOGLE AI" },
       { name: "description", content: "Notes on building healthcare infrastructure for Bharat — product, research, and field stories." },
-      { property: "og:title", content: "HealthOS AI Blog" },
+      { property: "og:title", content: "MEDOOGLE AI Blog" },
       { property: "og:description", content: "Product, research, and field notes from the intelligent healthcare network." },
     ],
   }),
@@ -25,7 +25,7 @@ function Blog() {
     <SimplePage
       eyebrow="Field notes"
       title={<>Building healthcare, <span className="gradient-brand-text">in the open.</span></>}
-      description="Product, research, and field stories from across the HealthOS network."
+      description="Product, research, and field stories from across the MEDOOGLE network."
     >
       <div className="mt-12 grid gap-4 md:grid-cols-2">
         {posts.map((p) => (

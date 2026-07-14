@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Siren, Phone, MapPin, Ambulance, Hospital, Droplet, Users, Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/patient/emergency")({
-  head: () => ({ meta: [{ title: "Emergency — HealthOS AI" }] }),
+  head: () => ({ meta: [{ title: "Emergency — MEDOOGLE AI" }] }),
   component: EmergencyPage,
 });
 

@@ -33,7 +33,7 @@ export function SiteNav() {
           <span className="grid h-8 w-8 place-items-center rounded-xl gradient-brand text-white shadow-glow">
             <Sparkles className="h-4 w-4" />
           </span>
-          <span className="text-[15px] font-semibold tracking-tight">HealthOS <span className="gradient-brand-text">AI</span></span>
+          <span className="text-[15px] font-semibold tracking-tight">MEDOOGLE <span className="gradient-brand-text">AI</span></span>
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">

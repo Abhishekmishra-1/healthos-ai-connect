@@ -5,9 +5,9 @@ import { Store, Stethoscope, FlaskConical, Building2, ArrowRight } from "lucide-
 export const Route = createFileRoute("/partners")({
   head: () => ({
     meta: [
-      { title: "Partners — HealthOS AI" },
-      { name: "description", content: "Join 8,400+ pharmacies, 12,000+ doctors, and 900+ labs already growing on the HealthOS network." },
-      { property: "og:title", content: "Partner with HealthOS AI" },
+      { title: "Partners — MEDOOGLE AI" },
+      { name: "description", content: "Join 8,400+ pharmacies, 12,000+ doctors, and 900+ labs already growing on the MEDOOGLE network." },
+      { property: "og:title", content: "Partner with MEDOOGLE AI" },
       { property: "og:description", content: "Run your pharmacy, clinic, or lab on the intelligent healthcare network." },
     ],
   }),
@@ -24,7 +24,7 @@ const partners = [
 function Partners() {
   return (
     <SimplePage
-      eyebrow="Grow on HealthOS"
+      eyebrow="Grow on MEDOOGLE"
       title={<>Run your practice on the <span className="gradient-brand-text">intelligent network.</span></>}
       description="Free to start. 15-minute onboarding. Real patients from day one."
     >

@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Search, Pill, MapPin, Truck, ScanLine, Heart, RotateCcw, Star, Filter, Upload } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/patient/medicine")({
-  head: () => ({ meta: [{ title: "Medicine — HealthOS AI" }] }),
+  head: () => ({ meta: [{ title: "Medicine — MEDOOGLE AI" }] }),
   component: MedicinePage,
 });
 

@@ -5,9 +5,9 @@ import { MapPin, Briefcase, ArrowRight } from "lucide-react";
 export const Route = createFileRoute("/careers")({
   head: () => ({
     meta: [
-      { title: "Careers — HealthOS AI" },
+      { title: "Careers — MEDOOGLE AI" },
       { name: "description", content: "Help us build the operating system for Indian healthcare. Open roles in engineering, design, and operations." },
-      { property: "og:title", content: "Careers at HealthOS AI" },
+      { property: "og:title", content: "Careers at MEDOOGLE AI" },
       { property: "og:description", content: "Do the best work of your life on a problem that matters." },
     ],
   }),

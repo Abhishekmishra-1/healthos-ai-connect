@@ -5,9 +5,9 @@ import { Check } from "lucide-react";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — HealthOS AI" },
+      { title: "Pricing — MEDOOGLE AI" },
       { name: "description", content: "Fair, transparent pricing built for Bharat. Free forever plan, Care membership at ₹99/month, and custom partner plans." },
-      { property: "og:title", content: "HealthOS AI Pricing" },
+      { property: "og:title", content: "MEDOOGLE AI Pricing" },
       { property: "og:description", content: "Free forever. Care at ₹99/month. Custom for partners." },
     ],
   }),
@@ -37,7 +37,7 @@ const plans = [
     name: "Partner",
     price: "Custom",
     note: "for clinics & pharmacies",
-    desc: "Run your practice on HealthOS.",
+    desc: "Run your practice on MEDOOGLE.",
     features: ["Full pharmacy / clinic / lab dashboard", "Digital billing & inventory", "Patient network access", "Analytics & insights", "Dedicated onboarding"],
     cta: "Talk to sales",
     highlighted: false,

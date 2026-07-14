@@ -18,17 +18,17 @@ const config: Record<DemoKind, {
     eyebrow: "Product demo",
     title: "Aarogya — the AI health assistant",
     description: "Ask in Hindi or English. Understand any prescription, report or symptom in seconds.",
-    meta: "See how HealthOS AI answers health questions in Hindi and English with safety-first design.",
+    meta: "See how MEDOOGLE AI answers health questions in Hindi and English with safety-first design.",
   },
   patient: {
     eyebrow: "Patient app",
     title: "Your entire healthcare, in one app",
     description: "The consumer experience that 1.2M+ Indian families use every day.",
-    meta: "A tour of the HealthOS patient app: records, medicines, doctors, and emergency.",
+    meta: "A tour of the MEDOOGLE patient app: records, medicines, doctors, and emergency.",
   },
   pharmacy: {
     eyebrow: "Pharmacy dashboard",
-    title: "Run your chemist shop on HealthOS",
+    title: "Run your chemist shop on MEDOOGLE",
     description: "Digital billing, inventory, and instant access to patients in your locality.",
     meta: "Inventory, orders, analytics — the pharmacy dashboard powering 8,400+ partners.",
   },
@@ -42,13 +42,13 @@ const config: Record<DemoKind, {
     eyebrow: "Lab dashboard",
     title: "Grow your lab across every neighborhood",
     description: "Sample collection scheduling, report upload, and AI patient summaries built in.",
-    meta: "Sample scheduling, reports, and analytics for pathology labs on HealthOS.",
+    meta: "Sample scheduling, reports, and analytics for pathology labs on MEDOOGLE.",
   },
   admin: {
     eyebrow: "Admin dashboard",
     title: "Command center for the network",
     description: "Manage users, partners, orders, revenue and network-wide analytics.",
-    meta: "The internal command center for the HealthOS AI healthcare network.",
+    meta: "The internal command center for the MEDOOGLE AI healthcare network.",
   },
 };
 
@@ -61,7 +61,7 @@ export const Route = createFileRoute("/demo/$kind")({
     const c = config[k] ?? config["patient"];
     return {
       meta: [
-        { title: `${c.title} — HealthOS AI` },
+        { title: `${c.title} — MEDOOGLE AI` },
         { name: "description", content: c.meta },
         { property: "og:title", content: c.title },
         { property: "og:description", content: c.meta },
