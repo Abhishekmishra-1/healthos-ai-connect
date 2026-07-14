@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { FileText, FlaskConical, Syringe, Camera, LayoutGrid, List, Upload, Download, Share2 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/patient/records")({
-  head: () => ({ meta: [{ title: "Health Records — HealthOS AI" }] }),
+  head: () => ({ meta: [{ title: "Health Records — MEDOOGLE AI" }] }),
   component: RecordsPage,
 });
 

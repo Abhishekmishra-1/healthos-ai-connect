@@ -8,7 +8,7 @@ import { FlaskConical, Upload, Loader2, AlertCircle, HelpCircle } from "lucide-r
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/patient/upload-report")({
-  head: () => ({ meta: [{ title: "Upload Lab Report — HealthOS AI" }] }),
+  head: () => ({ meta: [{ title: "Upload Lab Report — MEDOOGLE AI" }] }),
   component: UploadReport,
 });
 

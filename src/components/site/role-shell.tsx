@@ -47,7 +47,7 @@ export function RoleShell({
         )}>
           <Link to={sideNav[0].to} className="mb-2 flex items-center gap-2 px-2">
             <span className="grid h-9 w-9 place-items-center rounded-xl gradient-brand text-white shadow-glow"><Sparkles className="h-4 w-4" /></span>
-            <span className="text-[15px] font-semibold tracking-tight">HealthOS <span className="gradient-brand-text">AI</span></span>
+            <span className="text-[15px] font-semibold tracking-tight">MEDOOGLE <span className="gradient-brand-text">AI</span></span>
           </Link>
           <div className="mb-6 px-2 text-xs uppercase tracking-wider text-muted-foreground">{roleLabel} Portal</div>
           <nav className="flex-1 space-y-1 overflow-y-auto pr-1">

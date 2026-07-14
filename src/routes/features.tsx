@@ -5,9 +5,9 @@ import { Sparkles, Pill, Stethoscope, FlaskConical, FileHeart, Bell, Siren, User
 export const Route = createFileRoute("/features")({
   head: () => ({
     meta: [
-      { title: "Features — HealthOS AI" },
-      { name: "description", content: "Twelve services, one intelligent network. Explore every capability inside HealthOS AI." },
-      { property: "og:title", content: "HealthOS AI Features" },
+      { title: "Features — MEDOOGLE AI" },
+      { name: "description", content: "Twelve services, one intelligent network. Explore every capability inside MEDOOGLE AI." },
+      { property: "og:title", content: "MEDOOGLE AI Features" },
       { property: "og:description", content: "The complete healthcare toolbox for every Indian family." },
     ],
   }),

@@ -45,7 +45,7 @@ export function SiteFooter() {
                 <Sparkles className="h-4 w-4" />
               </span>
               <span className="text-base font-semibold tracking-tight">
-                HealthOS <span className="gradient-brand-text">AI</span>
+                MEDOOGLE <span className="gradient-brand-text">AI</span>
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
@@ -82,7 +82,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-8 md:flex-row">
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} HealthOS AI. Made with care in Bengaluru.</p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} MEDOOGLE AI. Made with care in Bengaluru.</p>
           <p className="text-xs text-muted-foreground">Not a substitute for professional medical advice.</p>
         </div>
       </div>

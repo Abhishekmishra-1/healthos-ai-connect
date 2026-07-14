@@ -75,7 +75,7 @@ function Hero() {
             <span className="gradient-brand-text">Every healthcare need.</span>
           </h1>
           <p className="mt-6 max-w-xl text-balance text-lg text-muted-foreground md:text-xl">
-            HealthOS AI connects local pharmacies, doctors, labs, hospitals, and ambulances into
+            MEDOOGLE AI connects local pharmacies, doctors, labs, hospitals, and ambulances into
             one intelligent network — designed for every Indian family, in Hindi and English.
           </p>
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row md:justify-start">
@@ -118,7 +118,7 @@ function Hero() {
           <div className="pointer-events-none absolute -inset-8 -z-10 gradient-mesh blur-2xl" />
           <img
             src={heroOrb}
-            alt="HealthOS AI healthcare network"
+            alt="MEDOOGLE AI healthcare network"
             width={1600}
             height={1200}
             className="animate-float mx-auto w-full max-w-[560px] drop-shadow-[0_40px_60px_rgba(103,80,220,0.25)]"
@@ -374,7 +374,7 @@ function RecordsSection() {
       reverse
       eyebrow="Digital Health Records"
       title={<>Every report, prescription and visit — <span className="gradient-brand-text">one timeline.</span></>}
-      description="No more shoeboxes of paper reports. HealthOS quietly organizes your family's entire medical history — searchable, sharable, and secure."
+      description="No more shoeboxes of paper reports. MEDOOGLE quietly organizes your family's entire medical history — searchable, sharable, and secure."
       bullets={[
         "ABDM-compliant, end-to-end encrypted",
         "Automatic timeline across doctors and labs",
@@ -417,7 +417,7 @@ function EmergencySection() {
               One tap. Help on the way.
             </h2>
             <p className="mt-4 max-w-lg text-white/85">
-              Press and hold the SOS button. HealthOS finds the nearest verified ambulance, shares
+              Press and hold the SOS button. MEDOOGLE finds the nearest verified ambulance, shares
               your live location, and alerts up to five family members automatically.
             </p>
             <div className="mt-6 grid grid-cols-3 gap-4 text-sm">
@@ -460,7 +460,7 @@ function FamilySection() {
       visual={
         <img
           src={appMockup}
-          alt="HealthOS mobile app"
+          alt="MEDOOGLE mobile app"
           width={1200}
           height={1408}
           loading="lazy"
@@ -507,7 +507,7 @@ function Membership() {
         <div className="grid gap-10 md:grid-cols-2 md:items-center">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs font-medium">
-              <ShieldCheck className="h-3.5 w-3.5" /> HealthOS Care Membership
+              <ShieldCheck className="h-3.5 w-3.5" /> MEDOOGLE Care Membership
             </span>
             <h2 className="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">
               ₹99/month. Care for the whole family.
@@ -620,7 +620,7 @@ function Pricing() {
       name: "Partner",
       price: "Custom",
       note: "for clinics & pharmacies",
-      desc: "Run your practice on HealthOS.",
+      desc: "Run your practice on MEDOOGLE.",
       features: ["Full pharmacy / clinic / lab dashboard", "Digital billing & inventory", "Patient network access", "Analytics & insights", "Dedicated onboarding"],
       cta: "Talk to sales",
       highlighted: false,
@@ -685,10 +685,10 @@ function Pricing() {
 /* ---------- FAQ ---------- */
 function FAQ() {
   const items = [
-    { q: "Is HealthOS AI a replacement for a doctor?", a: "No. Our AI helps you understand your health and connects you to the right doctor — but every diagnosis and prescription is issued by a licensed professional." },
-    { q: "Does it work in Hindi and regional languages?", a: "Yes. HealthOS speaks Hindi, Marathi, Tamil, Telugu, Bengali, and Kannada — with voice input and voice reminders." },
+    { q: "Is MEDOOGLE AI a replacement for a doctor?", a: "No. Our AI helps you understand your health and connects you to the right doctor — but every diagnosis and prescription is issued by a licensed professional." },
+    { q: "Does it work in Hindi and regional languages?", a: "Yes. MEDOOGLE speaks Hindi, Marathi, Tamil, Telugu, Bengali, and Kannada — with voice input and voice reminders." },
     { q: "Do you deliver to villages and small towns?", a: "We are live in 240+ Tier 2 and Tier 3 cities, and expanding to blocks and panchayat-level towns every week." },
-    { q: "Is my medical data safe?", a: "Yes. HealthOS is ABDM-compliant, end-to-end encrypted, and you control who sees what. We never sell your data." },
+    { q: "Is my medical data safe?", a: "Yes. MEDOOGLE is ABDM-compliant, end-to-end encrypted, and you control who sees what. We never sell your data." },
     { q: "How does the ambulance service work?", a: "One tap on SOS locates the nearest verified ambulance, shares your live location, and alerts your family. Average dispatch time is 3.8 minutes." },
     { q: "Can my local chemist join the network?", a: "Absolutely. Any licensed pharmacy can join in under 15 minutes with our free partner app. No setup fees." },
   ];
@@ -729,7 +729,7 @@ function CTA() {
           they <span className="gradient-brand-text">deserve.</span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-balance text-muted-foreground">
-          Join 1.2 million Indian families already living on HealthOS AI.
+          Join 1.2 million Indian families already living on MEDOOGLE AI.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link to="/contact" className="inline-flex items-center gap-2 rounded-full gradient-brand px-6 py-3.5 text-sm font-semibold text-white shadow-glow">

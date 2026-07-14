@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/patient/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard — HealthOS AI" }] }),
+  head: () => ({ meta: [{ title: "Dashboard — MEDOOGLE AI" }] }),
   component: Dashboard,
 });
 

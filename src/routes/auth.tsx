@@ -9,8 +9,8 @@ export const Route = createFileRoute("/auth")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Sign in — HealthOS AI" },
-      { name: "description", content: "Sign in or create your HealthOS AI account to access your health records, reminders, and AI insights." },
+      { title: "Sign in — MEDOOGLE AI" },
+      { name: "description", content: "Sign in or create your MEDOOGLE AI account to access your health records, reminders, and AI insights." },
     ],
   }),
   component: AuthPage,
@@ -88,7 +88,7 @@ function AuthPage() {
           <span className="grid h-9 w-9 place-items-center rounded-xl gradient-brand text-white shadow-glow">
             <Sparkles className="h-4 w-4" />
           </span>
-          <span className="text-[15px] font-semibold tracking-tight">HealthOS <span className="gradient-brand-text">AI</span></span>
+          <span className="text-[15px] font-semibold tracking-tight">MEDOOGLE <span className="gradient-brand-text">AI</span></span>
         </Link>
 
         <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-glow">

@@ -6,7 +6,7 @@ import { Plus, Pill, Trash2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/patient/reminders")({
-  head: () => ({ meta: [{ title: "Medicine Reminders — HealthOS AI" }] }),
+  head: () => ({ meta: [{ title: "Medicine Reminders — MEDOOGLE AI" }] }),
   component: Reminders,
 });
 

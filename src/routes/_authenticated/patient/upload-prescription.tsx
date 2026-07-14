@@ -8,7 +8,7 @@ import { FileText, Upload, Loader2, AlertCircle, Pill } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/patient/upload-prescription")({
-  head: () => ({ meta: [{ title: "Upload Prescription — HealthOS AI" }] }),
+  head: () => ({ meta: [{ title: "Upload Prescription — MEDOOGLE AI" }] }),
   component: UploadPrescription,
 });
 

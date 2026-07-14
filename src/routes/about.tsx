@@ -4,9 +4,9 @@ import { SimplePage } from "@/components/site/simple-page";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — HealthOS AI" },
+      { title: "About — MEDOOGLE AI" },
       { name: "description", content: "We're building the operating system for Indian healthcare — starting from Tier 2 and Tier 3 towns." },
-      { property: "og:title", content: "About HealthOS AI" },
+      { property: "og:title", content: "About MEDOOGLE AI" },
       { property: "og:description", content: "The story behind the intelligent healthcare network for Bharat." },
     ],
   }),
@@ -18,7 +18,7 @@ function About() {
     <SimplePage
       eyebrow="Our story"
       title={<>Healthcare for the <span className="gradient-brand-text">next 500 million</span> Indians.</>}
-      description="We grew up watching our grandparents travel three hours to see a doctor, only to lose their prescriptions on the way back. HealthOS AI is our answer."
+      description="We grew up watching our grandparents travel three hours to see a doctor, only to lose their prescriptions on the way back. MEDOOGLE AI is our answer."
     >
       <div className="prose prose-neutral mx-auto mt-12 max-w-none text-lg leading-relaxed text-foreground/85">
         <p>
@@ -27,7 +27,7 @@ function About() {
           clipboards, and long journeys to district hospitals. It shouldn't be this way.
         </p>
         <p>
-          HealthOS AI is one intelligent network that quietly connects your local pharmacy, your
+          MEDOOGLE AI is one intelligent network that quietly connects your local pharmacy, your
           family doctor, the nearest lab, the closest ambulance, and your home caregivers. We speak
           your language. We understand your family. We remember every prescription so you don't have to.
         </p>
