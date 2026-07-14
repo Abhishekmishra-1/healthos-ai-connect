@@ -2,7 +2,7 @@ import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, Bot, Pill, Stethoscope, FlaskConical, FolderHeart,
-  ShoppingBag, CalendarCheck, User as UserIcon, Home,
+  ShoppingBag, CalendarCheck, User as UserIcon, Home, Search, LifeBuoy, Hospital,
 } from "lucide-react";
 import { RoleShell, type NavItem } from "@/components/site/role-shell";
 
@@ -12,18 +12,20 @@ const sideNav: NavItem[] = [
   { to: "/patient/medicine", label: "Medicine", icon: Pill },
   { to: "/patient/doctors", label: "Doctor Consultation", icon: Stethoscope },
   { to: "/patient/labs", label: "Lab Tests", icon: FlaskConical },
+  { to: "/patient/hospitals", label: "Hospitals", icon: Hospital },
   { to: "/patient/records", label: "Health Records", icon: FolderHeart },
   { to: "/patient/orders", label: "Orders", icon: ShoppingBag },
   { to: "/patient/appointments", label: "Appointments", icon: CalendarCheck },
+  { to: "/patient/support", label: "Support", icon: LifeBuoy },
   { to: "/patient/profile", label: "Profile", icon: UserIcon },
 ];
 
 const bottomNav: NavItem[] = [
   { to: "/patient/dashboard", label: "Home", icon: Home },
-  { to: "/patient/medicine", label: "Medicine", icon: Pill },
-  { to: "/patient/doctors", label: "Doctors", icon: Stethoscope },
-  { to: "/patient/records", label: "Records", icon: FolderHeart },
+  { to: "/patient/search", label: "Search", icon: Search },
+  { to: "/patient/orders", label: "Orders", icon: ShoppingBag },
   { to: "/patient/profile", label: "Profile", icon: UserIcon },
+  { to: "/patient/support", label: "Support", icon: LifeBuoy },
 ];
 
 export const Route = createFileRoute("/_authenticated/patient")({
