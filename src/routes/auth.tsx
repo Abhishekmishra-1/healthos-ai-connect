@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
-import { Sparkles, Loader2, User, Stethoscope, Pill, FlaskConical, Hospital } from "lucide-react";
+import { Sparkles, Loader2, User, Stethoscope, Pill, FlaskConical, Hospital, Mail, Phone } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/auth")({
@@ -19,10 +19,14 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [method, setMethod] = useState<"email" | "otp">("email");
   const [role, setRole] = useState<"patient" | "doctor" | "pharmacy" | "lab" | "hospital">("patient");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -64,6 +68,49 @@ function AuthPage() {
       }
     } catch (err: any) {
       toast.error(err.message ?? "Authentication failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function normalizePhone(raw: string) {
+    const digits = raw.replace(/\D/g, "");
+    if (raw.trim().startsWith("+")) return "+" + digits;
+    // Default to India country code for 10-digit numbers.
+    if (digits.length === 10) return "+91" + digits;
+    return "+" + digits;
+  }
+
+  async function handleSendOtp(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        phone: normalizePhone(phone),
+        options: { data: { full_name: name || undefined, role } },
+      });
+      if (error) throw error;
+      setOtpSent(true);
+      toast.success("OTP sent. Check your phone.");
+    } catch (err: any) {
+      toast.error(err.message ?? "Could not send OTP. Ask admin to enable phone auth.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleVerifyOtp(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.verifyOtp({
+        phone: normalizePhone(phone),
+        token: otp,
+        type: "sms",
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      toast.error(err.message ?? "Invalid OTP");
     } finally {
       setLoading(false);
     }
@@ -129,6 +176,25 @@ function AuthPage() {
             {mode === "signin" ? "Sign in to your health dashboard." : "Start managing your family's health, intelligently."}
           </p>
 
+          <div className="mt-5 grid grid-cols-2 gap-2 rounded-full bg-secondary p-1">
+            <button
+              type="button"
+              onClick={() => setMethod("email")}
+              className={`flex items-center justify-center gap-2 rounded-full px-3 py-2 text-sm font-semibold transition ${method === "email" ? "bg-background shadow-sm" : "text-muted-foreground"}`}
+              aria-pressed={method === "email"}
+            >
+              <Mail className="h-4 w-4" /> Email
+            </button>
+            <button
+              type="button"
+              onClick={() => { setMethod("otp"); setOtpSent(false); }}
+              className={`flex items-center justify-center gap-2 rounded-full px-3 py-2 text-sm font-semibold transition ${method === "otp" ? "bg-background shadow-sm" : "text-muted-foreground"}`}
+              aria-pressed={method === "otp"}
+            >
+              <Phone className="h-4 w-4" /> Mobile OTP
+            </button>
+          </div>
+
           <button
             onClick={handleGoogle}
             disabled={loading}
@@ -142,6 +208,7 @@ function AuthPage() {
             <div className="h-px flex-1 bg-border" />or<div className="h-px flex-1 bg-border" />
           </div>
 
+          {method === "email" && (
           <form onSubmit={handleEmail} className="space-y-3">
             {mode === "signup" && (
               <input required placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)}
@@ -157,6 +224,38 @@ function AuthPage() {
               {mode === "signin" ? "Sign in" : "Create account"}
             </button>
           </form>
+          )}
+
+          {method === "otp" && (
+            <form onSubmit={otpSent ? handleVerifyOtp : handleSendOtp} className="space-y-3">
+              {mode === "signup" && !otpSent && (
+                <input placeholder="Full name (optional)" value={name} onChange={(e) => setName(e.target.value)}
+                  className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary" />
+              )}
+              <input required type="tel" inputMode="tel" placeholder="Mobile number (e.g. 9876543210)" value={phone}
+                onChange={(e) => setPhone(e.target.value)} disabled={otpSent}
+                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-base outline-none focus:ring-2 focus:ring-primary disabled:opacity-60" />
+              {otpSent && (
+                <input required inputMode="numeric" pattern="[0-9]*" maxLength={6} placeholder="Enter 6-digit OTP"
+                  value={otp} onChange={(e) => setOtp(e.target.value)}
+                  className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-center text-lg tracking-[0.4em] outline-none focus:ring-2 focus:ring-primary" />
+              )}
+              <button disabled={loading}
+                className="flex w-full items-center justify-center gap-2 rounded-full gradient-brand px-4 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-60">
+                {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                {otpSent ? "Verify OTP" : "Send OTP"}
+              </button>
+              {otpSent && (
+                <button type="button" onClick={() => { setOtpSent(false); setOtp(""); }}
+                  className="w-full text-center text-xs text-muted-foreground underline">
+                  Change number
+                </button>
+              )}
+              <p className="text-center text-[11px] text-muted-foreground">
+                Standard SMS charges may apply. Requires phone auth to be enabled.
+              </p>
+            </form>
+          )}
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             {mode === "signin" ? "New here?" : "Already have an account?"}{" "}

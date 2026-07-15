@@ -8,7 +8,7 @@ const roleDashboards: Record<string, string> = {
   pharmacy: "/pharmacy/dashboard",
   lab: "/lab/dashboard",
   hospital: "/hospital/dashboard",
-  admin: "/patient/dashboard",
+  admin: "/admin/dashboard",
 };
 
 export async function fetchCurrentRole(): Promise<string | null> {
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/_authenticated")({
 
     // At the bare /_authenticated (e.g. legacy /dashboard) — send to role home
     const path = location.pathname;
-    const knownPrefix = ["/patient", "/doctor", "/pharmacy", "/lab", "/hospital"].some((p) => path.startsWith(p));
+    const knownPrefix = ["/patient", "/doctor", "/pharmacy", "/lab", "/hospital", "/admin"].some((p) => path.startsWith(p));
     if (!knownPrefix) {
       const { data: r } = await supabase.from("user_roles").select("role").eq("user_id", data.user.id).limit(1).maybeSingle();
       const role = (r?.role as string) ?? "patient";

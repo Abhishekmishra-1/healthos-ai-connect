@@ -221,3 +221,26 @@
 @utility animate-pulse-ring {
   animation: pulse-ring 2.4s cubic-bezier(0.24, 0, 0.38, 1) infinite;
 }
+
+/* Accessibility: elderly / large-text mode */
+html.elderly {
+  font-size: 18px;
+}
+html.elderly button,
+html.elderly a,
+html.elderly [role="button"] {
+  min-height: 48px;
+}
+html.elderly input,
+html.elderly select,
+html.elderly textarea {
+  min-height: 48px;
+  font-size: 1rem;
+}
+
+/* Always-on focus ring for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
