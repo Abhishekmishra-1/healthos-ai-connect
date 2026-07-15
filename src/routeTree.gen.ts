@@ -31,6 +31,7 @@ import { Route as AuthenticatedPatientRouteRouteImport } from './routes/_authent
 import { Route as AuthenticatedLabRouteRouteImport } from './routes/_authenticated/lab/route'
 import { Route as AuthenticatedHospitalRouteRouteImport } from './routes/_authenticated/hospital/route'
 import { Route as AuthenticatedDoctorRouteRouteImport } from './routes/_authenticated/doctor/route'
+import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as AuthenticatedPharmacyPaymentsRouteImport } from './routes/_authenticated/pharmacy/payments'
 import { Route as AuthenticatedPharmacyOrdersRouteImport } from './routes/_authenticated/pharmacy/orders'
 import { Route as AuthenticatedPharmacyInventoryRouteImport } from './routes/_authenticated/pharmacy/inventory'
@@ -189,6 +190,11 @@ const AuthenticatedDoctorRouteRoute =
     path: '/doctor',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPharmacyPaymentsRoute =
   AuthenticatedPharmacyPaymentsRouteImport.update({
     id: '/payments',
@@ -469,6 +475,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/admin': typeof AuthenticatedAdminRouteRoute
   '/doctor': typeof AuthenticatedDoctorRouteRouteWithChildren
   '/hospital': typeof AuthenticatedHospitalRouteRouteWithChildren
   '/lab': typeof AuthenticatedLabRouteRouteWithChildren
@@ -536,6 +543,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/admin': typeof AuthenticatedAdminRouteRoute
   '/doctor': typeof AuthenticatedDoctorRouteRouteWithChildren
   '/hospital': typeof AuthenticatedHospitalRouteRouteWithChildren
   '/lab': typeof AuthenticatedLabRouteRouteWithChildren
@@ -605,6 +613,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRoute
   '/_authenticated/doctor': typeof AuthenticatedDoctorRouteRouteWithChildren
   '/_authenticated/hospital': typeof AuthenticatedHospitalRouteRouteWithChildren
   '/_authenticated/lab': typeof AuthenticatedLabRouteRouteWithChildren
@@ -674,6 +683,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/terms'
+    | '/admin'
     | '/doctor'
     | '/hospital'
     | '/lab'
@@ -741,6 +751,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/terms'
+    | '/admin'
     | '/doctor'
     | '/hospital'
     | '/lab'
@@ -809,6 +820,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/terms'
+    | '/_authenticated/admin'
     | '/_authenticated/doctor'
     | '/_authenticated/hospital'
     | '/_authenticated/lab'
@@ -1035,6 +1047,13 @@ declare module '@tanstack/react-router' {
       path: '/doctor'
       fullPath: '/doctor'
       preLoaderRoute: typeof AuthenticatedDoctorRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/pharmacy/payments': {
@@ -1501,6 +1520,7 @@ const AuthenticatedPharmacyRouteRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRoute
   AuthenticatedDoctorRouteRoute: typeof AuthenticatedDoctorRouteRouteWithChildren
   AuthenticatedHospitalRouteRoute: typeof AuthenticatedHospitalRouteRouteWithChildren
   AuthenticatedLabRouteRoute: typeof AuthenticatedLabRouteRouteWithChildren
@@ -1509,6 +1529,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRoute,
   AuthenticatedDoctorRouteRoute: AuthenticatedDoctorRouteRouteWithChildren,
   AuthenticatedHospitalRouteRoute: AuthenticatedHospitalRouteRouteWithChildren,
   AuthenticatedLabRouteRoute: AuthenticatedLabRouteRouteWithChildren,
