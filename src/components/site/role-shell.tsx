@@ -1,8 +1,9 @@
 import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ComponentType } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Sparkles, Menu, X, Search, Bell, LogOut, type LucideIcon } from "lucide-react";
+import { Sparkles, Menu, X, Search, Bell, LogOut, Accessibility, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useElderlyMode } from "@/hooks/use-elderly-mode";
 
 export type NavItem = { to: string; label: string; icon: LucideIcon };
 
@@ -22,6 +23,7 @@ export function RoleShell({
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const elderly = useElderlyMode();
 
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
@@ -82,6 +84,18 @@ export function RoleShell({
                 <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <input type="search" placeholder={`Search ${roleLabel.toLowerCase()} tools…`} className="w-full rounded-full border border-border/60 bg-secondary/50 py-2.5 pl-11 pr-4 text-sm outline-none focus:bg-background focus:ring-2 focus:ring-primary/40" />
               </div>
+              <button
+                onClick={() => elderly.toggle()}
+                aria-pressed={elderly.on}
+                aria-label={elderly.on ? "Turn off large text mode" : "Turn on large text mode"}
+                title={elderly.on ? "Large text: on" : "Large text: off"}
+                className={cn(
+                  "grid h-10 w-10 shrink-0 place-items-center rounded-full transition",
+                  elderly.on ? "gradient-brand text-white shadow-glow" : "hover:bg-secondary",
+                )}
+              >
+                <Accessibility className="h-5 w-5" />
+              </button>
               <button className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full hover:bg-secondary" aria-label="Notifications">
                 <Bell className="h-5 w-5" />
                 <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
