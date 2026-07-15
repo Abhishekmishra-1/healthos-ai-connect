@@ -14,6 +14,219 @@ export type Database = {
   }
   public: {
     Tables: {
+      catalog_doctors: {
+        Row: {
+          active: boolean
+          city: string | null
+          clinic: string | null
+          created_at: string
+          experience_years: number | null
+          fee: number | null
+          id: string
+          languages: string | null
+          name: string
+          specialty: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          city?: string | null
+          clinic?: string | null
+          created_at?: string
+          experience_years?: number | null
+          fee?: number | null
+          id?: string
+          languages?: string | null
+          name: string
+          specialty: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          city?: string | null
+          clinic?: string | null
+          created_at?: string
+          experience_years?: number | null
+          fee?: number | null
+          id?: string
+          languages?: string | null
+          name?: string
+          specialty?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      catalog_hospitals: {
+        Row: {
+          active: boolean
+          address: string | null
+          city: string | null
+          created_at: string
+          emergency: boolean
+          id: string
+          name: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          emergency?: boolean
+          id?: string
+          name: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          emergency?: boolean
+          id?: string
+          name?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      catalog_labs: {
+        Row: {
+          active: boolean
+          address: string | null
+          city: string | null
+          created_at: string
+          id: string
+          name: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      catalog_medicines: {
+        Row: {
+          active: boolean
+          brand: string | null
+          category: string | null
+          created_at: string
+          id: string
+          name: string
+          price: number | null
+          requires_prescription: boolean
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          brand?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          price?: number | null
+          requires_prescription?: boolean
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          brand?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          price?: number | null
+          requires_prescription?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      catalog_pharmacies: {
+        Row: {
+          active: boolean
+          address: string | null
+          city: string | null
+          created_at: string
+          id: string
+          name: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      catalog_tests: {
+        Row: {
+          active: boolean
+          category: string | null
+          created_at: string
+          home_collection: boolean
+          id: string
+          name: string
+          price: number | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          category?: string | null
+          created_at?: string
+          home_collection?: boolean
+          id?: string
+          name: string
+          price?: number | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          category?: string | null
+          created_at?: string
+          home_collection?: boolean
+          id?: string
+          name?: string
+          price?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       health_events: {
         Row: {
           created_at: string
