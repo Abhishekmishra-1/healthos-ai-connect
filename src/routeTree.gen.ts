@@ -76,6 +76,7 @@ import { Route as AuthenticatedDoctorPatientsRouteImport } from './routes/_authe
 import { Route as AuthenticatedDoctorEarningsRouteImport } from './routes/_authenticated/doctor/earnings'
 import { Route as AuthenticatedDoctorDashboardRouteImport } from './routes/_authenticated/doctor/dashboard'
 import { Route as AuthenticatedDoctorCalendarRouteImport } from './routes/_authenticated/doctor/calendar'
+import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin/dashboard'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -458,6 +459,12 @@ const AuthenticatedDoctorCalendarRoute =
     path: '/calendar',
     getParentRoute: () => AuthenticatedDoctorRouteRoute,
   } as any)
+const AuthenticatedAdminDashboardRoute =
+  AuthenticatedAdminDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -475,13 +482,14 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
-  '/admin': typeof AuthenticatedAdminRouteRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/doctor': typeof AuthenticatedDoctorRouteRouteWithChildren
   '/hospital': typeof AuthenticatedHospitalRouteRouteWithChildren
   '/lab': typeof AuthenticatedLabRouteRouteWithChildren
   '/patient': typeof AuthenticatedPatientRouteRouteWithChildren
   '/pharmacy': typeof AuthenticatedPharmacyRouteRouteWithChildren
   '/demo/$kind': typeof DemoKindRoute
+  '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/doctor/calendar': typeof AuthenticatedDoctorCalendarRoute
   '/doctor/dashboard': typeof AuthenticatedDoctorDashboardRoute
   '/doctor/earnings': typeof AuthenticatedDoctorEarningsRoute
@@ -543,13 +551,14 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
-  '/admin': typeof AuthenticatedAdminRouteRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/doctor': typeof AuthenticatedDoctorRouteRouteWithChildren
   '/hospital': typeof AuthenticatedHospitalRouteRouteWithChildren
   '/lab': typeof AuthenticatedLabRouteRouteWithChildren
   '/patient': typeof AuthenticatedPatientRouteRouteWithChildren
   '/pharmacy': typeof AuthenticatedPharmacyRouteRouteWithChildren
   '/demo/$kind': typeof DemoKindRoute
+  '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/doctor/calendar': typeof AuthenticatedDoctorCalendarRoute
   '/doctor/dashboard': typeof AuthenticatedDoctorDashboardRoute
   '/doctor/earnings': typeof AuthenticatedDoctorEarningsRoute
@@ -613,13 +622,14 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRouteRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/doctor': typeof AuthenticatedDoctorRouteRouteWithChildren
   '/_authenticated/hospital': typeof AuthenticatedHospitalRouteRouteWithChildren
   '/_authenticated/lab': typeof AuthenticatedLabRouteRouteWithChildren
   '/_authenticated/patient': typeof AuthenticatedPatientRouteRouteWithChildren
   '/_authenticated/pharmacy': typeof AuthenticatedPharmacyRouteRouteWithChildren
   '/demo/$kind': typeof DemoKindRoute
+  '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/_authenticated/doctor/calendar': typeof AuthenticatedDoctorCalendarRoute
   '/_authenticated/doctor/dashboard': typeof AuthenticatedDoctorDashboardRoute
   '/_authenticated/doctor/earnings': typeof AuthenticatedDoctorEarningsRoute
@@ -690,6 +700,7 @@ export interface FileRouteTypes {
     | '/patient'
     | '/pharmacy'
     | '/demo/$kind'
+    | '/admin/dashboard'
     | '/doctor/calendar'
     | '/doctor/dashboard'
     | '/doctor/earnings'
@@ -758,6 +769,7 @@ export interface FileRouteTypes {
     | '/patient'
     | '/pharmacy'
     | '/demo/$kind'
+    | '/admin/dashboard'
     | '/doctor/calendar'
     | '/doctor/dashboard'
     | '/doctor/earnings'
@@ -827,6 +839,7 @@ export interface FileRouteTypes {
     | '/_authenticated/patient'
     | '/_authenticated/pharmacy'
     | '/demo/$kind'
+    | '/_authenticated/admin/dashboard'
     | '/_authenticated/doctor/calendar'
     | '/_authenticated/doctor/dashboard'
     | '/_authenticated/doctor/earnings'
@@ -1364,8 +1377,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDoctorCalendarRouteImport
       parentRoute: typeof AuthenticatedDoctorRouteRoute
     }
+    '/_authenticated/admin/dashboard': {
+      id: '/_authenticated/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
+
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminDashboardRoute: typeof AuthenticatedAdminDashboardRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminDashboardRoute: AuthenticatedAdminDashboardRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
 
 interface AuthenticatedDoctorRouteRouteChildren {
   AuthenticatedDoctorCalendarRoute: typeof AuthenticatedDoctorCalendarRoute
@@ -1520,7 +1554,7 @@ const AuthenticatedPharmacyRouteRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRoute
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
   AuthenticatedDoctorRouteRoute: typeof AuthenticatedDoctorRouteRouteWithChildren
   AuthenticatedHospitalRouteRoute: typeof AuthenticatedHospitalRouteRouteWithChildren
   AuthenticatedLabRouteRoute: typeof AuthenticatedLabRouteRouteWithChildren
@@ -1529,7 +1563,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRoute,
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
   AuthenticatedDoctorRouteRoute: AuthenticatedDoctorRouteRouteWithChildren,
   AuthenticatedHospitalRouteRoute: AuthenticatedHospitalRouteRouteWithChildren,
   AuthenticatedLabRouteRoute: AuthenticatedLabRouteRouteWithChildren,
