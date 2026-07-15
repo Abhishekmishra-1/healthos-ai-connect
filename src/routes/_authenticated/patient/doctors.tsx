@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, Star, Video, MessageCircle, CalendarCheck, MapPin, Stethoscope } from "lucide-react";
+import { VoiceSearchInput } from "@/components/site/voice-search-input";
 
 export const Route = createFileRoute("/_authenticated/patient/doctors")({
   head: () => ({ meta: [{ title: "Doctors — MEDOOGLE AI" }] }),
@@ -8,6 +9,20 @@ export const Route = createFileRoute("/_authenticated/patient/doctors")({
 });
 
 const SPECS = ["All", "General Physician", "Dermatology", "Pediatrics", "Cardiology", "Gynecology", "Orthopedics", "ENT", "Psychiatry"];
+
+// Symptom → recommended specialty mapping. Each tile drives both the search
+// query and the specialty filter so users find the right doctor in one tap.
+const SYMPTOMS: { label: string; emoji: string; spec: string; keywords: string }[] = [
+  { label: "Fever", emoji: "🤒", spec: "General Physician", keywords: "fever" },
+  { label: "Cough & Cold", emoji: "🤧", spec: "General Physician", keywords: "cough cold" },
+  { label: "Skin & Hair", emoji: "🧴", spec: "Dermatology", keywords: "skin" },
+  { label: "Child Care", emoji: "🧒", spec: "Pediatrics", keywords: "child" },
+  { label: "Heart", emoji: "❤️", spec: "Cardiology", keywords: "heart" },
+  { label: "Women's Health", emoji: "🌸", spec: "Gynecology", keywords: "women" },
+  { label: "Bones & Joints", emoji: "🦴", spec: "Orthopedics", keywords: "joint pain" },
+  { label: "Ear · Nose · Throat", emoji: "👂", spec: "ENT", keywords: "throat" },
+  { label: "Mental Health", emoji: "🧠", spec: "Psychiatry", keywords: "stress anxiety" },
+];
 
 const DOCTORS = [
   { id: 1, name: "Dr. Priya Sharma", spec: "General Physician", exp: 12, lang: "English, Hindi, Marathi", rating: 4.9, reviews: 1204, fee: 399, clinic: "Sunrise Clinic, Pune", online: true, gender: "F" },
@@ -31,19 +46,43 @@ export function DoctorsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Doctor Consultation</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Book video, chat or in-clinic visits with verified specialists.</p>
+        <p className="mt-2 text-base text-muted-foreground">Tell us what's wrong — we'll match you with the right doctor.</p>
       </div>
 
-      <div className="relative">
-        <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by name, specialty or clinic"
-          className="w-full rounded-2xl border border-border/60 bg-card py-3 pl-11 pr-4 text-sm outline-none focus:ring-2 focus:ring-primary/40" />
+      <VoiceSearchInput
+        value={q}
+        onChange={setQ}
+        placeholder="Say a symptom — e.g. 'skin rash', 'chest pain'"
+        ariaLabel="Search doctors by symptom, name, or clinic"
+      />
+
+      <div>
+        <p className="mb-3 text-sm font-semibold text-muted-foreground">What are you feeling?</p>
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+          {SYMPTOMS.map((s) => {
+            const active = spec === s.spec;
+            return (
+              <button
+                key={s.label}
+                type="button"
+                onClick={() => { setSpec(active ? "All" : s.spec); setQ(active ? "" : s.keywords); }}
+                aria-pressed={active}
+                className={`flex min-h-24 flex-col items-center justify-center gap-1.5 rounded-2xl border p-3 text-center text-xs font-semibold transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                  active ? "border-transparent gradient-brand text-white shadow-glow" : "border-border/60 bg-card hover:bg-secondary"
+                }`}
+              >
+                <span aria-hidden className="text-2xl">{s.emoji}</span>
+                <span className="leading-tight">{s.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <div className="flex gap-2 overflow-x-auto pb-1">
         {SPECS.map((s) => (
-          <button key={s} onClick={() => setSpec(s)}
-            className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium ${spec === s ? "gradient-brand text-white shadow-glow" : "bg-secondary text-muted-foreground hover:text-foreground"}`}>
+          <button key={s} onClick={() => setSpec(s)} aria-pressed={spec === s}
+            className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary ${spec === s ? "gradient-brand text-white shadow-glow" : "bg-secondary text-muted-foreground hover:text-foreground"}`}>
             {s}
           </button>
         ))}
