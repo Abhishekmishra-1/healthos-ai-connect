@@ -5,6 +5,22 @@ import { lovable } from "@/integrations/lovable";
 import { Sparkles, Loader2, User, Stethoscope, Pill, FlaskConical, Hospital, Mail, Phone } from "lucide-react";
 import { toast } from "sonner";
 
+/** Turn Supabase auth errors into plain language for first-time users. */
+function friendlyAuthError(err: any): string {
+  const msg: string = err?.message ?? "";
+  const code: string = err?.code ?? "";
+  if (code === "weak_password" || /known to be weak|pwned/i.test(msg))
+    return "That password is too easy to guess. Mix letters, numbers and a symbol (8+ characters).";
+  if (/invalid login credentials/i.test(msg))
+    return "Wrong email or password. If you're new here, tap 'Create an account'.";
+  if (/email not confirmed/i.test(msg))
+    return "Please confirm your email from the link we sent, then sign in again.";
+  if (/user already registered/i.test(msg))
+    return "This email already has an account. Switch to Sign in.";
+  if (/password should be at least/i.test(msg)) return "Password must be at least 6 characters.";
+  return msg || "Sign in failed. Please try again.";
+}
+
 export const Route = createFileRoute("/auth")({
   ssr: false,
   // Optional ?redirect=/some/path — where to land after a successful sign-in.
