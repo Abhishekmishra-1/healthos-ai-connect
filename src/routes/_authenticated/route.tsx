@@ -27,7 +27,7 @@ export const Route = createFileRoute("/_authenticated")({
   ssr: false,
   beforeLoad: async ({ location }) => {
     const { data, error } = await supabase.auth.getUser();
-    if (error || !data.user) throw redirect({ to: "/auth" });
+    if (error || !data.user) throw redirect({ to: "/auth", search: { redirect: location.href } });
 
     // At the bare /_authenticated (e.g. legacy /dashboard) — send to role home
     const path = location.pathname;

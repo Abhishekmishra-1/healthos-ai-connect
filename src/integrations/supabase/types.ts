@@ -14,6 +14,71 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          clinic: string | null
+          created_at: string
+          doctor_id: string | null
+          doctor_name: string
+          doctor_specialty: string | null
+          fee: number
+          id: string
+          mode: string
+          patient_id: string
+          patient_name: string | null
+          patient_phone: string | null
+          reason: string | null
+          slot_date: string
+          slot_time: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          clinic?: string | null
+          created_at?: string
+          doctor_id?: string | null
+          doctor_name: string
+          doctor_specialty?: string | null
+          fee?: number
+          id?: string
+          mode?: string
+          patient_id: string
+          patient_name?: string | null
+          patient_phone?: string | null
+          reason?: string | null
+          slot_date: string
+          slot_time: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          clinic?: string | null
+          created_at?: string
+          doctor_id?: string | null
+          doctor_name?: string
+          doctor_specialty?: string | null
+          fee?: number
+          id?: string
+          mode?: string
+          patient_id?: string
+          patient_name?: string | null
+          patient_phone?: string | null
+          reason?: string | null
+          slot_date?: string
+          slot_time?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_doctor_id_fkey"
+            columns: ["doctor_id"]
+            isOneToOne: false
+            referencedRelation: "catalog_doctors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       catalog_doctors: {
         Row: {
           active: boolean
@@ -490,6 +555,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      bootstrap_current_user: {
+        Args: never
+        Returns: Database["public"]["Enums"]["app_role"]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, Star, Video, MessageCircle, CalendarCheck, MapPin, Stethoscope } from "lucide-react";
 import { VoiceSearchInput } from "@/components/site/voice-search-input";
+import { BookDoctorDialog, type BookingRequest } from "@/components/patient/book-doctor-dialog";
 
 export const Route = createFileRoute("/_authenticated/patient/doctors")({
   head: () => ({ meta: [{ title: "Doctors — MEDOOGLE AI" }] }),
@@ -36,6 +37,14 @@ const DOCTORS = [
 export function DoctorsPage() {
   const [q, setQ] = useState("");
   const [spec, setSpec] = useState("All");
+  const [booking, setBooking] = useState<BookingRequest | null>(null);
+
+  function startBooking(d: (typeof DOCTORS)[number], mode: BookingRequest["mode"]) {
+    setBooking({
+      doctor: { name: d.name, spec: d.spec, clinic: d.clinic, fee: d.fee },
+      mode,
+    });
+  }
 
   const list = useMemo(() => DOCTORS.filter((d) =>
     (spec === "All" || d.spec === spec) &&
@@ -101,7 +110,9 @@ export function DoctorsPage() {
                     <p className="truncate font-semibold">{d.name}</p>
                     <p className="text-xs text-muted-foreground">{d.spec} · {d.exp} yrs exp.</p>
                   </div>
-                  {d.online && <span className="shrink-0 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-500">Online now</span>}
+                  <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${d.online ? "bg-emerald-500/10 text-emerald-500" : "bg-sky-500/10 text-sky-600"}`}>
+                    {d.online ? "Online now" : "Available today"}
+                  </span>
                 </div>
                 <div className="mt-2 flex items-center gap-3 text-xs">
                   <span className="inline-flex items-center gap-1"><Star className="h-3 w-3 fill-amber-500 text-amber-500" /> {d.rating} ({d.reviews})</span>
@@ -113,9 +124,9 @@ export function DoctorsPage() {
             <div className="mt-4 flex items-center justify-between gap-2">
               <div className="text-sm"><span className="text-muted-foreground">Consultation</span> <span className="font-semibold">₹{d.fee}</span></div>
               <div className="flex gap-1.5">
-                <button className="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1.5 text-xs font-medium hover:bg-secondary/70"><MessageCircle className="h-3.5 w-3.5" /> Chat</button>
-                <button className="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1.5 text-xs font-medium hover:bg-secondary/70"><Video className="h-3.5 w-3.5" /> Video</button>
-                <button className="inline-flex items-center gap-1 rounded-full gradient-brand px-3 py-1.5 text-xs font-semibold text-white shadow-glow"><CalendarCheck className="h-3.5 w-3.5" /> Book</button>
+                <button type="button" onClick={() => startBooking(d, "chat")} className="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1.5 text-xs font-medium hover:bg-secondary/70"><MessageCircle className="h-3.5 w-3.5" /> Chat</button>
+                <button type="button" onClick={() => startBooking(d, "video")} className="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1.5 text-xs font-medium hover:bg-secondary/70"><Video className="h-3.5 w-3.5" /> Video</button>
+                <button type="button" onClick={() => startBooking(d, "clinic")} className="inline-flex items-center gap-1 rounded-full gradient-brand px-3 py-1.5 text-xs font-semibold text-white shadow-glow"><CalendarCheck className="h-3.5 w-3.5" /> Book</button>
               </div>
             </div>
           </div>
@@ -128,6 +139,8 @@ export function DoctorsPage() {
           No doctors match your search.
         </div>
       )}
+
+      <BookDoctorDialog request={booking} onClose={() => setBooking(null)} />
     </div>
   );
 }
