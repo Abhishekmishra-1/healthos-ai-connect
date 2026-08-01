@@ -1,21 +1,77 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarCheck, Video, MapPin, Clock } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { CalendarCheck, Video, MapPin, Clock, MessageCircle, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { BookDoctorDialog, type BookingRequest } from "@/components/patient/book-doctor-dialog";
+import { type AppointmentMode, MODE_LABEL, formatWhen, slotMinutes, todayISO } from "@/lib/appointments";
 
 export const Route = createFileRoute("/_authenticated/patient/appointments")({
   head: () => ({ meta: [{ title: "Appointments — MEDOOGLE AI" }] }),
   component: AppointmentsPage,
 });
 
-const UPCOMING = [
-  { doctor: "Dr. Priya Sharma", spec: "General Physician", when: "Tomorrow, 10:30 AM", mode: "Video", fee: 399 },
-  { doctor: "Dr. Ananya Iyer", spec: "Pediatrics", when: "Fri, 4:00 PM", mode: "In-clinic", fee: 499, clinic: "Little Steps, Aundh" },
-];
-const PAST = [
-  { doctor: "Dr. Rahul Verma", spec: "Cardiology", when: "12 Jun · 6:15 PM", mode: "Video" },
-  { doctor: "Dr. Meera Nair", spec: "Gynecology", when: "28 May · 11:00 AM", mode: "In-clinic" },
-];
+type Row = {
+  id: string;
+  doctor_name: string;
+  doctor_specialty: string | null;
+  clinic: string | null;
+  mode: string;
+  fee: number;
+  slot_date: string;
+  slot_time: string;
+  reason: string | null;
+  status: string;
+};
+
+function isPast(r: Row) {
+  const today = todayISO();
+  if (r.slot_date < today) return true;
+  if (r.slot_date > today) return false;
+  const now = new Date();
+  return slotMinutes(r.slot_time) < now.getHours() * 60 + now.getMinutes();
+}
+
+function ModeIcon({ mode }: { mode: string }) {
+  if (mode === "clinic") return <MapPin className="h-3.5 w-3.5" />;
+  if (mode === "chat") return <MessageCircle className="h-3.5 w-3.5" />;
+  return <Video className="h-3.5 w-3.5" />;
+}
 
 export function AppointmentsPage() {
+  const [rows, setRows] = useState<Row[] | null>(null);
+  const [booking, setBooking] = useState<BookingRequest | null>(null);
+
+  const load = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("appointments")
+      .select("id, doctor_name, doctor_specialty, clinic, mode, fee, slot_date, slot_time, reason, status")
+      .order("slot_date", { ascending: true });
+    if (error) {
+      toast.error("Could not load appointments.");
+      setRows([]);
+      return;
+    }
+    setRows(data as Row[]);
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  async function cancel(r: Row) {
+    const { error } = await supabase.from("appointments").update({ status: "cancelled" }).eq("id", r.id);
+    if (error) {
+      toast.error("Could not cancel. Please try again.");
+      return;
+    }
+    toast.success("Appointment cancelled.");
+    load();
+  }
+
+  const upcoming = (rows ?? []).filter((r) => r.status !== "cancelled" && !isPast(r));
+  const past = (rows ?? []).filter((r) => r.status === "cancelled" || isPast(r));
+
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -28,16 +84,23 @@ export function AppointmentsPage() {
 
       <section>
         <h2 className="mb-3 text-lg font-semibold">Upcoming</h2>
-        {UPCOMING.length === 0 ? (
-          <div className="rounded-3xl border border-dashed p-8 text-center text-sm text-muted-foreground">No upcoming appointments.</div>
+        {rows === null ? (
+          <div className="flex items-center gap-2 rounded-3xl border border-dashed p-8 text-sm text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin" /> Loading your appointments…
+          </div>
+        ) : upcoming.length === 0 ? (
+          <div className="rounded-3xl border border-dashed p-8 text-center text-sm text-muted-foreground">
+            No upcoming appointments.{" "}
+            <Link to="/patient/doctors" className="font-semibold text-primary">Book a doctor</Link>
+          </div>
         ) : (
           <div className="grid gap-3 md:grid-cols-2">
-            {UPCOMING.map((a) => (
-              <div key={a.doctor} className="rounded-3xl border border-border/60 bg-card p-5">
+            {upcoming.map((a) => (
+              <div key={a.id} className="rounded-3xl border border-border/60 bg-card p-5">
                 <div className="flex items-center gap-3">
                   <span className="grid h-11 w-11 place-items-center rounded-2xl gradient-brand text-white shadow-glow"><CalendarCheck className="h-4 w-4" /></span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold">{a.doctor}</p>
+                    <p className="truncate text-sm font-semibold">{a.doctor_name}</p>
                     <p className="text-xs text-muted-foreground">{a.spec}</p>
                   </div>
                 </div>
