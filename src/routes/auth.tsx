@@ -61,7 +61,11 @@ function AuthPage() {
           },
         });
         if (error) throw error;
-        toast.success("Account created. Check your email if confirmation is required.");
+        toast.success(
+          role === "patient"
+            ? "Account created. Check your email if confirmation is required."
+            : "Account created as a patient. Your professional account request is pending admin approval.",
+        );
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
