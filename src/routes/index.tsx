@@ -83,7 +83,7 @@ function Hero() {
               to="/contact"
               className="group inline-flex items-center gap-2 rounded-full gradient-brand px-6 py-3.5 text-sm font-semibold text-white shadow-glow transition hover:opacity-95"
             >
-              Get started free
+              Request a demo
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
@@ -733,7 +733,7 @@ function CTA() {
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link to="/contact" className="inline-flex items-center gap-2 rounded-full gradient-brand px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
-            Get started free <ArrowRight className="h-4 w-4" />
+            Contact sales <ArrowRight className="h-4 w-4" />
           </Link>
           <Link to="/partners" className="inline-flex items-center gap-2 rounded-full glass px-6 py-3.5 text-sm font-semibold">
             Partner with us
