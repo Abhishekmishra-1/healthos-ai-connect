@@ -7,6 +7,10 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
+  // Optional ?redirect=/some/path — where to land after a successful sign-in.
+  validateSearch: (search: Record<string, unknown>) => ({
+    redirect: typeof search.redirect === "string" ? search.redirect : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Sign in — MEDOOGLE AI" },
@@ -18,6 +22,9 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
+  const { redirect: redirectTo } = Route.useSearch();
+  const safeRedirect =
+    redirectTo && redirectTo.startsWith("/") && !redirectTo.startsWith("//") ? redirectTo : undefined;
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [method, setMethod] = useState<"email" | "otp">("email");
   const [role, setRole] = useState<"patient" | "doctor" | "pharmacy" | "lab" | "hospital">("patient");
@@ -38,6 +45,10 @@ function AuthPage() {
       hospital: "/hospital/dashboard",
     };
     const go = async (userId: string) => {
+      if (safeRedirect) {
+        navigate({ to: safeRedirect } as never);
+        return;
+      }
       const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId).limit(1).maybeSingle();
       const r = (data?.role as string) ?? "patient";
       navigate({ to: roleMap[r] ?? "/patient/dashboard" });
@@ -45,7 +56,7 @@ function AuthPage() {
     supabase.auth.getSession().then(({ data }) => { if (data.session) go(data.session.user.id); });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => { if (session) go(session.user.id); });
     return () => sub.subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, safeRedirect]);
 
   async function handleEmail(e: React.FormEvent) {
     e.preventDefault();
@@ -63,7 +74,7 @@ function AuthPage() {
         if (error) throw error;
         toast.success(
           role === "patient"
-            ? "Account created. Check your email if confirmation is required."
+            ? "Account created. You're signed in."
             : "Account created as a patient. Your professional account request is pending admin approval.",
         );
       } else {
@@ -71,7 +82,7 @@ function AuthPage() {
         if (error) throw error;
       }
     } catch (err: any) {
-      toast.error(err.message ?? "Authentication failed");
+      toast.error(friendlyAuthError(err), { duration: 8000 });
     } finally {
       setLoading(false);
     }
@@ -123,7 +134,12 @@ function AuthPage() {
   async function handleGoogle() {
     setLoading(true);
     try {
-      const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/auth" });
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri:
+          window.location.origin +
+          "/auth" +
+          (safeRedirect ? `?redirect=${encodeURIComponent(safeRedirect)}` : ""),
+      });
       if (result.error) throw result.error;
     } catch (err: any) {
       toast.error(err.message ?? "Google sign-in failed");
