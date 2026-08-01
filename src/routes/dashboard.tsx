@@ -11,9 +11,9 @@ const map: Record<string, string> = {
 
 export const Route = createFileRoute("/dashboard")({
   ssr: false,
-  beforeLoad: async () => {
+  beforeLoad: async ({ location }) => {
     const { data: u } = await supabase.auth.getUser();
-    if (!u.user) throw redirect({ to: "/auth" });
+    if (!u.user) throw redirect({ to: "/auth", search: { redirect: location.href } });
     const { data: r } = await supabase.from("user_roles").select("role").eq("user_id", u.user.id).limit(1).maybeSingle();
     throw redirect({ to: map[(r?.role as string) ?? "patient"] ?? "/patient/dashboard" });
   },

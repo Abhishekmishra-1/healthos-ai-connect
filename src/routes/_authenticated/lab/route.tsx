@@ -10,9 +10,9 @@ const nav: NavItem[] = [
   { to: "/lab/payments", label: "Payments", icon: Wallet },
 ];
 export const Route = createFileRoute("/_authenticated/lab")({
-  beforeLoad: async () => {
+  beforeLoad: async ({ location }) => {
     const { data: u } = await supabase.auth.getUser();
-    if (!u.user) throw redirect({ to: "/auth" });
+    if (!u.user) throw redirect({ to: "/auth", search: { redirect: location.href } });
     const { data } = await supabase.rpc("has_role", { _user_id: u.user.id, _role: "lab" });
     if (!data) throw redirect({ to: "/dashboard" });
   },

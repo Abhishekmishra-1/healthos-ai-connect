@@ -13,9 +13,9 @@ const nav: NavItem[] = [
   { to: "/hospital/analytics", label: "Analytics", icon: BarChart3 },
 ];
 export const Route = createFileRoute("/_authenticated/hospital")({
-  beforeLoad: async () => {
+  beforeLoad: async ({ location }) => {
     const { data: u } = await supabase.auth.getUser();
-    if (!u.user) throw redirect({ to: "/auth" });
+    if (!u.user) throw redirect({ to: "/auth", search: { redirect: location.href } });
     const { data } = await supabase.rpc("has_role", { _user_id: u.user.id, _role: "hospital" });
     if (!data) throw redirect({ to: "/dashboard" });
   },
