@@ -61,12 +61,18 @@ function AuthPage() {
       hospital: "/hospital/dashboard",
     };
     const go = async (userId: string) => {
+      // New accounts get their profile + patient access created here
+      // (roles are never granted from client metadata).
+      const { data: bootstrapped } = await supabase.rpc("bootstrap_current_user");
       if (safeRedirect) {
         navigate({ to: safeRedirect } as never);
         return;
       }
-      const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId).limit(1).maybeSingle();
-      const r = (data?.role as string) ?? "patient";
+      let r = (bootstrapped as string | null) ?? null;
+      if (!r) {
+        const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId).limit(1).maybeSingle();
+        r = (data?.role as string) ?? "patient";
+      }
       navigate({ to: roleMap[r] ?? "/patient/dashboard" });
     };
     supabase.auth.getSession().then(({ data }) => { if (data.session) go(data.session.user.id); });
