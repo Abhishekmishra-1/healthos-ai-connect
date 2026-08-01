@@ -101,18 +101,42 @@ export function AppointmentsPage() {
                   <span className="grid h-11 w-11 place-items-center rounded-2xl gradient-brand text-white shadow-glow"><CalendarCheck className="h-4 w-4" /></span>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-semibold">{a.doctor_name}</p>
-                    <p className="text-xs text-muted-foreground">{a.spec}</p>
+                    <p className="text-xs text-muted-foreground">{a.doctor_specialty}</p>
                   </div>
                 </div>
                 <div className="mt-4 space-y-1 text-xs text-muted-foreground">
-                  <p className="inline-flex items-center gap-1"><Clock className="h-3 w-3" /> {a.when}</p>
-                  <p className="inline-flex items-center gap-1">{a.mode === "Video" ? <Video className="h-3 w-3" /> : <MapPin className="h-3 w-3" />} {a.mode}{a.clinic ? ` · ${a.clinic}` : ""}</p>
+                  <p className="inline-flex items-center gap-1"><Clock className="h-3 w-3" /> {formatWhen(a.slot_date, a.slot_time)}</p>
+                  <p className="inline-flex items-center gap-1"><ModeIcon mode={a.mode} /> {MODE_LABEL[a.mode as AppointmentMode] ?? a.mode}{a.clinic ? ` · ${a.clinic}` : ""}</p>
+                  {a.reason && <p>Reason: {a.reason}</p>}
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-sm font-semibold">₹{a.fee}</span>
                   <div className="flex gap-1.5">
-                    <button className="rounded-full bg-secondary px-3 py-1.5 text-xs font-medium">Reschedule</button>
-                    <button className="rounded-full gradient-brand px-3 py-1.5 text-xs font-semibold text-white shadow-glow">Join</button>
+                    <button
+                      type="button"
+                      onClick={() => cancel(a)}
+                      className="rounded-full bg-secondary px-3 py-1.5 text-xs font-medium"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setBooking({
+                          doctor: {
+                            name: a.doctor_name,
+                            spec: a.doctor_specialty ?? "",
+                            clinic: a.clinic,
+                            fee: a.fee,
+                          },
+                          mode: (a.mode as AppointmentMode) ?? "video",
+                          rescheduleId: a.id,
+                        })
+                      }
+                      className="rounded-full gradient-brand px-3 py-1.5 text-xs font-semibold text-white shadow-glow"
+                    >
+                      Reschedule
+                    </button>
                   </div>
                 </div>
               </div>
@@ -123,18 +147,28 @@ export function AppointmentsPage() {
 
       <section>
         <h2 className="mb-3 text-lg font-semibold">Past</h2>
-        <div className="divide-y divide-border/60 rounded-3xl border border-border/60 bg-card">
-          {PAST.map((a) => (
-            <div key={a.doctor} className="flex items-center justify-between gap-3 p-4">
-              <div>
-                <p className="text-sm font-semibold">{a.doctor}</p>
-                <p className="text-xs text-muted-foreground">{a.spec} · {a.when} · {a.mode}</p>
+        {past.length === 0 ? (
+          <div className="rounded-3xl border border-dashed p-8 text-center text-sm text-muted-foreground">Nothing here yet.</div>
+        ) : (
+          <div className="divide-y divide-border/60 rounded-3xl border border-border/60 bg-card">
+            {past.map((a) => (
+              <div key={a.id} className="flex items-center justify-between gap-3 p-4">
+                <div>
+                  <p className="text-sm font-semibold">{a.doctor_name}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {a.doctor_specialty} · {formatWhen(a.slot_date, a.slot_time)} · {MODE_LABEL[a.mode as AppointmentMode] ?? a.mode}
+                  </p>
+                </div>
+                <span className={`rounded-full px-3 py-1.5 text-xs font-semibold ${a.status === "cancelled" ? "bg-destructive/10 text-destructive" : "bg-secondary"}`}>
+                  {a.status === "cancelled" ? "Cancelled" : "Completed"}
+                </span>
               </div>
-              <button className="rounded-full bg-secondary px-3 py-1.5 text-xs font-medium">View summary</button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
+
+      <BookDoctorDialog request={booking} onClose={() => setBooking(null)} onBooked={load} />
     </div>
   );
 }
