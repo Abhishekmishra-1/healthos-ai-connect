@@ -171,6 +171,11 @@ function AuthPage() {
                 );
               })}
             </div>
+            {role !== "patient" && (
+              <p className="mt-2 text-[11px] text-muted-foreground">
+                Professional accounts start as patient access and need admin approval before the {role} portal unlocks.
+              </p>
+            )}
           </div>
 
           <h1 className="text-2xl font-semibold tracking-tight">
