@@ -15,7 +15,13 @@ export const Route = createFileRoute("/dashboard")({
     const { data: u } = await supabase.auth.getUser();
     if (!u.user) throw redirect({ to: "/auth", search: { redirect: location.href } });
     const { data: r } = await supabase.from("user_roles").select("role").eq("user_id", u.user.id).limit(1).maybeSingle();
-    throw redirect({ to: map[(r?.role as string) ?? "patient"] ?? "/patient/dashboard" });
+    let roleName = (r?.role as string) ?? "";
+    if (!roleName) {
+      // No role row yet (fresh account) — create profile + patient access.
+      const { data: bootstrapped } = await supabase.rpc("bootstrap_current_user");
+      roleName = (bootstrapped as string | null) ?? "patient";
+    }
+    throw redirect({ to: map[roleName] ?? "/patient/dashboard" });
   },
   component: () => null,
 });
