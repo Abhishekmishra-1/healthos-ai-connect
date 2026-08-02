@@ -120,7 +120,7 @@ export function BookDoctorDialog({
       reason: reason.trim() || null,
       status: "confirmed",
     };
-    const { error } = request?.rescheduleId
+    const { error, data: created } = request?.rescheduleId
       ? await supabase.from("appointments").update(payload).eq("id", request.rescheduleId)
       : await supabase.from("appointments").insert(payload).select("id").maybeSingle();
     const appointmentId = request?.rescheduleId ?? (created as { id?: string } | null)?.id;
