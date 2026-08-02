@@ -3,6 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { CalendarCheck, Loader2, MapPin, Video, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { sendBookingConfirmation } from "@/lib/booking-email.functions";
 import {
   Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle,
 } from "@/components/ui/dialog";
@@ -121,7 +122,8 @@ export function BookDoctorDialog({
     };
     const { error } = request?.rescheduleId
       ? await supabase.from("appointments").update(payload).eq("id", request.rescheduleId)
-      : await supabase.from("appointments").insert(payload);
+      : await supabase.from("appointments").insert(payload).select("id").maybeSingle();
+    const appointmentId = request?.rescheduleId ?? (created as { id?: string } | null)?.id;
     setSaving(false);
     if (error) {
       toast.error(
@@ -136,6 +138,15 @@ export function BookDoctorDialog({
         ? "Appointment rescheduled."
         : `Booked with ${doctor.name} · ${formatDay(day)}, ${slot}`,
     );
+    if (appointmentId) {
+      sendBookingConfirmation({
+        data: { appointmentId, rescheduled: !!request?.rescheduleId },
+      })
+        .then((r) => {
+          if (r?.sent) toast.success("Booking details emailed to you.");
+        })
+        .catch(() => toast.error("Booked, but we could not email the details."));
+    }
     onClose();
     onBooked?.();
     if (!request?.rescheduleId) navigate({ to: "/patient/appointments" });
