@@ -36,10 +36,20 @@ export function AssistantPage() {
     setInput("");
     setLoading(true);
     try {
-      const { reply } = await ask({ data: { messages: next } });
-      setMessages([...next, { role: "assistant", content: reply }]);
-    } catch (e: any) {
-      setMessages([...next, { role: "assistant", content: "Sorry, I couldn't reach the AI service. Please try again." }]);
+      const res = await ask({ data: { messages: next } });
+      setMessages([
+        ...next,
+        {
+          role: "assistant",
+          content: res.reply || `Sorry, something went wrong: ${res.error ?? "unknown error"}`,
+        },
+      ]);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "unknown error";
+      setMessages([
+        ...next,
+        { role: "assistant", content: `Sorry, I couldn't reach the AI service (${message}). Please try again.` },
+      ]);
     } finally {
       setLoading(false);
     }
