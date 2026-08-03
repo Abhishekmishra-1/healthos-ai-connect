@@ -111,8 +111,8 @@ function BigButtons() {
             to={a.to}
             className={`flex items-center gap-4 rounded-3xl border border-border/60 bg-gradient-to-br ${a.tint} p-5 transition hover:-translate-y-0.5 hover:shadow-glow`}
           >
-            <span aria-hidden className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white text-2xl shadow-sm">
-              {a.emoji}
+            <span aria-hidden className={`grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white shadow-sm ${a.color}`}>
+              <a.icon className="h-7 w-7" />
             </span>
             <span className={`text-lg font-semibold tracking-tight ${a.color}`}>{a.label}</span>
             <ArrowRight className="ml-auto h-4 w-4 text-muted-foreground" />
