@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Stethoscope, Pill, FlaskConical, Hospital, FolderHeart, Bot, Phone, LifeBuoy } from "lucide-react";
+import { LocationBar } from "@/components/patient/location-bar";
 
 export const Route = createFileRoute("/_authenticated/patient/dashboard")({
   head: () => ({ meta: [{ title: "Home — MEDOOGLE AI" }] }),
@@ -34,6 +35,9 @@ function Dashboard() {
           How can we help you today?
         </h1>
       </div>
+
+      {/* Where are you? */}
+      <LocationBar />
 
       {/* Five big buttons */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

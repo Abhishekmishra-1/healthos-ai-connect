@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Stethoscope, Pill, FlaskConical, Hospital, Building2, TestTube2 } from "lucide-react";
+import { Stethoscope, Pill, FlaskConical, Hospital, Building2, TestTube2, Users } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_authenticated/admin/dashboard")({
@@ -10,6 +10,7 @@ export const Route = createFileRoute("/_authenticated/admin/dashboard")({
 });
 
 const CARDS = [
+  { to: "/admin/users", label: "Users", table: "profiles", icon: Users, tint: "from-teal-100 to-white" },
   { to: "/admin/doctors", label: "Doctors", table: "catalog_doctors", icon: Stethoscope, tint: "from-sky-100 to-white" },
   { to: "/admin/pharmacies", label: "Pharmacies", table: "catalog_pharmacies", icon: Pill, tint: "from-emerald-100 to-white" },
   { to: "/admin/labs", label: "Labs", table: "catalog_labs", icon: FlaskConical, tint: "from-fuchsia-100 to-white" },

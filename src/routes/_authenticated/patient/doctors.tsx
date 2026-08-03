@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { Search, Star, Video, MessageCircle, CalendarCheck, MapPin, Stethoscope } from "lucide-react";
 import { VoiceSearchInput } from "@/components/site/voice-search-input";
 import { BookDoctorDialog, type BookingRequest } from "@/components/patient/book-doctor-dialog";
+import { LocationBar } from "@/components/patient/location-bar";
+import { useMyLocation } from "@/hooks/use-my-location";
 
 export const Route = createFileRoute("/_authenticated/patient/doctors")({
   head: () => ({ meta: [{ title: "Doctors — MEDOOGLE AI" }] }),
@@ -38,6 +40,8 @@ export function DoctorsPage() {
   const [q, setQ] = useState("");
   const [spec, setSpec] = useState("All");
   const [booking, setBooking] = useState<BookingRequest | null>(null);
+  const { location } = useMyLocation();
+  const [nearMe, setNearMe] = useState(false);
 
   function startBooking(d: (typeof DOCTORS)[number], mode: BookingRequest["mode"]) {
     setBooking({
@@ -48,8 +52,9 @@ export function DoctorsPage() {
 
   const list = useMemo(() => DOCTORS.filter((d) =>
     (spec === "All" || d.spec === spec) &&
-    (q === "" || (d.name + d.spec + d.clinic).toLowerCase().includes(q.toLowerCase())),
-  ), [q, spec]);
+    (q === "" || (d.name + d.spec + d.clinic).toLowerCase().includes(q.toLowerCase())) &&
+    (!nearMe || !location.city || d.clinic.toLowerCase().includes(location.city.toLowerCase())),
+  ), [q, spec, nearMe, location.city]);
 
   return (
     <div className="space-y-6">
@@ -58,12 +63,27 @@ export function DoctorsPage() {
         <p className="mt-2 text-base text-muted-foreground">Tell us what's wrong — we'll match you with the right doctor.</p>
       </div>
 
+      <LocationBar />
+
       <VoiceSearchInput
         value={q}
         onChange={setQ}
         placeholder="Say a symptom — e.g. 'skin rash', 'chest pain'"
         ariaLabel="Search doctors by symptom, name, or clinic"
       />
+
+      {location.city && (
+        <button
+          type="button"
+          onClick={() => setNearMe((v) => !v)}
+          aria-pressed={nearMe}
+          className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold ${
+            nearMe ? "gradient-brand text-white shadow-glow" : "bg-secondary text-muted-foreground"
+          }`}
+        >
+          <MapPin className="h-4 w-4" /> Near me · {location.city}
+        </button>
+      )}
 
       <div>
         <p className="mb-3 text-sm font-semibold text-muted-foreground">What are you feeling?</p>

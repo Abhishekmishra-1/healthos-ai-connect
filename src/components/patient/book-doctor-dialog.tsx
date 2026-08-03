@@ -143,7 +143,19 @@ export function BookDoctorDialog({
         data: { appointmentId, rescheduled: !!request?.rescheduleId },
       })
         .then((r) => {
-          if (r?.sent) toast.success("Booking details emailed to you.");
+          if (r?.sent && r?.whatsapp) toast.success("Booking details sent on email and WhatsApp.");
+          else if (r?.sent) toast.success("Booking details emailed to you.");
+          if (!r?.whatsapp && phone.trim()) {
+            const text = encodeURIComponent(
+              `MEDOOGLE AI — Appointment ${request?.rescheduleId ? "rescheduled" : "confirmed"}\n${doctor.name}${doctor.spec ? ` (${doctor.spec})` : ""}\n${formatDay(day)}, ${slot}\nType: ${MODE_LABEL[mode]}\nFee: Rs. ${doctor.fee}`,
+            );
+            const digits = phone.replace(/\D/g, "");
+            const wa = `https://wa.me/${digits.length === 10 ? `91${digits}` : digits}?text=${text}`;
+            toast("Get it on WhatsApp", {
+              description: "Tap to open WhatsApp with your booking details.",
+              action: { label: "Open WhatsApp", onClick: () => window.open(wa, "_blank", "noopener") },
+            });
+          }
         })
         .catch(() => toast.error("Booked, but we could not email the details."));
     }
