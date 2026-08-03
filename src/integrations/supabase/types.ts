@@ -412,6 +412,47 @@ export type Database = {
         }
         Relationships: []
       }
+      notification_log: {
+        Row: {
+          appointment_id: string | null
+          channel: string
+          created_at: string
+          destination: string | null
+          error: string | null
+          id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          appointment_id?: string | null
+          channel: string
+          created_at?: string
+          destination?: string | null
+          error?: string | null
+          id?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          appointment_id?: string | null
+          channel?: string
+          created_at?: string
+          destination?: string | null
+          error?: string | null
+          id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_log_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       prescriptions: {
         Row: {
           analysis: Json | null
@@ -456,6 +497,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          address: string | null
           allergies: string | null
           blood_group: string | null
           city: string | null
@@ -465,11 +507,15 @@ export type Database = {
           emergency_contact_phone: string | null
           full_name: string | null
           id: string
+          latitude: number | null
+          longitude: number | null
           phone: string | null
+          pincode: string | null
           state: string | null
           updated_at: string
         }
         Insert: {
+          address?: string | null
           allergies?: string | null
           blood_group?: string | null
           city?: string | null
@@ -479,11 +525,15 @@ export type Database = {
           emergency_contact_phone?: string | null
           full_name?: string | null
           id: string
+          latitude?: number | null
+          longitude?: number | null
           phone?: string | null
+          pincode?: string | null
           state?: string | null
           updated_at?: string
         }
         Update: {
+          address?: string | null
           allergies?: string | null
           blood_group?: string | null
           city?: string | null
@@ -493,7 +543,10 @@ export type Database = {
           emergency_contact_phone?: string | null
           full_name?: string | null
           id?: string
+          latitude?: number | null
+          longitude?: number | null
           phone?: string | null
+          pincode?: string | null
           state?: string | null
           updated_at?: string
         }
