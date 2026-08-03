@@ -215,7 +215,6 @@ export const generateHealthInsights = createServerFn({ method: "POST" })
 
 /* -------- AI Health Assistant chat -------- */
 export const askHealthAssistant = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) =>
     z
       .object({
@@ -228,18 +227,26 @@ export const askHealthAssistant = createServerFn({ method: "POST" })
   )
   .handler(async ({ data }) => {
     const key = process.env.LOVABLE_API_KEY;
-    if (!key) throw new Error("Missing LOVABLE_API_KEY");
+    if (!key) return { reply: "", error: "The AI service is not configured yet." };
     const gateway = createLovableAiGatewayProvider(key);
-    const { text } = await generateText({
-      model: gateway(MODEL),
-      messages: [
-        {
-          role: "system",
-          content:
-            "You are MEDOOGLE AI Copilot for Indian patients. Give short, warm, plain-English guidance about medicines, symptoms, lab reports and general wellness. Never diagnose. Always recommend consulting a doctor for anything serious. Prefer bullet points. Keep answers under 180 words.",
-        },
-        ...data.messages,
-      ],
-    });
-    return { reply: text };
+    try {
+      const { text } = await generateText({
+        model: gateway(MODEL),
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are MEDOOGLE AI Copilot for Indian patients. Give short, warm, plain-English guidance about medicines, symptoms, lab reports and general wellness. Never diagnose. Always recommend consulting a doctor for anything serious. Prefer bullet points. Keep answers under 180 words.",
+          },
+          ...data.messages,
+        ],
+      });
+      const reply = text.trim();
+      if (!reply) return { reply: "", error: "The AI did not return an answer. Please ask again." };
+      return { reply, error: null as string | null };
+    } catch (e) {
+      const message = e instanceof Error ? e.message : String(e);
+      console.error("askHealthAssistant failed:", message);
+      return { reply: "", error: message.slice(0, 300) };
+    }
   });
