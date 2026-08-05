@@ -18,7 +18,11 @@ export const Route = createFileRoute("/_authenticated/admin")({
   beforeLoad: async ({ location }) => {
     const { data: u } = await supabase.auth.getUser();
     if (!u.user) throw redirect({ to: "/auth", search: { redirect: location.href } });
-    let { data } = await supabase.rpc("has_role", { _user_id: u.user.id, _role: "admin" });
+    const [{ data: isAdmin }, { data: isSuper }] = await Promise.all([
+      supabase.rpc("has_role", { _user_id: u.user.id, _role: "admin" }),
+      supabase.rpc("has_role", { _user_id: u.user.id, _role: "superadmin" as never }),
+    ]);
+    let data = Boolean(isAdmin || isSuper);
     if (!data) {
       // First visit after sign-up: create the profile + default patient role, then re-check.
       const { data: bootstrapped } = await supabase.rpc("bootstrap_current_user");
