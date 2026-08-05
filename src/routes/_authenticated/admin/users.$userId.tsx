@@ -10,7 +10,18 @@ export const Route = createFileRoute("/_authenticated/admin/users/$userId")({
   component: ManageUser,
 });
 
-const ROLES = ["patient", "doctor", "pharmacy", "lab", "hospital", "admin"] as const;
+const ROLES = [
+  "patient",
+  "doctor",
+  "nurse",
+  "staff",
+  "receptionist",
+  "pharmacy",
+  "lab",
+  "hospital",
+  "admin",
+  "superadmin",
+] as const;
 type Role = (typeof ROLES)[number];
 
 const FIELDS: { key: string; label: string; type?: string }[] = [
@@ -32,6 +43,20 @@ function ManageUser() {
   const qc = useQueryClient();
   const [form, setForm] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
+
+  const me = useQuery({
+    queryKey: ["admin", "me", "superadmin"],
+    queryFn: async () => {
+      const { data: u } = await supabase.auth.getUser();
+      if (!u.user) return false;
+      const { data } = await supabase.rpc("has_role", {
+        _user_id: u.user.id,
+        _role: "superadmin" as never,
+      });
+      return Boolean(data);
+    },
+  });
+  const isSuperadmin = me.data === true;
 
   const q = useQuery({
     queryKey: ["admin", "user", userId],
@@ -128,7 +153,12 @@ function ManageUser() {
 
       {/* Roles */}
       <section className="rounded-3xl border border-border/60 bg-card p-6">
-        <h2 className="text-lg font-semibold">Roles &amp; access</h2>
+        <h2 className="text-lg font-semibold">Groups &amp; access</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {isSuperadmin
+            ? "Tap a group to grant or remove it for this user."
+            : "Only the superadmin (app owner) can change a user's groups. Admins can manage doctor and other catalog details."}
+        </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {ROLES.map((r) => {
             const has = roles.some((x) => x.role === r);
@@ -137,8 +167,9 @@ function ManageUser() {
                 key={r}
                 type="button"
                 onClick={() => toggleRole(r, has)}
+                disabled={!isSuperadmin}
                 aria-pressed={has}
-                className={`rounded-full px-4 py-2 text-sm font-semibold capitalize ${
+                className={`rounded-full px-4 py-2 text-sm font-semibold capitalize disabled:cursor-not-allowed disabled:opacity-50 ${
                   has ? "gradient-brand text-white shadow-glow" : "bg-secondary text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -147,9 +178,9 @@ function ManageUser() {
             );
           })}
         </div>
-        {(q.data?.requests ?? []).filter((r) => r.status === "pending").length > 0 && (
+        {isSuperadmin && (q.data?.requests ?? []).filter((r) => r.status === "pending").length > 0 && (
           <div className="mt-4 space-y-2">
-            <p className="text-sm font-semibold">Pending role requests</p>
+            <p className="text-sm font-semibold">Pending group requests</p>
             {(q.data?.requests ?? [])
               .filter((r) => r.status === "pending")
               .map((r) => (
