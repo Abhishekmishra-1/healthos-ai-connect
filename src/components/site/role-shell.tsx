@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Sparkles, Menu, X, Search, Bell, LogOut, Accessibility, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useElderlyMode } from "@/hooks/use-elderly-mode";
+import { ThemeToggle } from "@/components/site/theme-toggle";
 
 export type NavItem = { to: string; label: string; icon: LucideIcon };
 
@@ -96,6 +97,7 @@ export function RoleShell({
               >
                 <Accessibility className="h-5 w-5" />
               </button>
+              <ThemeToggle />
               <button className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full hover:bg-secondary" aria-label="Notifications">
                 <Bell className="h-5 w-5" />
                 <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
