@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Sparkles } from "lucide-react";
+import { ThemeToggle } from "@/components/site/theme-toggle";
 
 const links = [
   { to: "/features", label: "Features" },
@@ -50,6 +51,7 @@ export function SiteNav() {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
+          <ThemeToggle />
           <Link to="/auth" className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">
             Log in
           </Link>
@@ -61,14 +63,17 @@ export function SiteNav() {
           </Link>
         </div>
 
-        <button
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
           className="grid h-10 w-10 place-items-center rounded-full text-foreground md:hidden"
           onClick={() => setOpen((o) => !o)}
           aria-label="Toggle menu"
           aria-expanded={open}
-        >
+          >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+          </button>
+        </div>
 
         {open && (
           <div className="glass absolute inset-x-4 top-16 flex flex-col gap-1 rounded-3xl p-3 md:hidden">
