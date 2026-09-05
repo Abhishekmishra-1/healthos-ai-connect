@@ -1,9 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Search, Pill, MapPin, Truck, ScanLine, Heart, RotateCcw, Star, Filter, Upload } from "lucide-react";
+import { ArrowLeft, CheckCircle2, CreditCard, Search, Pill, MapPin, Truck, ScanLine, Heart, RotateCcw, Star, Filter, Upload } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/patient/medicine")({
-  head: () => ({ meta: [{ title: "Medicine — MEDOOGLE AI" }] }),
+  head: () => ({ meta: [
+    { title: "Buy Medicine — MEDOOGLE AI" },
+    { name: "description", content: "Compare medicines from nearby pharmacies and place a delivery order." },
+    { property: "og:title", content: "Buy Medicine — MEDOOGLE AI" },
+    { property: "og:description", content: "Compare medicines from nearby pharmacies and place a delivery order." },
+  ] }),
   component: MedicinePage,
 });
 
@@ -23,6 +28,25 @@ export function MedicinePage() {
   const [tab, setTab] = useState<"all" | "favorites" | "repeat">("all");
   const [favs, setFavs] = useState<Record<number, boolean>>({});
   const [cart, setCart] = useState<Record<number, number>>({});
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+  const [address, setAddress] = useState("");
+  const [payment, setPayment] = useState<"cod" | "upi">("cod");
+
+  const cartItems = MEDS.filter((m) => (cart[m.id] ?? 0) > 0);
+  const itemCount = Object.values(cart).reduce((sum, value) => sum + value, 0);
+  const subtotal = cartItems.reduce((sum, item) => sum + item.price * (cart[item.id] ?? 0), 0);
+
+  function openCheckout() {
+    setOrderPlaced(false);
+    setCheckoutOpen(true);
+  }
+
+  function placeOrder() {
+    if (!address.trim()) return;
+    setOrderPlaced(true);
+    setCart({});
+  }
 
   const list = useMemo(() => {
     let l = MEDS;
@@ -30,6 +54,62 @@ export function MedicinePage() {
     if (tab === "favorites") l = l.filter((m) => favs[m.id]);
     return l;
   }, [q, tab, favs]);
+
+  if (checkoutOpen) {
+    return (
+      <div className="mx-auto max-w-3xl space-y-6">
+        <button type="button" onClick={() => setCheckoutOpen(false)} className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="h-4 w-4" /> Back to medicines
+        </button>
+        {orderPlaced ? (
+          <div className="rounded-3xl border border-border/60 bg-card p-8 text-center shadow-glow">
+            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-emerald-500/10 text-emerald-600"><CheckCircle2 className="h-8 w-8" /></span>
+            <h1 className="mt-5 text-2xl font-semibold">Order placed successfully</h1>
+            <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">Your pharmacy will confirm the order shortly. You can track its status from Orders.</p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link to="/patient/orders" className="rounded-full gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-glow">View orders</Link>
+              <button type="button" onClick={() => setCheckoutOpen(false)} className="rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold">Continue shopping</button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div>
+              <h1 className="text-3xl font-semibold tracking-tight">Complete your order</h1>
+              <p className="mt-2 text-sm text-muted-foreground">Add a delivery address and choose how you want to pay.</p>
+            </div>
+            <div className="grid gap-5 md:grid-cols-[1.2fr_0.8fr]">
+              <div className="space-y-5">
+                <section className="rounded-3xl border border-border/60 bg-card p-5">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-2xl bg-secondary text-primary"><MapPin className="h-5 w-5" /></span>
+                    <div><h2 className="font-semibold">Delivery address</h2><p className="text-xs text-muted-foreground">Where should we deliver your medicines?</p></div>
+                  </div>
+                  <textarea value={address} onChange={(e) => setAddress(e.target.value)} placeholder="House number, street, village / town, PIN code" rows={4} className="mt-4 w-full resize-none rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40" />
+                </section>
+                <section className="rounded-3xl border border-border/60 bg-card p-5">
+                  <div className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-2xl bg-secondary text-primary"><CreditCard className="h-5 w-5" /></span><h2 className="font-semibold">Payment method</h2></div>
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                    <button type="button" onClick={() => setPayment("cod")} className={`rounded-2xl border p-4 text-left ${payment === "cod" ? "border-primary bg-primary/5" : "border-border"}`}><p className="text-sm font-semibold">Cash on delivery</p><p className="mt-1 text-xs text-muted-foreground">Pay when your order arrives</p></button>
+                    <button type="button" onClick={() => setPayment("upi")} className={`rounded-2xl border p-4 text-left ${payment === "upi" ? "border-primary bg-primary/5" : "border-border"}`}><p className="text-sm font-semibold">UPI on delivery</p><p className="mt-1 text-xs text-muted-foreground">Scan and pay at the doorstep</p></button>
+                  </div>
+                </section>
+              </div>
+              <section className="h-fit rounded-3xl border border-border/60 bg-card p-5">
+                <h2 className="font-semibold">Order summary</h2>
+                <div className="mt-4 space-y-3 border-b border-border/60 pb-4">
+                  {cartItems.map((item) => <div key={item.id} className="flex justify-between gap-3 text-sm"><span className="min-w-0 truncate">{item.name} × {cart[item.id]}</span><span className="font-medium">₹{item.price * (cart[item.id] ?? 0)}</span></div>)}
+                </div>
+                <div className="mt-4 flex justify-between text-sm"><span className="text-muted-foreground">Delivery</span><span className="font-medium text-emerald-600">Free</span></div>
+                <div className="mt-3 flex justify-between text-base font-semibold"><span>Total ({itemCount} items)</span><span>₹{subtotal}</span></div>
+                <button type="button" onClick={placeOrder} disabled={!address.trim() || cartItems.length === 0} className="mt-5 w-full rounded-full gradient-brand px-5 py-3 text-sm font-semibold text-white shadow-glow disabled:cursor-not-allowed disabled:opacity-50">Place order · ₹{subtotal}</button>
+                {!address.trim() && <p className="mt-2 text-center text-xs text-muted-foreground">Enter your address to continue.</p>}
+              </section>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -117,7 +197,7 @@ export function MedicinePage() {
       {Object.values(cart).some((v) => v > 0) && (
         <div className="sticky bottom-24 z-10 mx-auto flex max-w-lg items-center justify-between gap-3 rounded-full gradient-brand px-5 py-3 text-white shadow-glow md:bottom-6">
           <div className="text-sm font-semibold">{Object.values(cart).reduce((a, b) => a + b, 0)} items in cart</div>
-          <button className="rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold backdrop-blur">Checkout →</button>
+          <button type="button" onClick={openCheckout} className="rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold backdrop-blur">Checkout →</button>
         </div>
       )}
 
