@@ -328,6 +328,94 @@ export type Database = {
         }
         Relationships: []
       }
+      lab_booking_slots: {
+        Row: {
+          available: boolean
+          created_at: string
+          id: string
+          lab_id: string
+          slot_date: string
+          slot_time: string
+        }
+        Insert: {
+          available?: boolean
+          created_at?: string
+          id?: string
+          lab_id: string
+          slot_date: string
+          slot_time: string
+        }
+        Update: {
+          available?: boolean
+          created_at?: string
+          id?: string
+          lab_id?: string
+          slot_date?: string
+          slot_time?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lab_booking_slots_lab_id_fkey"
+            columns: ["lab_id"]
+            isOneToOne: false
+            referencedRelation: "catalog_labs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lab_bookings: {
+        Row: {
+          collection_address: string
+          created_at: string
+          id: string
+          lab_id: string
+          lab_name: string
+          price: number
+          slot_date: string
+          slot_time: string
+          status: string
+          test_code: string | null
+          test_name: string
+          user_id: string
+        }
+        Insert: {
+          collection_address: string
+          created_at?: string
+          id?: string
+          lab_id: string
+          lab_name: string
+          price?: number
+          slot_date: string
+          slot_time: string
+          status?: string
+          test_code?: string | null
+          test_name: string
+          user_id: string
+        }
+        Update: {
+          collection_address?: string
+          created_at?: string
+          id?: string
+          lab_id?: string
+          lab_name?: string
+          price?: number
+          slot_date?: string
+          slot_time?: string
+          status?: string
+          test_code?: string | null
+          test_name?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lab_bookings_lab_id_fkey"
+            columns: ["lab_id"]
+            isOneToOne: false
+            referencedRelation: "catalog_labs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lab_reports: {
         Row: {
           analysis: Json | null
