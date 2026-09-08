@@ -8,6 +8,20 @@
       "when": 1788677150476,
       "tag": "0000_create_lab_booking_slots_and_bookings",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788893690072,
+      "tag": "0001_add_catalog_categories_and_unique_lab_slots",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788893736669,
+      "tag": "0002_add_secure_lab_booking_function",
+      "breakpoints": true
     }
   ]
 }
