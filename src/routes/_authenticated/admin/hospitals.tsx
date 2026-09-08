@@ -13,6 +13,7 @@ export const Route = createFileRoute("/_authenticated/admin/hospitals")({
         { key: "city", label: "City" },
         { key: "address", label: "Address" },
         { key: "phone", label: "Phone" },
+        { key: "category", label: "Category" },
         { key: "emergency", label: "24×7 Emergency", type: "boolean" },
         { key: "active", label: "Active", type: "boolean" },
       ]}

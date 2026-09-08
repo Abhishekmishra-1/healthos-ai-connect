@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { CalendarDays, CheckCircle2, Clock, FlaskConical, Home, MapPin, Truck, Download, Sparkles, HeartPulse } from "lucide-react";
+import { useEffect, useState } from "react";
+import { CalendarDays, CheckCircle2, Clock, FlaskConical, Home, MapPin, Truck, Download, Sparkles, HeartPulse, Loader2 } from "lucide-react";
 import { LocationBar } from "@/components/patient/location-bar";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/patient/labs")({
   head: () => ({ meta: [
@@ -31,21 +33,71 @@ const PACKAGES = [
   { name: "Women's Wellness", tests: 48, price: 1499, mrp: 3400 },
 ];
 
+type Lab = { id: string; name: string; city: string | null; address: string | null; phone: string | null };
+type Slot = { id: string; lab_id: string; slot_date: string; slot_time: string; available: boolean };
+
 export function LabsPage() {
-  const [selected, setSelected] = useState<{ name: string; price: number } | null>(null);
+  const [selected, setSelected] = useState<{ name: string; code?: string; price: number } | null>(null);
+  const [labs, setLabs] = useState<Lab[]>([]);
+  const [labId, setLabId] = useState("");
+  const [slots, setSlots] = useState<Slot[]>([]);
+  const [loadingLabs, setLoadingLabs] = useState(true);
+  const [loadingSlots, setLoadingSlots] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("08:00 AM - 09:00 AM");
   const [address, setAddress] = useState("");
   const [confirmed, setConfirmed] = useState(false);
 
+  useEffect(() => {
+    async function loadLabs() {
+      const { data, error } = await supabase.from("catalog_labs").select("id, name, city, address, phone").eq("active", true).order("name");
+      if (error) toast.error("Could not load diagnostic labs.");
+      const next = (data as Lab[] | null) ?? [];
+      setLabs(next);
+      setLabId(next[0]?.id ?? "");
+      setLoadingLabs(false);
+    }
+    loadLabs();
+  }, []);
+
+  useEffect(() => {
+    if (!labId || !date) return;
+    async function loadSlots() {
+      setLoadingSlots(true);
+      const { data, error } = await supabase.from("lab_booking_slots").select("id, lab_id, slot_date, slot_time, available").eq("lab_id", labId).eq("slot_date", date).eq("available", true).order("slot_time");
+      if (error) toast.error("Could not load collection slots.");
+      setSlots((data as Slot[] | null) ?? []);
+      setLoadingSlots(false);
+    }
+    loadSlots();
+  }, [date, labId]);
+
   function selectTest(test: { name: string; price: number }) {
     setSelected(test);
     setConfirmed(false);
     setDate(new Date().toISOString().slice(0, 10));
+    setTime("");
   }
 
-  function confirmBooking() {
-    if (selected && date && address.trim()) setConfirmed(true);
+  async function confirmBooking() {
+    if (!selected || !date || !time || !address.trim() || !labId) return;
+    const lab = labs.find((item) => item.id === labId);
+    if (!lab) return;
+    setSaving(true);
+    const { error } = await supabase.rpc("book_lab_test", {
+      p_lab_id: lab.id,
+      p_lab_name: lab.name,
+      p_test_name: selected.name,
+      p_test_code: selected.code ?? "",
+      p_price: selected.price,
+      p_slot_date: date,
+      p_slot_time: time,
+      p_collection_address: address.trim(),
+    });
+    setSaving(false);
+    if (error) { toast.error(error.message.includes("no longer") ? error.message : "Could not confirm this booking."); return; }
+    setConfirmed(true);
   }
 
   return (
@@ -63,16 +115,16 @@ export function LabsPage() {
             <div className="text-center">
               <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-500/10 text-emerald-600"><CheckCircle2 className="h-7 w-7" /></span>
               <h2 className="mt-4 text-xl font-semibold">Lab test booked</h2>
-              <p className="mt-1 text-sm text-muted-foreground">{selected.name} · {date} · {time}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{selected.name} · {labs.find((lab) => lab.id === labId)?.name} · {date} · {time}</p>
               <p className="mt-1 text-xs text-muted-foreground">A collection partner will call before visiting your address.</p>
               <div className="mt-4 flex justify-center gap-2"><Link to="/patient/orders" className="rounded-full gradient-brand px-4 py-2 text-sm font-semibold text-white shadow-glow">View orders</Link><button type="button" onClick={() => setSelected(null)} className="rounded-full bg-secondary px-4 py-2 text-sm font-semibold">Book another</button></div>
             </div>
           ) : (
             <>
               <div className="flex items-start justify-between gap-3"><div><p className="text-xs font-semibold uppercase tracking-wide text-primary">Book your test</p><h2 className="mt-1 text-xl font-semibold">{selected.name}</h2><p className="mt-1 text-sm text-muted-foreground">₹{selected.price} · Home sample collection</p></div><button type="button" onClick={() => setSelected(null)} className="text-sm text-muted-foreground hover:text-foreground">Close</button></div>
-              <div className="mt-5 grid gap-3 md:grid-cols-3"><label className="text-sm font-medium">Date<input type="date" value={date} min={new Date().toISOString().slice(0, 10)} onChange={(e) => setDate(e.target.value)} className="mt-2 w-full rounded-2xl border border-border bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40" /></label><label className="text-sm font-medium">Collection time<select value={time} onChange={(e) => setTime(e.target.value)} className="mt-2 w-full rounded-2xl border border-border bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40"><option>08:00 AM - 09:00 AM</option><option>10:00 AM - 11:00 AM</option><option>12:00 PM - 01:00 PM</option><option>04:00 PM - 05:00 PM</option></select></label><label className="text-sm font-medium">Collection address<input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="House, street, PIN code" className="mt-2 w-full rounded-2xl border border-border bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40" /></label></div>
-              <button type="button" onClick={confirmBooking} disabled={!date || !address.trim()} className="mt-4 inline-flex items-center gap-2 rounded-full gradient-brand px-5 py-3 text-sm font-semibold text-white shadow-glow disabled:cursor-not-allowed disabled:opacity-50"><CalendarDays className="h-4 w-4" /> Confirm booking · ₹{selected.price}</button>
-              {(!date || !address.trim()) && <p className="mt-2 text-xs text-muted-foreground">Choose a date and enter your collection address to continue.</p>}
+               <div className="mt-5 grid gap-3 md:grid-cols-2"><label className="text-sm font-medium">Diagnostic lab<select value={labId} onChange={(e) => { setLabId(e.target.value); setTime(""); }} disabled={loadingLabs} className="mt-2 w-full rounded-2xl border border-border bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40">{labs.map((lab) => <option key={lab.id} value={lab.id}>{lab.name} · {lab.city}</option>)}</select></label><label className="text-sm font-medium">Date<input type="date" value={date} min={new Date().toISOString().slice(0, 10)} onChange={(e) => { setDate(e.target.value); setTime(""); }} className="mt-2 w-full rounded-2xl border border-border bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40" /></label><label className="text-sm font-medium">Collection time<select value={time} onChange={(e) => setTime(e.target.value)} disabled={loadingSlots || slots.length === 0} className="mt-2 w-full rounded-2xl border border-border bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40"><option value="">{loadingSlots ? "Loading slots…" : slots.length ? "Choose a time" : "No slots available"}</option>{slots.map((slot) => <option key={slot.id} value={slot.slot_time}>{slot.slot_time}</option>)}</select></label><label className="text-sm font-medium">Collection address<input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="House, street, PIN code" className="mt-2 w-full rounded-2xl border border-border bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40" /></label></div>
+               <button type="button" onClick={confirmBooking} disabled={!date || !time || !address.trim() || !labId || saving} className="mt-4 inline-flex items-center gap-2 rounded-full gradient-brand px-5 py-3 text-sm font-semibold text-white shadow-glow disabled:cursor-not-allowed disabled:opacity-50">{saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <CalendarDays className="h-4 w-4" />} Confirm booking · ₹{selected.price}</button>
+               {(!date || !time || !address.trim()) && <p className="mt-2 text-xs text-muted-foreground">Choose a lab, date, available time and collection address to continue.</p>}
             </>
           )}
         </section>
