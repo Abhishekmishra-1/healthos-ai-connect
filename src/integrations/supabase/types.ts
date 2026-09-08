@@ -699,6 +699,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      book_lab_test: {
+        Args: {
+          p_collection_address: string
+          p_lab_id: string
+          p_lab_name: string
+          p_price: number
+          p_slot_date: string
+          p_slot_time: string
+          p_test_code: string
+          p_test_name: string
+        }
+        Returns: string
+      }
       bootstrap_current_user: {
         Args: never
         Returns: Database["public"]["Enums"]["app_role"]
