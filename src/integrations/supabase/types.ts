@@ -331,6 +331,57 @@ export type Database = {
         }
         Relationships: []
       }
+      hospital_profiles: {
+        Row: {
+          address: string | null
+          created_at: string
+          email: string | null
+          established_year: number | null
+          facilities: Json
+          hospital_name: string
+          id: string
+          logo_path: string | null
+          owner_user_id: string
+          phone: string | null
+          registration_number: string | null
+          specializations: string[]
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          established_year?: number | null
+          facilities?: Json
+          hospital_name?: string
+          id?: string
+          logo_path?: string | null
+          owner_user_id: string
+          phone?: string | null
+          registration_number?: string | null
+          specializations?: string[]
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          established_year?: number | null
+          facilities?: Json
+          hospital_name?: string
+          id?: string
+          logo_path?: string | null
+          owner_user_id?: string
+          phone?: string | null
+          registration_number?: string | null
+          specializations?: string[]
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       lab_booking_slots: {
         Row: {
           available: boolean
