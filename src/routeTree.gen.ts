@@ -16,6 +16,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as HospitalLoginRouteImport } from './routes/hospital-login'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -61,6 +62,7 @@ import { Route as AuthenticatedLabPaymentsRouteImport } from './routes/_authenti
 import { Route as AuthenticatedLabDashboardRouteImport } from './routes/_authenticated/lab/dashboard'
 import { Route as AuthenticatedLabCollectionRouteImport } from './routes/_authenticated/lab/collection'
 import { Route as AuthenticatedLabBookingsRouteImport } from './routes/_authenticated/lab/bookings'
+import { Route as AuthenticatedHospitalProfileRouteImport } from './routes/_authenticated/hospital/profile'
 import { Route as AuthenticatedHospitalPatientsRouteImport } from './routes/_authenticated/hospital/patients'
 import { Route as AuthenticatedHospitalEmergencyRouteImport } from './routes/_authenticated/hospital/emergency'
 import { Route as AuthenticatedHospitalDoctorsRouteImport } from './routes/_authenticated/hospital/doctors'
@@ -119,6 +121,11 @@ const PartnersRoute = PartnersRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HospitalLoginRoute = HospitalLoginRouteImport.update({
+  id: '/hospital-login',
+  path: '/hospital-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeaturesRoute = FeaturesRouteImport.update({
@@ -377,6 +384,12 @@ const AuthenticatedLabBookingsRoute =
     path: '/bookings',
     getParentRoute: () => AuthenticatedLabRouteRoute,
   } as any)
+const AuthenticatedHospitalProfileRoute =
+  AuthenticatedHospitalProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
 const AuthenticatedHospitalPatientsRoute =
   AuthenticatedHospitalPatientsRouteImport.update({
     id: '/patients',
@@ -528,6 +541,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
+  '/hospital-login': typeof HospitalLoginRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
@@ -565,6 +579,7 @@ export interface FileRoutesByFullPath {
   '/hospital/doctors': typeof AuthenticatedHospitalDoctorsRoute
   '/hospital/emergency': typeof AuthenticatedHospitalEmergencyRoute
   '/hospital/patients': typeof AuthenticatedHospitalPatientsRoute
+  '/hospital/profile': typeof AuthenticatedHospitalProfileRoute
   '/lab/bookings': typeof AuthenticatedLabBookingsRoute
   '/lab/collection': typeof AuthenticatedLabCollectionRoute
   '/lab/dashboard': typeof AuthenticatedLabDashboardRoute
@@ -605,6 +620,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
+  '/hospital-login': typeof HospitalLoginRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
@@ -642,6 +658,7 @@ export interface FileRoutesByTo {
   '/hospital/doctors': typeof AuthenticatedHospitalDoctorsRoute
   '/hospital/emergency': typeof AuthenticatedHospitalEmergencyRoute
   '/hospital/patients': typeof AuthenticatedHospitalPatientsRoute
+  '/hospital/profile': typeof AuthenticatedHospitalProfileRoute
   '/lab/bookings': typeof AuthenticatedLabBookingsRoute
   '/lab/collection': typeof AuthenticatedLabCollectionRoute
   '/lab/dashboard': typeof AuthenticatedLabDashboardRoute
@@ -684,6 +701,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
+  '/hospital-login': typeof HospitalLoginRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
@@ -721,6 +739,7 @@ export interface FileRoutesById {
   '/_authenticated/hospital/doctors': typeof AuthenticatedHospitalDoctorsRoute
   '/_authenticated/hospital/emergency': typeof AuthenticatedHospitalEmergencyRoute
   '/_authenticated/hospital/patients': typeof AuthenticatedHospitalPatientsRoute
+  '/_authenticated/hospital/profile': typeof AuthenticatedHospitalProfileRoute
   '/_authenticated/lab/bookings': typeof AuthenticatedLabBookingsRoute
   '/_authenticated/lab/collection': typeof AuthenticatedLabCollectionRoute
   '/_authenticated/lab/dashboard': typeof AuthenticatedLabDashboardRoute
@@ -763,6 +782,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/features'
+    | '/hospital-login'
     | '/login'
     | '/partners'
     | '/pricing'
@@ -800,6 +820,7 @@ export interface FileRouteTypes {
     | '/hospital/doctors'
     | '/hospital/emergency'
     | '/hospital/patients'
+    | '/hospital/profile'
     | '/lab/bookings'
     | '/lab/collection'
     | '/lab/dashboard'
@@ -840,6 +861,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/features'
+    | '/hospital-login'
     | '/login'
     | '/partners'
     | '/pricing'
@@ -877,6 +899,7 @@ export interface FileRouteTypes {
     | '/hospital/doctors'
     | '/hospital/emergency'
     | '/hospital/patients'
+    | '/hospital/profile'
     | '/lab/bookings'
     | '/lab/collection'
     | '/lab/dashboard'
@@ -918,6 +941,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/features'
+    | '/hospital-login'
     | '/login'
     | '/partners'
     | '/pricing'
@@ -955,6 +979,7 @@ export interface FileRouteTypes {
     | '/_authenticated/hospital/doctors'
     | '/_authenticated/hospital/emergency'
     | '/_authenticated/hospital/patients'
+    | '/_authenticated/hospital/profile'
     | '/_authenticated/lab/bookings'
     | '/_authenticated/lab/collection'
     | '/_authenticated/lab/dashboard'
@@ -997,6 +1022,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   FeaturesRoute: typeof FeaturesRoute
+  HospitalLoginRoute: typeof HospitalLoginRoute
   LoginRoute: typeof LoginRoute
   PartnersRoute: typeof PartnersRoute
   PricingRoute: typeof PricingRoute
@@ -1056,6 +1082,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hospital-login': {
+      id: '/hospital-login'
+      path: '/hospital-login'
+      fullPath: '/hospital-login'
+      preLoaderRoute: typeof HospitalLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/features': {
@@ -1373,6 +1406,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLabBookingsRouteImport
       parentRoute: typeof AuthenticatedLabRouteRoute
     }
+    '/_authenticated/hospital/profile': {
+      id: '/_authenticated/hospital/profile'
+      path: '/profile'
+      fullPath: '/hospital/profile'
+      preLoaderRoute: typeof AuthenticatedHospitalProfileRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
     '/_authenticated/hospital/patients': {
       id: '/_authenticated/hospital/patients'
       path: '/patients'
@@ -1622,6 +1662,7 @@ interface AuthenticatedHospitalRouteRouteChildren {
   AuthenticatedHospitalDoctorsRoute: typeof AuthenticatedHospitalDoctorsRoute
   AuthenticatedHospitalEmergencyRoute: typeof AuthenticatedHospitalEmergencyRoute
   AuthenticatedHospitalPatientsRoute: typeof AuthenticatedHospitalPatientsRoute
+  AuthenticatedHospitalProfileRoute: typeof AuthenticatedHospitalProfileRoute
 }
 
 const AuthenticatedHospitalRouteRouteChildren: AuthenticatedHospitalRouteRouteChildren =
@@ -1635,6 +1676,7 @@ const AuthenticatedHospitalRouteRouteChildren: AuthenticatedHospitalRouteRouteCh
     AuthenticatedHospitalDoctorsRoute: AuthenticatedHospitalDoctorsRoute,
     AuthenticatedHospitalEmergencyRoute: AuthenticatedHospitalEmergencyRoute,
     AuthenticatedHospitalPatientsRoute: AuthenticatedHospitalPatientsRoute,
+    AuthenticatedHospitalProfileRoute: AuthenticatedHospitalProfileRoute,
   }
 
 const AuthenticatedHospitalRouteRouteWithChildren =
@@ -1769,6 +1811,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   FeaturesRoute: FeaturesRoute,
+  HospitalLoginRoute: HospitalLoginRoute,
   LoginRoute: LoginRoute,
   PartnersRoute: PartnersRoute,
   PricingRoute: PricingRoute,

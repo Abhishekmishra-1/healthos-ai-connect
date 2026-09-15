@@ -331,6 +331,45 @@ export type Database = {
         }
         Relationships: []
       }
+      hospital_booked_slots: {
+        Row: {
+          created_at: string
+          doctor_name: string | null
+          hospital_owner_id: string
+          id: string
+          notes: string | null
+          patient_name: string
+          slot_date: string
+          slot_time: string
+          slot_type: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          doctor_name?: string | null
+          hospital_owner_id: string
+          id?: string
+          notes?: string | null
+          patient_name: string
+          slot_date: string
+          slot_time: string
+          slot_type?: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          doctor_name?: string | null
+          hospital_owner_id?: string
+          id?: string
+          notes?: string | null
+          patient_name?: string
+          slot_date?: string
+          slot_time?: string
+          slot_type?: string
+          status?: string
+        }
+        Relationships: []
+      }
       hospital_profiles: {
         Row: {
           address: string | null
@@ -379,6 +418,45 @@ export type Database = {
           specializations?: string[]
           updated_at?: string
           website?: string | null
+        }
+        Relationships: []
+      }
+      hospital_staff: {
+        Row: {
+          active: boolean
+          created_at: string
+          department: string | null
+          fee: number | null
+          hospital_owner_id: string
+          id: string
+          name: string
+          role: string
+          schedule: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          department?: string | null
+          fee?: number | null
+          hospital_owner_id: string
+          id?: string
+          name: string
+          role?: string
+          schedule?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          department?: string | null
+          fee?: number | null
+          hospital_owner_id?: string
+          id?: string
+          name?: string
+          role?: string
+          schedule?: string | null
+          updated_at?: string
         }
         Relationships: []
       }

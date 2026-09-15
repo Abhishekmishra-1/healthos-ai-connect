@@ -29,6 +29,13 @@
       "when": 1789277014662,
       "tag": "0003_create_hospital_portal_profile",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789469082361,
+      "tag": "0004_create_hospital_operations_tables",
+      "breakpoints": true
     }
   ]
 }
