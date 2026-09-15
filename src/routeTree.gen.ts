@@ -16,6 +16,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as HospitalLoginRouteImport } from './routes/hospital-login'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -119,6 +120,11 @@ const PartnersRoute = PartnersRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HospitalLoginRoute = HospitalLoginRouteImport.update({
+  id: '/hospital-login',
+  path: '/hospital-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeaturesRoute = FeaturesRouteImport.update({
@@ -528,6 +534,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
+  '/hospital-login': typeof HospitalLoginRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
@@ -605,6 +612,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
+  '/hospital-login': typeof HospitalLoginRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
@@ -684,6 +692,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
+  '/hospital-login': typeof HospitalLoginRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
@@ -763,6 +772,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/features'
+    | '/hospital-login'
     | '/login'
     | '/partners'
     | '/pricing'
@@ -840,6 +850,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/features'
+    | '/hospital-login'
     | '/login'
     | '/partners'
     | '/pricing'
@@ -918,6 +929,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/features'
+    | '/hospital-login'
     | '/login'
     | '/partners'
     | '/pricing'
@@ -997,6 +1009,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   FeaturesRoute: typeof FeaturesRoute
+  HospitalLoginRoute: typeof HospitalLoginRoute
   LoginRoute: typeof LoginRoute
   PartnersRoute: typeof PartnersRoute
   PricingRoute: typeof PricingRoute
@@ -1056,6 +1069,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hospital-login': {
+      id: '/hospital-login'
+      path: '/hospital-login'
+      fullPath: '/hospital-login'
+      preLoaderRoute: typeof HospitalLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/features': {
@@ -1769,6 +1789,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   FeaturesRoute: FeaturesRoute,
+  HospitalLoginRoute: HospitalLoginRoute,
   LoginRoute: LoginRoute,
   PartnersRoute: PartnersRoute,
   PricingRoute: PricingRoute,
