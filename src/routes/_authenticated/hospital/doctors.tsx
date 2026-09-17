@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Stethoscope } from "lucide-react";
-import { GenericPage } from "@/components/site/generic-page";
-export const Route = createFileRoute("/_authenticated/hospital/doctors")({
-  component: () => <GenericPage icon={Stethoscope} title="Doctors" description="Empanelled doctors and schedules." items={[{ title: "Dr. Kavita Shah · Cardiology", meta: "Mon–Fri · 10–1", status: "Available" }]} />,
-});
+import { PortalDataView, SimpleStatus } from "@/components/hospital/portal-data-view";
+import { hospitalDoctors } from "@/lib/hospital-portal-data";
+export const Route = createFileRoute("/_authenticated/hospital/doctors")({ component: HospitalDoctors });
+function HospitalDoctors() { return <PortalDataView title="Doctors" description="Manage your clinical team, schedules, and availability." rows={hospitalDoctors} addLabel="Add doctor" columns={[{ key: "name", label: "Doctor", render: (row) => <div><p className="font-semibold">{row.name}</p><p className="text-xs text-muted-foreground">{row.experience} experience</p></div> }, { key: "specialty", label: "Specialty" }, { key: "schedule", label: "Schedule" }, { key: "patients", label: "Patients today" }, { key: "status", label: "Status", render: (row) => <SimpleStatus status={row.status} /> }]} onAdd={() => undefined} />; }
