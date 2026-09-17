@@ -1,5 +1,5 @@
 import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect, useMemo, useState, type LucideIcon, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -31,7 +31,7 @@ import {
   X,
 } from "lucide-react";
 
-export type HospitalNavItem = { to: string; label: string; icon: LucideIcon };
+export type HospitalNavItem = { to: string; label: string; icon: React.ComponentType<{ className?: string }> };
 export type HospitalNavGroup = { label: string; items: readonly HospitalNavItem[] };
 
 export const hospitalNavGroups: readonly HospitalNavGroup[] = [
@@ -118,7 +118,7 @@ export function HospitalPortalShell() {
 
   async function signOut() {
     await supabase.auth.signOut();
-    navigate({ to: "/hospital-login", replace: true });
+    navigate({ to: "/hospital-login", search: { redirect: "/hospital/dashboard" }, replace: true });
   }
 
   const initials = hospitalName.split(" ").map((word) => word[0]).join("").slice(0, 2).toUpperCase() || "HC";
@@ -201,7 +201,7 @@ export function PortalCard({ title, description, action, children, className }: 
   return <section className={cn("rounded-xl border border-border bg-card", className)}><div className="flex items-start justify-between gap-4 border-b border-border px-5 py-4"><div><h2 className="text-sm font-semibold">{title}</h2>{description && <p className="mt-1 text-xs text-muted-foreground">{description}</p>}</div>{action}</div><div className="p-5">{children}</div></section>;
 }
 
-export function MetricCard({ label, value, detail, icon: Icon, tone = "default" }: { label: string; value: string; detail: string; icon: LucideIcon; tone?: "default" | "success" | "warning" | "danger" }) {
+export function MetricCard({ label, value, detail, icon: Icon, tone = "default" }: { label: string; value: string; detail: string; icon: React.ComponentType<{ className?: string }>; tone?: "default" | "success" | "warning" | "danger" }) {
   const toneClass = { default: "bg-primary/10 text-primary", success: "bg-emerald-500/10 text-emerald-600", warning: "bg-amber-500/10 text-amber-600", danger: "bg-destructive/10 text-destructive" }[tone];
   return <div className="rounded-xl border border-border bg-card p-4"><div className="flex items-start justify-between gap-3"><div><p className="text-xs text-muted-foreground">{label}</p><p className="mt-2 text-2xl font-bold tracking-tight">{value}</p></div><span className={cn("grid h-9 w-9 place-items-center rounded-lg", toneClass)}><Icon className="h-4 w-4" /></span></div><p className="mt-3 text-xs text-muted-foreground">{detail}</p></div>;
 }
@@ -211,7 +211,7 @@ export function StatusBadge({ children, tone = "neutral" }: { children: ReactNod
   return <Badge variant="outline" className={cn("border-0 font-medium", styles)}>{children}</Badge>;
 }
 
-export function SectionEmpty({ title, description, icon: Icon = ClipboardList }: { title: string; description: string; icon?: LucideIcon }) {
+export function SectionEmpty({ title, description, icon: Icon = ClipboardList }: { title: string; description: string; icon?: React.ComponentType<{ className?: string }> }) {
   return <div className="flex min-h-44 flex-col items-center justify-center rounded-lg border border-dashed border-border bg-secondary/20 px-6 text-center"><span className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary"><Icon className="h-5 w-5" /></span><p className="mt-3 text-sm font-semibold">{title}</p><p className="mt-1 max-w-sm text-xs text-muted-foreground">{description}</p></div>;
 }
 

@@ -25,7 +25,7 @@ function HospitalProfilePage() {
       if (!user.user) return;
       setUserId(user.user.id);
       const { data } = await supabase.from("hospital_profiles").select("*").eq("owner_user_id", user.user.id).maybeSingle();
-      if (data) setProfile({ ...blankProfile, ...data, established_year: data.established_year?.toString() ?? "", facilities: (data.facilities as Record<string, boolean>) ?? {}, specializations: data.specializations ?? [] });
+      if (data) setProfile({ ...blankProfile, hospital_name: data.hospital_name ?? "", registration_number: data.registration_number ?? "", address: data.address ?? "", phone: data.phone ?? "", email: data.email ?? "", website: data.website ?? "", established_year: data.established_year?.toString() ?? "", facilities: (data.facilities as Record<string, boolean>) ?? {}, specializations: data.specializations ?? [] });
     }
     void load();
   }, []);

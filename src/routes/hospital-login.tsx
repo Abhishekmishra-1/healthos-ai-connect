@@ -1,4 +1,4 @@
-import { createFileRoute, Link, redirect, useNavigate, useSearch } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Building2, Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -27,7 +27,6 @@ export const Route = createFileRoute("/hospital-login")({
 
 function HospitalLoginPage() {
   const navigate = useNavigate();
-  const { redirect: destination } = useSearch({ from: "/hospital-login" });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -53,7 +52,7 @@ function HospitalLoginPage() {
       return;
     }
     void remember;
-    navigate({ to: destination.startsWith("/") ? destination : "/hospital/dashboard" as "/hospital/dashboard" });
+    navigate({ to: "/hospital/dashboard" });
   }
 
   return <main className="grid min-h-dvh bg-background lg:grid-cols-[0.9fr_1.1fr]">
