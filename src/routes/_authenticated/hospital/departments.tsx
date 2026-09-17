@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Building2 } from "lucide-react";
-import { GenericPage } from "@/components/site/generic-page";
-export const Route = createFileRoute("/_authenticated/hospital/departments")({
-  component: () => <GenericPage icon={Building2} title="Departments" description="All clinical departments." items={[{ title: "Cardiology", meta: "12 doctors · 24 beds", status: "Active" },{ title: "Pediatrics", meta: "8 doctors · 18 beds", status: "Active" }]} />,
-});
+import { PortalCard, PortalPageHeader } from "@/components/hospital/portal-shell";
+import { hospitalDepartments } from "@/lib/hospital-portal-data";
+import { Button } from "@/components/ui/button";
+export const Route = createFileRoute("/_authenticated/hospital/departments")({ component: HospitalDepartments });
+function HospitalDepartments() { return <><PortalPageHeader title="Departments" description="Organise clinical departments, capacity, and care coverage." actions={<Button><Building2 className="mr-2 h-4 w-4" />Add department</Button>} /><div className="grid gap-4 md:grid-cols-2">{hospitalDepartments.map((department) => <PortalCard key={department.name} title={department.name} description={`${department.doctors} doctors assigned`} action={<Button variant="ghost" size="sm">Manage</Button>}><div className="flex items-end justify-between"><div><p className="text-3xl font-bold">{department.occupancy}%</p><p className="mt-1 text-xs text-muted-foreground">{department.beds} beds occupied</p></div><div className="h-16 w-16 rounded-full border-[7px] border-primary/20 border-t-primary" /></div><div className="mt-5 h-2 overflow-hidden rounded-full bg-secondary"><div className={`h-full rounded-full ${department.color}`} style={{ width: `${department.occupancy}%` }} /></div></PortalCard>)}</div></>; }

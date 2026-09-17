@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Users } from "lucide-react";
-import { GenericPage } from "@/components/site/generic-page";
-export const Route = createFileRoute("/_authenticated/hospital/patients")({
-  component: () => <GenericPage icon={Users} title="Patients" description="Active and discharged patients." items={[{ title: "IP-2841 · Suresh Menon", meta: "Cardiology · Bed 12", status: "Admitted" }]} />,
-});
+import { PortalDataView, SimpleStatus } from "@/components/hospital/portal-data-view";
+import { hospitalPatients } from "@/lib/hospital-portal-data";
+export const Route = createFileRoute("/_authenticated/hospital/patients")({ component: HospitalPatients });
+function HospitalPatients() { return <PortalDataView title="Patients" description="Find patients, review their visit context, and follow care status." rows={hospitalPatients} addLabel="Register patient" columns={[{ key: "id", label: "Patient ID", render: (row) => <span className="font-mono text-xs">{row.id}</span> }, { key: "name", label: "Patient", render: (row) => <div><p className="font-semibold">{row.name}</p><p className="text-xs text-muted-foreground">{row.age} years</p></div> }, { key: "department", label: "Department" }, { key: "room", label: "Room / queue" }, { key: "lastVisit", label: "Last activity" }, { key: "status", label: "Status", render: (row) => <SimpleStatus status={row.status} /> }]} onAdd={() => undefined} />; }
