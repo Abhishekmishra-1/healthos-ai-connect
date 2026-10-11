@@ -1,6 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BedDouble } from "lucide-react";
-import { GenericPage } from "@/components/site/generic-page";
-export const Route = createFileRoute("/_authenticated/hospital/admissions")({
-  component: () => <GenericPage icon={BedDouble} title="Admissions" description="New admissions and discharges." items={[{ title: "Admit · Suresh Menon", meta: "Cardiology", status: "Today" }]} />,
-});
+import { BedDouble, CheckCircle2, Clock3, UserRound } from "lucide-react";
+import { PortalCard, PortalPageHeader, StatusBadge } from "@/components/hospital/portal-shell";
+import { Button } from "@/components/ui/button";
+
+export const Route = createFileRoute("/_authenticated/hospital/admissions")({ component: HospitalAdmissions });
+function HospitalAdmissions() {
+  const items = [{ patient: "Suresh Menon", type: "Inpatient admission", department: "Cardiology", room: "A-12", time: "09:20", status: "Admitted" }, { patient: "Ravi Kulkarni", type: "Transfer request", department: "Orthopedics", room: "B-08", time: "08:45", status: "Pending" }, { patient: "Asha Verma", type: "Discharge ready", department: "Pediatrics", room: "D-04", time: "08:10", status: "Ready" }];
+  return <><PortalPageHeader title="Admissions" description="Coordinate arrivals, transfers, and discharges across every ward." actions={<Button><BedDouble className="mr-2 h-4 w-4" />New admission</Button>} /><PortalCard title="Today’s patient movement" description="3 active workflows"><div className="space-y-3">{items.map((item) => <div key={item.patient} className="flex flex-wrap items-center gap-3 rounded-lg border border-border p-4"><span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary"><UserRound className="h-4 w-4" /></span><div className="min-w-0 flex-1"><p className="text-sm font-semibold">{item.patient}</p><p className="text-xs text-muted-foreground">{item.type} · {item.department} · {item.room}</p></div><span className="flex items-center gap-1 text-xs text-muted-foreground"><Clock3 className="h-3.5 w-3.5" />{item.time}</span><StatusBadge tone={item.status === "Admitted" ? "success" : item.status === "Pending" ? "warning" : "info"}>{item.status}</StatusBadge><Button variant="ghost" size="sm">Open</Button></div>)}</div></PortalCard><div className="mt-6 grid gap-4 md:grid-cols-3"><Metric title="Admissions today" value="12" detail="3 awaiting bed" icon={UserRound} /><Metric title="Discharges planned" value="8" detail="2 need sign-off" icon={CheckCircle2} /><Metric title="Transfers" value="4" detail="Across 3 departments" icon={BedDouble} /></div></>;
+}
+function Metric({ title, value, detail, icon: Icon }: { title: string; value: string; detail: string; icon: typeof UserRound }) { return <div className="rounded-xl border border-border bg-card p-5"><Icon className="h-4 w-4 text-primary" /><p className="mt-4 text-xs text-muted-foreground">{title}</p><p className="mt-1 text-2xl font-bold">{value}</p><p className="mt-1 text-xs text-muted-foreground">{detail}</p></div>; }

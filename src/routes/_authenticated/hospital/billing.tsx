@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Receipt } from "lucide-react";
-import { GenericPage } from "@/components/site/generic-page";
-export const Route = createFileRoute("/_authenticated/hospital/billing")({
-  component: () => <GenericPage icon={Receipt} title="Billing" description="Invoices, TPA claims and dues." items={[{ title: "INV-9812", meta: "₹84,200 · Star Health TPA", status: "Approved" }]} />,
-});
+import { CreditCard, Download, Receipt } from "lucide-react";
+import { PortalCard, PortalPageHeader, StatusBadge } from "@/components/hospital/portal-shell";
+import { Button } from "@/components/ui/button";
+
+export const Route = createFileRoute("/_authenticated/hospital/billing")({ component: HospitalBilling });
+function HospitalBilling() { const invoices = [{ id: "INV-9812", name: "Star Health TPA", amount: "₹84,200", date: "08 Sep 2026", status: "Approved" }, { id: "INV-9807", name: "Self-pay accounts", amount: "₹42,850", date: "07 Sep 2026", status: "Processing" }, { id: "INV-9799", name: "Care Insurance", amount: "₹1,12,400", date: "05 Sep 2026", status: "Approved" }]; return <><PortalPageHeader title="Billing" description="Review invoices, TPA claims, and the financial pulse of care delivery." actions={<Button><Receipt className="mr-2 h-4 w-4" />Create invoice</Button>} /><div className="grid gap-4 sm:grid-cols-3"><Metric label="This month" value="₹4.2Cr" detail="14% above last month" /><Metric label="Pending claims" value="₹18.6L" detail="23 claims in review" /><Metric label="Collection rate" value="92%" detail="Healthy this month" /></div><div className="mt-6"><PortalCard title="Recent invoices" action={<Button variant="outline" size="sm"><Download className="mr-2 h-4 w-4" />Export</Button>}><div className="space-y-2">{invoices.map((invoice) => <div key={invoice.id} className="flex flex-wrap items-center gap-3 rounded-lg border border-border p-4"><span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary"><CreditCard className="h-4 w-4" /></span><div className="flex-1"><p className="text-sm font-semibold">{invoice.id} · {invoice.name}</p><p className="text-xs text-muted-foreground">{invoice.date}</p></div><span className="text-sm font-semibold">{invoice.amount}</span><StatusBadge tone={invoice.status === "Approved" ? "success" : "warning"}>{invoice.status}</StatusBadge></div>)}</div></PortalCard></div></>; }
+function Metric({ label, value, detail }: { label: string; value: string; detail: string }) { return <div className="rounded-xl border border-border bg-card p-5"><p className="text-xs text-muted-foreground">{label}</p><p className="mt-2 text-2xl font-bold">{value}</p><p className="mt-1 text-xs text-muted-foreground">{detail}</p></div>; }
