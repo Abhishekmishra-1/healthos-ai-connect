@@ -9,162 +9,101 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SignupRouteImport } from './routes/signup'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as PartnersRouteImport } from './routes/partners'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as HospitalLoginRouteImport } from './routes/hospital-login'
-import { Route as FeaturesRouteImport } from './routes/features'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CareersRouteImport } from './routes/careers'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DemoKindRouteImport } from './routes/demo.$kind'
-import { Route as AuthenticatedPharmacyRouteRouteImport } from './routes/_authenticated/pharmacy/route'
-import { Route as AuthenticatedPatientRouteRouteImport } from './routes/_authenticated/patient/route'
-import { Route as AuthenticatedLabRouteRouteImport } from './routes/_authenticated/lab/route'
-import { Route as AuthenticatedHospitalRouteRouteImport } from './routes/_authenticated/hospital/route'
-import { Route as AuthenticatedDoctorRouteRouteImport } from './routes/_authenticated/doctor/route'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as HospitalLoginRouteImport } from './routes/hospital-login'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
-import { Route as AuthenticatedPharmacyPaymentsRouteImport } from './routes/_authenticated/pharmacy/payments'
-import { Route as AuthenticatedPharmacyOrdersRouteImport } from './routes/_authenticated/pharmacy/orders'
-import { Route as AuthenticatedPharmacyInventoryRouteImport } from './routes/_authenticated/pharmacy/inventory'
-import { Route as AuthenticatedPharmacyDeliveryRouteImport } from './routes/_authenticated/pharmacy/delivery'
-import { Route as AuthenticatedPharmacyDashboardRouteImport } from './routes/_authenticated/pharmacy/dashboard'
-import { Route as AuthenticatedPharmacyCustomersRouteImport } from './routes/_authenticated/pharmacy/customers'
-import { Route as AuthenticatedPharmacyAnalyticsRouteImport } from './routes/_authenticated/pharmacy/analytics'
-import { Route as AuthenticatedPatientUploadReportRouteImport } from './routes/_authenticated/patient/upload-report'
-import { Route as AuthenticatedPatientUploadPrescriptionRouteImport } from './routes/_authenticated/patient/upload-prescription'
-import { Route as AuthenticatedPatientTimelineRouteImport } from './routes/_authenticated/patient/timeline'
-import { Route as AuthenticatedPatientSupportRouteImport } from './routes/_authenticated/patient/support'
-import { Route as AuthenticatedPatientSearchRouteImport } from './routes/_authenticated/patient/search'
-import { Route as AuthenticatedPatientRemindersRouteImport } from './routes/_authenticated/patient/reminders'
-import { Route as AuthenticatedPatientRecordsRouteImport } from './routes/_authenticated/patient/records'
-import { Route as AuthenticatedPatientProfileRouteImport } from './routes/_authenticated/patient/profile'
-import { Route as AuthenticatedPatientOrdersRouteImport } from './routes/_authenticated/patient/orders'
-import { Route as AuthenticatedPatientMedicineRouteImport } from './routes/_authenticated/patient/medicine'
-import { Route as AuthenticatedPatientLabsRouteImport } from './routes/_authenticated/patient/labs'
-import { Route as AuthenticatedPatientHospitalsRouteImport } from './routes/_authenticated/patient/hospitals'
-import { Route as AuthenticatedPatientEmergencyRouteImport } from './routes/_authenticated/patient/emergency'
-import { Route as AuthenticatedPatientDoctorsRouteImport } from './routes/_authenticated/patient/doctors'
-import { Route as AuthenticatedPatientDashboardRouteImport } from './routes/_authenticated/patient/dashboard'
-import { Route as AuthenticatedPatientAppointmentsRouteImport } from './routes/_authenticated/patient/appointments'
-import { Route as AuthenticatedPatientAiAssistantRouteImport } from './routes/_authenticated/patient/ai-assistant'
-import { Route as AuthenticatedLabReportsRouteImport } from './routes/_authenticated/lab/reports'
-import { Route as AuthenticatedLabPaymentsRouteImport } from './routes/_authenticated/lab/payments'
-import { Route as AuthenticatedLabDashboardRouteImport } from './routes/_authenticated/lab/dashboard'
-import { Route as AuthenticatedLabCollectionRouteImport } from './routes/_authenticated/lab/collection'
-import { Route as AuthenticatedLabBookingsRouteImport } from './routes/_authenticated/lab/bookings'
-import { Route as AuthenticatedHospitalStaffRouteImport } from './routes/_authenticated/hospital/staff'
-import { Route as AuthenticatedHospitalSettingsRouteImport } from './routes/_authenticated/hospital/settings'
-import { Route as AuthenticatedHospitalReviewsRouteImport } from './routes/_authenticated/hospital/reviews'
-import { Route as AuthenticatedHospitalRecordsRouteImport } from './routes/_authenticated/hospital/records'
-import { Route as AuthenticatedHospitalProfileRouteImport } from './routes/_authenticated/hospital/profile'
-import { Route as AuthenticatedHospitalPharmacyRouteImport } from './routes/_authenticated/hospital/pharmacy'
-import { Route as AuthenticatedHospitalPatientsRouteImport } from './routes/_authenticated/hospital/patients'
-import { Route as AuthenticatedHospitalNotificationsRouteImport } from './routes/_authenticated/hospital/notifications'
-import { Route as AuthenticatedHospitalLaboratoryRouteImport } from './routes/_authenticated/hospital/laboratory'
-import { Route as AuthenticatedHospitalEmergencyRouteImport } from './routes/_authenticated/hospital/emergency'
-import { Route as AuthenticatedHospitalDoctorsRouteImport } from './routes/_authenticated/hospital/doctors'
-import { Route as AuthenticatedHospitalDepartmentsRouteImport } from './routes/_authenticated/hospital/departments'
-import { Route as AuthenticatedHospitalDashboardRouteImport } from './routes/_authenticated/hospital/dashboard'
-import { Route as AuthenticatedHospitalBillingRouteImport } from './routes/_authenticated/hospital/billing'
-import { Route as AuthenticatedHospitalBedsRouteImport } from './routes/_authenticated/hospital/beds'
-import { Route as AuthenticatedHospitalAppointmentsRouteImport } from './routes/_authenticated/hospital/appointments'
-import { Route as AuthenticatedHospitalAnalyticsRouteImport } from './routes/_authenticated/hospital/analytics'
-import { Route as AuthenticatedHospitalAdmissionsRouteImport } from './routes/_authenticated/hospital/admissions'
-import { Route as AuthenticatedDoctorVideoRouteImport } from './routes/_authenticated/doctor/video'
-import { Route as AuthenticatedDoctorProfileRouteImport } from './routes/_authenticated/doctor/profile'
-import { Route as AuthenticatedDoctorPrescriptionsRouteImport } from './routes/_authenticated/doctor/prescriptions'
-import { Route as AuthenticatedDoctorPatientsRouteImport } from './routes/_authenticated/doctor/patients'
-import { Route as AuthenticatedDoctorEarningsRouteImport } from './routes/_authenticated/doctor/earnings'
-import { Route as AuthenticatedDoctorDashboardRouteImport } from './routes/_authenticated/doctor/dashboard'
-import { Route as AuthenticatedDoctorCalendarRouteImport } from './routes/_authenticated/doctor/calendar'
-import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
-import { Route as AuthenticatedAdminTestsRouteImport } from './routes/_authenticated/admin/tests'
-import { Route as AuthenticatedAdminPharmaciesRouteImport } from './routes/_authenticated/admin/pharmacies'
-import { Route as AuthenticatedAdminMedicinesRouteImport } from './routes/_authenticated/admin/medicines'
-import { Route as AuthenticatedAdminLabsRouteImport } from './routes/_authenticated/admin/labs'
-import { Route as AuthenticatedAdminHospitalsRouteImport } from './routes/_authenticated/admin/hospitals'
-import { Route as AuthenticatedAdminDoctorsRouteImport } from './routes/_authenticated/admin/doctors'
+import { Route as AuthenticatedDoctorRouteRouteImport } from './routes/_authenticated/doctor/route'
+import { Route as AuthenticatedHospitalRouteRouteImport } from './routes/_authenticated/hospital/route'
+import { Route as AuthenticatedLabRouteRouteImport } from './routes/_authenticated/lab/route'
+import { Route as AuthenticatedPatientRouteRouteImport } from './routes/_authenticated/patient/route'
+import { Route as AuthenticatedPharmacyRouteRouteImport } from './routes/_authenticated/pharmacy/route'
+import { Route as DemoKindRouteImport } from './routes/demo.$kind'
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin/dashboard'
+import { Route as AuthenticatedAdminDoctorsRouteImport } from './routes/_authenticated/admin/doctors'
+import { Route as AuthenticatedAdminHospitalsRouteImport } from './routes/_authenticated/admin/hospitals'
+import { Route as AuthenticatedAdminLabsRouteImport } from './routes/_authenticated/admin/labs'
+import { Route as AuthenticatedAdminMedicinesRouteImport } from './routes/_authenticated/admin/medicines'
+import { Route as AuthenticatedAdminPharmaciesRouteImport } from './routes/_authenticated/admin/pharmacies'
+import { Route as AuthenticatedAdminTestsRouteImport } from './routes/_authenticated/admin/tests'
+import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
+import { Route as AuthenticatedDoctorCalendarRouteImport } from './routes/_authenticated/doctor/calendar'
+import { Route as AuthenticatedDoctorDashboardRouteImport } from './routes/_authenticated/doctor/dashboard'
+import { Route as AuthenticatedDoctorEarningsRouteImport } from './routes/_authenticated/doctor/earnings'
+import { Route as AuthenticatedDoctorPatientsRouteImport } from './routes/_authenticated/doctor/patients'
+import { Route as AuthenticatedDoctorPrescriptionsRouteImport } from './routes/_authenticated/doctor/prescriptions'
+import { Route as AuthenticatedDoctorProfileRouteImport } from './routes/_authenticated/doctor/profile'
+import { Route as AuthenticatedDoctorVideoRouteImport } from './routes/_authenticated/doctor/video'
+import { Route as AuthenticatedHospitalAdmissionsRouteImport } from './routes/_authenticated/hospital/admissions'
+import { Route as AuthenticatedHospitalAnalyticsRouteImport } from './routes/_authenticated/hospital/analytics'
+import { Route as AuthenticatedHospitalAppointmentsRouteImport } from './routes/_authenticated/hospital/appointments'
+import { Route as AuthenticatedHospitalBedsRouteImport } from './routes/_authenticated/hospital/beds'
+import { Route as AuthenticatedHospitalBillingRouteImport } from './routes/_authenticated/hospital/billing'
+import { Route as AuthenticatedHospitalDashboardRouteImport } from './routes/_authenticated/hospital/dashboard'
+import { Route as AuthenticatedHospitalDepartmentsRouteImport } from './routes/_authenticated/hospital/departments'
+import { Route as AuthenticatedHospitalDoctorsRouteImport } from './routes/_authenticated/hospital/doctors'
+import { Route as AuthenticatedHospitalEmergencyRouteImport } from './routes/_authenticated/hospital/emergency'
+import { Route as AuthenticatedHospitalLaboratoryRouteImport } from './routes/_authenticated/hospital/laboratory'
+import { Route as AuthenticatedHospitalNotificationsRouteImport } from './routes/_authenticated/hospital/notifications'
+import { Route as AuthenticatedHospitalPatientsRouteImport } from './routes/_authenticated/hospital/patients'
+import { Route as AuthenticatedHospitalPharmacyRouteImport } from './routes/_authenticated/hospital/pharmacy'
+import { Route as AuthenticatedHospitalProfileRouteImport } from './routes/_authenticated/hospital/profile'
+import { Route as AuthenticatedHospitalRecordsRouteImport } from './routes/_authenticated/hospital/records'
+import { Route as AuthenticatedHospitalReviewsRouteImport } from './routes/_authenticated/hospital/reviews'
+import { Route as AuthenticatedHospitalSettingsRouteImport } from './routes/_authenticated/hospital/settings'
+import { Route as AuthenticatedHospitalStaffRouteImport } from './routes/_authenticated/hospital/staff'
+import { Route as AuthenticatedLabBookingsRouteImport } from './routes/_authenticated/lab/bookings'
+import { Route as AuthenticatedLabCollectionRouteImport } from './routes/_authenticated/lab/collection'
+import { Route as AuthenticatedLabDashboardRouteImport } from './routes/_authenticated/lab/dashboard'
+import { Route as AuthenticatedLabPaymentsRouteImport } from './routes/_authenticated/lab/payments'
+import { Route as AuthenticatedLabReportsRouteImport } from './routes/_authenticated/lab/reports'
+import { Route as AuthenticatedPatientAiAssistantRouteImport } from './routes/_authenticated/patient/ai-assistant'
+import { Route as AuthenticatedPatientAppointmentsRouteImport } from './routes/_authenticated/patient/appointments'
+import { Route as AuthenticatedPatientDashboardRouteImport } from './routes/_authenticated/patient/dashboard'
+import { Route as AuthenticatedPatientDoctorsRouteImport } from './routes/_authenticated/patient/doctors'
+import { Route as AuthenticatedPatientEmergencyRouteImport } from './routes/_authenticated/patient/emergency'
+import { Route as AuthenticatedPatientHospitalsRouteImport } from './routes/_authenticated/patient/hospitals'
+import { Route as AuthenticatedPatientLabsRouteImport } from './routes/_authenticated/patient/labs'
+import { Route as AuthenticatedPatientMedicineRouteImport } from './routes/_authenticated/patient/medicine'
+import { Route as AuthenticatedPatientOrdersRouteImport } from './routes/_authenticated/patient/orders'
+import { Route as AuthenticatedPatientProfileRouteImport } from './routes/_authenticated/patient/profile'
+import { Route as AuthenticatedPatientRecordsRouteImport } from './routes/_authenticated/patient/records'
+import { Route as AuthenticatedPatientRemindersRouteImport } from './routes/_authenticated/patient/reminders'
+import { Route as AuthenticatedPatientSearchRouteImport } from './routes/_authenticated/patient/search'
+import { Route as AuthenticatedPatientSupportRouteImport } from './routes/_authenticated/patient/support'
+import { Route as AuthenticatedPatientTimelineRouteImport } from './routes/_authenticated/patient/timeline'
+import { Route as AuthenticatedPatientUploadPrescriptionRouteImport } from './routes/_authenticated/patient/upload-prescription'
+import { Route as AuthenticatedPatientUploadReportRouteImport } from './routes/_authenticated/patient/upload-report'
+import { Route as AuthenticatedPharmacyAnalyticsRouteImport } from './routes/_authenticated/pharmacy/analytics'
+import { Route as AuthenticatedPharmacyCustomersRouteImport } from './routes/_authenticated/pharmacy/customers'
+import { Route as AuthenticatedPharmacyDashboardRouteImport } from './routes/_authenticated/pharmacy/dashboard'
+import { Route as AuthenticatedPharmacyDeliveryRouteImport } from './routes/_authenticated/pharmacy/delivery'
+import { Route as AuthenticatedPharmacyInventoryRouteImport } from './routes/_authenticated/pharmacy/inventory'
+import { Route as AuthenticatedPharmacyOrdersRouteImport } from './routes/_authenticated/pharmacy/orders'
+import { Route as AuthenticatedPharmacyPaymentsRouteImport } from './routes/_authenticated/pharmacy/payments'
 import { Route as AuthenticatedAdminUsersUserIdRouteImport } from './routes/_authenticated/admin/users.$userId'
 
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PartnersRoute = PartnersRouteImport.update({
-  id: '/partners',
-  path: '/partners',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HospitalLoginRoute = HospitalLoginRouteImport.update({
-  id: '/hospital-login',
-  path: '/hospital-login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FeaturesRoute = FeaturesRouteImport.update({
-  id: '/features',
-  path: '/features',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CareersRoute = CareersRouteImport.update({
-  id: '/careers',
-  path: '/careers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -172,30 +111,91 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoKindRoute = DemoKindRouteImport.update({
-  id: '/demo/$kind',
-  path: '/demo/$kind',
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedPharmacyRouteRoute =
-  AuthenticatedPharmacyRouteRouteImport.update({
-    id: '/pharmacy',
-    path: '/pharmacy',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturesRoute = FeaturesRouteImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HospitalLoginRoute = HospitalLoginRouteImport.update({
+  id: '/hospital-login',
+  path: '/hospital-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDoctorRouteRoute =
+  AuthenticatedDoctorRouteRouteImport.update({
+    id: '/doctor',
+    path: '/doctor',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedPatientRouteRoute =
-  AuthenticatedPatientRouteRouteImport.update({
-    id: '/patient',
-    path: '/patient',
+const AuthenticatedHospitalRouteRoute =
+  AuthenticatedHospitalRouteRouteImport.update({
+    id: '/hospital',
+    path: '/hospital',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedLabRouteRoute = AuthenticatedLabRouteRouteImport.update({
@@ -203,377 +203,27 @@ const AuthenticatedLabRouteRoute = AuthenticatedLabRouteRouteImport.update({
   path: '/lab',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedHospitalRouteRoute =
-  AuthenticatedHospitalRouteRouteImport.update({
-    id: '/hospital',
-    path: '/hospital',
+const AuthenticatedPatientRouteRoute =
+  AuthenticatedPatientRouteRouteImport.update({
+    id: '/patient',
+    path: '/patient',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedDoctorRouteRoute =
-  AuthenticatedDoctorRouteRouteImport.update({
-    id: '/doctor',
-    path: '/doctor',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedPharmacyPaymentsRoute =
-  AuthenticatedPharmacyPaymentsRouteImport.update({
-    id: '/payments',
-    path: '/payments',
-    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
-  } as any)
-const AuthenticatedPharmacyOrdersRoute =
-  AuthenticatedPharmacyOrdersRouteImport.update({
-    id: '/orders',
-    path: '/orders',
-    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
-  } as any)
-const AuthenticatedPharmacyInventoryRoute =
-  AuthenticatedPharmacyInventoryRouteImport.update({
-    id: '/inventory',
-    path: '/inventory',
-    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
-  } as any)
-const AuthenticatedPharmacyDeliveryRoute =
-  AuthenticatedPharmacyDeliveryRouteImport.update({
-    id: '/delivery',
-    path: '/delivery',
-    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
-  } as any)
-const AuthenticatedPharmacyDashboardRoute =
-  AuthenticatedPharmacyDashboardRouteImport.update({
-    id: '/dashboard',
-    path: '/dashboard',
-    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
-  } as any)
-const AuthenticatedPharmacyCustomersRoute =
-  AuthenticatedPharmacyCustomersRouteImport.update({
-    id: '/customers',
-    path: '/customers',
-    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
-  } as any)
-const AuthenticatedPharmacyAnalyticsRoute =
-  AuthenticatedPharmacyAnalyticsRouteImport.update({
-    id: '/analytics',
-    path: '/analytics',
-    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
-  } as any)
-const AuthenticatedPatientUploadReportRoute =
-  AuthenticatedPatientUploadReportRouteImport.update({
-    id: '/upload-report',
-    path: '/upload-report',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientUploadPrescriptionRoute =
-  AuthenticatedPatientUploadPrescriptionRouteImport.update({
-    id: '/upload-prescription',
-    path: '/upload-prescription',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientTimelineRoute =
-  AuthenticatedPatientTimelineRouteImport.update({
-    id: '/timeline',
-    path: '/timeline',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientSupportRoute =
-  AuthenticatedPatientSupportRouteImport.update({
-    id: '/support',
-    path: '/support',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientSearchRoute =
-  AuthenticatedPatientSearchRouteImport.update({
-    id: '/search',
-    path: '/search',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientRemindersRoute =
-  AuthenticatedPatientRemindersRouteImport.update({
-    id: '/reminders',
-    path: '/reminders',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientRecordsRoute =
-  AuthenticatedPatientRecordsRouteImport.update({
-    id: '/records',
-    path: '/records',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientProfileRoute =
-  AuthenticatedPatientProfileRouteImport.update({
-    id: '/profile',
-    path: '/profile',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientOrdersRoute =
-  AuthenticatedPatientOrdersRouteImport.update({
-    id: '/orders',
-    path: '/orders',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientMedicineRoute =
-  AuthenticatedPatientMedicineRouteImport.update({
-    id: '/medicine',
-    path: '/medicine',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientLabsRoute =
-  AuthenticatedPatientLabsRouteImport.update({
-    id: '/labs',
-    path: '/labs',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientHospitalsRoute =
-  AuthenticatedPatientHospitalsRouteImport.update({
-    id: '/hospitals',
-    path: '/hospitals',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientEmergencyRoute =
-  AuthenticatedPatientEmergencyRouteImport.update({
-    id: '/emergency',
-    path: '/emergency',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientDoctorsRoute =
-  AuthenticatedPatientDoctorsRouteImport.update({
-    id: '/doctors',
-    path: '/doctors',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientDashboardRoute =
-  AuthenticatedPatientDashboardRouteImport.update({
-    id: '/dashboard',
-    path: '/dashboard',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientAppointmentsRoute =
-  AuthenticatedPatientAppointmentsRouteImport.update({
-    id: '/appointments',
-    path: '/appointments',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedPatientAiAssistantRoute =
-  AuthenticatedPatientAiAssistantRouteImport.update({
-    id: '/ai-assistant',
-    path: '/ai-assistant',
-    getParentRoute: () => AuthenticatedPatientRouteRoute,
-  } as any)
-const AuthenticatedLabReportsRoute = AuthenticatedLabReportsRouteImport.update({
-  id: '/reports',
-  path: '/reports',
-  getParentRoute: () => AuthenticatedLabRouteRoute,
-} as any)
-const AuthenticatedLabPaymentsRoute =
-  AuthenticatedLabPaymentsRouteImport.update({
-    id: '/payments',
-    path: '/payments',
-    getParentRoute: () => AuthenticatedLabRouteRoute,
-  } as any)
-const AuthenticatedLabDashboardRoute =
-  AuthenticatedLabDashboardRouteImport.update({
-    id: '/dashboard',
-    path: '/dashboard',
-    getParentRoute: () => AuthenticatedLabRouteRoute,
-  } as any)
-const AuthenticatedLabCollectionRoute =
-  AuthenticatedLabCollectionRouteImport.update({
-    id: '/collection',
-    path: '/collection',
-    getParentRoute: () => AuthenticatedLabRouteRoute,
-  } as any)
-const AuthenticatedLabBookingsRoute =
-  AuthenticatedLabBookingsRouteImport.update({
-    id: '/bookings',
-    path: '/bookings',
-    getParentRoute: () => AuthenticatedLabRouteRoute,
-  } as any)
-const AuthenticatedHospitalStaffRoute =
-  AuthenticatedHospitalStaffRouteImport.update({
-    id: '/staff',
-    path: '/staff',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalSettingsRoute =
-  AuthenticatedHospitalSettingsRouteImport.update({
-    id: '/settings',
-    path: '/settings',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalReviewsRoute =
-  AuthenticatedHospitalReviewsRouteImport.update({
-    id: '/reviews',
-    path: '/reviews',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalRecordsRoute =
-  AuthenticatedHospitalRecordsRouteImport.update({
-    id: '/records',
-    path: '/records',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalProfileRoute =
-  AuthenticatedHospitalProfileRouteImport.update({
-    id: '/profile',
-    path: '/profile',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalPharmacyRoute =
-  AuthenticatedHospitalPharmacyRouteImport.update({
+const AuthenticatedPharmacyRouteRoute =
+  AuthenticatedPharmacyRouteRouteImport.update({
     id: '/pharmacy',
     path: '/pharmacy',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedHospitalPatientsRoute =
-  AuthenticatedHospitalPatientsRouteImport.update({
-    id: '/patients',
-    path: '/patients',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalNotificationsRoute =
-  AuthenticatedHospitalNotificationsRouteImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalLaboratoryRoute =
-  AuthenticatedHospitalLaboratoryRouteImport.update({
-    id: '/laboratory',
-    path: '/laboratory',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalEmergencyRoute =
-  AuthenticatedHospitalEmergencyRouteImport.update({
-    id: '/emergency',
-    path: '/emergency',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalDoctorsRoute =
-  AuthenticatedHospitalDoctorsRouteImport.update({
-    id: '/doctors',
-    path: '/doctors',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalDepartmentsRoute =
-  AuthenticatedHospitalDepartmentsRouteImport.update({
-    id: '/departments',
-    path: '/departments',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalDashboardRoute =
-  AuthenticatedHospitalDashboardRouteImport.update({
+const DemoKindRoute = DemoKindRouteImport.update({
+  id: '/demo/$kind',
+  path: '/demo/$kind',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminDashboardRoute =
+  AuthenticatedAdminDashboardRouteImport.update({
     id: '/dashboard',
     path: '/dashboard',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalBillingRoute =
-  AuthenticatedHospitalBillingRouteImport.update({
-    id: '/billing',
-    path: '/billing',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalBedsRoute =
-  AuthenticatedHospitalBedsRouteImport.update({
-    id: '/beds',
-    path: '/beds',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalAppointmentsRoute =
-  AuthenticatedHospitalAppointmentsRouteImport.update({
-    id: '/appointments',
-    path: '/appointments',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalAnalyticsRoute =
-  AuthenticatedHospitalAnalyticsRouteImport.update({
-    id: '/analytics',
-    path: '/analytics',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedHospitalAdmissionsRoute =
-  AuthenticatedHospitalAdmissionsRouteImport.update({
-    id: '/admissions',
-    path: '/admissions',
-    getParentRoute: () => AuthenticatedHospitalRouteRoute,
-  } as any)
-const AuthenticatedDoctorVideoRoute =
-  AuthenticatedDoctorVideoRouteImport.update({
-    id: '/video',
-    path: '/video',
-    getParentRoute: () => AuthenticatedDoctorRouteRoute,
-  } as any)
-const AuthenticatedDoctorProfileRoute =
-  AuthenticatedDoctorProfileRouteImport.update({
-    id: '/profile',
-    path: '/profile',
-    getParentRoute: () => AuthenticatedDoctorRouteRoute,
-  } as any)
-const AuthenticatedDoctorPrescriptionsRoute =
-  AuthenticatedDoctorPrescriptionsRouteImport.update({
-    id: '/prescriptions',
-    path: '/prescriptions',
-    getParentRoute: () => AuthenticatedDoctorRouteRoute,
-  } as any)
-const AuthenticatedDoctorPatientsRoute =
-  AuthenticatedDoctorPatientsRouteImport.update({
-    id: '/patients',
-    path: '/patients',
-    getParentRoute: () => AuthenticatedDoctorRouteRoute,
-  } as any)
-const AuthenticatedDoctorEarningsRoute =
-  AuthenticatedDoctorEarningsRouteImport.update({
-    id: '/earnings',
-    path: '/earnings',
-    getParentRoute: () => AuthenticatedDoctorRouteRoute,
-  } as any)
-const AuthenticatedDoctorDashboardRoute =
-  AuthenticatedDoctorDashboardRouteImport.update({
-    id: '/dashboard',
-    path: '/dashboard',
-    getParentRoute: () => AuthenticatedDoctorRouteRoute,
-  } as any)
-const AuthenticatedDoctorCalendarRoute =
-  AuthenticatedDoctorCalendarRouteImport.update({
-    id: '/calendar',
-    path: '/calendar',
-    getParentRoute: () => AuthenticatedDoctorRouteRoute,
-  } as any)
-const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
-  getParentRoute: () => AuthenticatedAdminRouteRoute,
-} as any)
-const AuthenticatedAdminTestsRoute = AuthenticatedAdminTestsRouteImport.update({
-  id: '/tests',
-  path: '/tests',
-  getParentRoute: () => AuthenticatedAdminRouteRoute,
-} as any)
-const AuthenticatedAdminPharmaciesRoute =
-  AuthenticatedAdminPharmaciesRouteImport.update({
-    id: '/pharmacies',
-    path: '/pharmacies',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminMedicinesRoute =
-  AuthenticatedAdminMedicinesRouteImport.update({
-    id: '/medicines',
-    path: '/medicines',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminLabsRoute = AuthenticatedAdminLabsRouteImport.update({
-  id: '/labs',
-  path: '/labs',
-  getParentRoute: () => AuthenticatedAdminRouteRoute,
-} as any)
-const AuthenticatedAdminHospitalsRoute =
-  AuthenticatedAdminHospitalsRouteImport.update({
-    id: '/hospitals',
-    path: '/hospitals',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminDoctorsRoute =
@@ -582,11 +232,361 @@ const AuthenticatedAdminDoctorsRoute =
     path: '/doctors',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
-const AuthenticatedAdminDashboardRoute =
-  AuthenticatedAdminDashboardRouteImport.update({
+const AuthenticatedAdminHospitalsRoute =
+  AuthenticatedAdminHospitalsRouteImport.update({
+    id: '/hospitals',
+    path: '/hospitals',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminLabsRoute = AuthenticatedAdminLabsRouteImport.update({
+  id: '/labs',
+  path: '/labs',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminMedicinesRoute =
+  AuthenticatedAdminMedicinesRouteImport.update({
+    id: '/medicines',
+    path: '/medicines',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPharmaciesRoute =
+  AuthenticatedAdminPharmaciesRouteImport.update({
+    id: '/pharmacies',
+    path: '/pharmacies',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminTestsRoute = AuthenticatedAdminTestsRouteImport.update({
+  id: '/tests',
+  path: '/tests',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedDoctorCalendarRoute =
+  AuthenticatedDoctorCalendarRouteImport.update({
+    id: '/calendar',
+    path: '/calendar',
+    getParentRoute: () => AuthenticatedDoctorRouteRoute,
+  } as any)
+const AuthenticatedDoctorDashboardRoute =
+  AuthenticatedDoctorDashboardRouteImport.update({
     id: '/dashboard',
     path: '/dashboard',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
+    getParentRoute: () => AuthenticatedDoctorRouteRoute,
+  } as any)
+const AuthenticatedDoctorEarningsRoute =
+  AuthenticatedDoctorEarningsRouteImport.update({
+    id: '/earnings',
+    path: '/earnings',
+    getParentRoute: () => AuthenticatedDoctorRouteRoute,
+  } as any)
+const AuthenticatedDoctorPatientsRoute =
+  AuthenticatedDoctorPatientsRouteImport.update({
+    id: '/patients',
+    path: '/patients',
+    getParentRoute: () => AuthenticatedDoctorRouteRoute,
+  } as any)
+const AuthenticatedDoctorPrescriptionsRoute =
+  AuthenticatedDoctorPrescriptionsRouteImport.update({
+    id: '/prescriptions',
+    path: '/prescriptions',
+    getParentRoute: () => AuthenticatedDoctorRouteRoute,
+  } as any)
+const AuthenticatedDoctorProfileRoute =
+  AuthenticatedDoctorProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedDoctorRouteRoute,
+  } as any)
+const AuthenticatedDoctorVideoRoute =
+  AuthenticatedDoctorVideoRouteImport.update({
+    id: '/video',
+    path: '/video',
+    getParentRoute: () => AuthenticatedDoctorRouteRoute,
+  } as any)
+const AuthenticatedHospitalAdmissionsRoute =
+  AuthenticatedHospitalAdmissionsRouteImport.update({
+    id: '/admissions',
+    path: '/admissions',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalAnalyticsRoute =
+  AuthenticatedHospitalAnalyticsRouteImport.update({
+    id: '/analytics',
+    path: '/analytics',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalAppointmentsRoute =
+  AuthenticatedHospitalAppointmentsRouteImport.update({
+    id: '/appointments',
+    path: '/appointments',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalBedsRoute =
+  AuthenticatedHospitalBedsRouteImport.update({
+    id: '/beds',
+    path: '/beds',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalBillingRoute =
+  AuthenticatedHospitalBillingRouteImport.update({
+    id: '/billing',
+    path: '/billing',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalDashboardRoute =
+  AuthenticatedHospitalDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalDepartmentsRoute =
+  AuthenticatedHospitalDepartmentsRouteImport.update({
+    id: '/departments',
+    path: '/departments',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalDoctorsRoute =
+  AuthenticatedHospitalDoctorsRouteImport.update({
+    id: '/doctors',
+    path: '/doctors',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalEmergencyRoute =
+  AuthenticatedHospitalEmergencyRouteImport.update({
+    id: '/emergency',
+    path: '/emergency',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalLaboratoryRoute =
+  AuthenticatedHospitalLaboratoryRouteImport.update({
+    id: '/laboratory',
+    path: '/laboratory',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalNotificationsRoute =
+  AuthenticatedHospitalNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalPatientsRoute =
+  AuthenticatedHospitalPatientsRouteImport.update({
+    id: '/patients',
+    path: '/patients',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalPharmacyRoute =
+  AuthenticatedHospitalPharmacyRouteImport.update({
+    id: '/pharmacy',
+    path: '/pharmacy',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalProfileRoute =
+  AuthenticatedHospitalProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalRecordsRoute =
+  AuthenticatedHospitalRecordsRouteImport.update({
+    id: '/records',
+    path: '/records',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalReviewsRoute =
+  AuthenticatedHospitalReviewsRouteImport.update({
+    id: '/reviews',
+    path: '/reviews',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalSettingsRoute =
+  AuthenticatedHospitalSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedHospitalStaffRoute =
+  AuthenticatedHospitalStaffRouteImport.update({
+    id: '/staff',
+    path: '/staff',
+    getParentRoute: () => AuthenticatedHospitalRouteRoute,
+  } as any)
+const AuthenticatedLabBookingsRoute =
+  AuthenticatedLabBookingsRouteImport.update({
+    id: '/bookings',
+    path: '/bookings',
+    getParentRoute: () => AuthenticatedLabRouteRoute,
+  } as any)
+const AuthenticatedLabCollectionRoute =
+  AuthenticatedLabCollectionRouteImport.update({
+    id: '/collection',
+    path: '/collection',
+    getParentRoute: () => AuthenticatedLabRouteRoute,
+  } as any)
+const AuthenticatedLabDashboardRoute =
+  AuthenticatedLabDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedLabRouteRoute,
+  } as any)
+const AuthenticatedLabPaymentsRoute =
+  AuthenticatedLabPaymentsRouteImport.update({
+    id: '/payments',
+    path: '/payments',
+    getParentRoute: () => AuthenticatedLabRouteRoute,
+  } as any)
+const AuthenticatedLabReportsRoute = AuthenticatedLabReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AuthenticatedLabRouteRoute,
+} as any)
+const AuthenticatedPatientAiAssistantRoute =
+  AuthenticatedPatientAiAssistantRouteImport.update({
+    id: '/ai-assistant',
+    path: '/ai-assistant',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientAppointmentsRoute =
+  AuthenticatedPatientAppointmentsRouteImport.update({
+    id: '/appointments',
+    path: '/appointments',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientDashboardRoute =
+  AuthenticatedPatientDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientDoctorsRoute =
+  AuthenticatedPatientDoctorsRouteImport.update({
+    id: '/doctors',
+    path: '/doctors',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientEmergencyRoute =
+  AuthenticatedPatientEmergencyRouteImport.update({
+    id: '/emergency',
+    path: '/emergency',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientHospitalsRoute =
+  AuthenticatedPatientHospitalsRouteImport.update({
+    id: '/hospitals',
+    path: '/hospitals',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientLabsRoute =
+  AuthenticatedPatientLabsRouteImport.update({
+    id: '/labs',
+    path: '/labs',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientMedicineRoute =
+  AuthenticatedPatientMedicineRouteImport.update({
+    id: '/medicine',
+    path: '/medicine',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientOrdersRoute =
+  AuthenticatedPatientOrdersRouteImport.update({
+    id: '/orders',
+    path: '/orders',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientProfileRoute =
+  AuthenticatedPatientProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientRecordsRoute =
+  AuthenticatedPatientRecordsRouteImport.update({
+    id: '/records',
+    path: '/records',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientRemindersRoute =
+  AuthenticatedPatientRemindersRouteImport.update({
+    id: '/reminders',
+    path: '/reminders',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientSearchRoute =
+  AuthenticatedPatientSearchRouteImport.update({
+    id: '/search',
+    path: '/search',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientSupportRoute =
+  AuthenticatedPatientSupportRouteImport.update({
+    id: '/support',
+    path: '/support',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientTimelineRoute =
+  AuthenticatedPatientTimelineRouteImport.update({
+    id: '/timeline',
+    path: '/timeline',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientUploadPrescriptionRoute =
+  AuthenticatedPatientUploadPrescriptionRouteImport.update({
+    id: '/upload-prescription',
+    path: '/upload-prescription',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPatientUploadReportRoute =
+  AuthenticatedPatientUploadReportRouteImport.update({
+    id: '/upload-report',
+    path: '/upload-report',
+    getParentRoute: () => AuthenticatedPatientRouteRoute,
+  } as any)
+const AuthenticatedPharmacyAnalyticsRoute =
+  AuthenticatedPharmacyAnalyticsRouteImport.update({
+    id: '/analytics',
+    path: '/analytics',
+    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
+  } as any)
+const AuthenticatedPharmacyCustomersRoute =
+  AuthenticatedPharmacyCustomersRouteImport.update({
+    id: '/customers',
+    path: '/customers',
+    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
+  } as any)
+const AuthenticatedPharmacyDashboardRoute =
+  AuthenticatedPharmacyDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
+  } as any)
+const AuthenticatedPharmacyDeliveryRoute =
+  AuthenticatedPharmacyDeliveryRouteImport.update({
+    id: '/delivery',
+    path: '/delivery',
+    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
+  } as any)
+const AuthenticatedPharmacyInventoryRoute =
+  AuthenticatedPharmacyInventoryRouteImport.update({
+    id: '/inventory',
+    path: '/inventory',
+    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
+  } as any)
+const AuthenticatedPharmacyOrdersRoute =
+  AuthenticatedPharmacyOrdersRouteImport.update({
+    id: '/orders',
+    path: '/orders',
+    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
+  } as any)
+const AuthenticatedPharmacyPaymentsRoute =
+  AuthenticatedPharmacyPaymentsRouteImport.update({
+    id: '/payments',
+    path: '/payments',
+    getParentRoute: () => AuthenticatedPharmacyRouteRoute,
   } as any)
 const AuthenticatedAdminUsersUserIdRoute =
   AuthenticatedAdminUsersUserIdRouteImport.update({
@@ -1152,109 +1152,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/partners': {
-      id: '/partners'
-      path: '/partners'
-      fullPath: '/partners'
-      preLoaderRoute: typeof PartnersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hospital-login': {
-      id: '/hospital-login'
-      path: '/hospital-login'
-      fullPath: '/hospital-login'
-      preLoaderRoute: typeof HospitalLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/features': {
-      id: '/features'
-      path: '/features'
-      fullPath: '/features'
-      preLoaderRoute: typeof FeaturesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/careers': {
-      id: '/careers'
-      path: '/careers'
-      fullPath: '/careers'
-      preLoaderRoute: typeof CareersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -1264,46 +1166,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/$kind': {
-      id: '/demo/$kind'
-      path: '/demo/$kind'
-      fullPath: '/demo/$kind'
-      preLoaderRoute: typeof DemoKindRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/pharmacy': {
-      id: '/_authenticated/pharmacy'
-      path: '/pharmacy'
-      fullPath: '/pharmacy'
-      preLoaderRoute: typeof AuthenticatedPharmacyRouteRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/patient': {
-      id: '/_authenticated/patient'
-      path: '/patient'
-      fullPath: '/patient'
-      preLoaderRoute: typeof AuthenticatedPatientRouteRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/lab': {
-      id: '/_authenticated/lab'
-      path: '/lab'
-      fullPath: '/lab'
-      preLoaderRoute: typeof AuthenticatedLabRouteRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/hospital': {
-      id: '/_authenticated/hospital'
-      path: '/hospital'
-      fullPath: '/hospital'
-      preLoaderRoute: typeof AuthenticatedHospitalRouteRouteImport
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hospital-login': {
+      id: '/hospital-login'
+      path: '/hospital-login'
+      fullPath: '/hospital-login'
+      preLoaderRoute: typeof HospitalLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/doctor': {
@@ -1313,431 +1285,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDoctorRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
+    '/_authenticated/hospital': {
+      id: '/_authenticated/hospital'
+      path: '/hospital'
+      fullPath: '/hospital'
+      preLoaderRoute: typeof AuthenticatedHospitalRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/pharmacy/payments': {
-      id: '/_authenticated/pharmacy/payments'
-      path: '/payments'
-      fullPath: '/pharmacy/payments'
-      preLoaderRoute: typeof AuthenticatedPharmacyPaymentsRouteImport
-      parentRoute: typeof AuthenticatedPharmacyRouteRoute
+    '/_authenticated/lab': {
+      id: '/_authenticated/lab'
+      path: '/lab'
+      fullPath: '/lab'
+      preLoaderRoute: typeof AuthenticatedLabRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/pharmacy/orders': {
-      id: '/_authenticated/pharmacy/orders'
-      path: '/orders'
-      fullPath: '/pharmacy/orders'
-      preLoaderRoute: typeof AuthenticatedPharmacyOrdersRouteImport
-      parentRoute: typeof AuthenticatedPharmacyRouteRoute
+    '/_authenticated/patient': {
+      id: '/_authenticated/patient'
+      path: '/patient'
+      fullPath: '/patient'
+      preLoaderRoute: typeof AuthenticatedPatientRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/pharmacy/inventory': {
-      id: '/_authenticated/pharmacy/inventory'
-      path: '/inventory'
-      fullPath: '/pharmacy/inventory'
-      preLoaderRoute: typeof AuthenticatedPharmacyInventoryRouteImport
-      parentRoute: typeof AuthenticatedPharmacyRouteRoute
-    }
-    '/_authenticated/pharmacy/delivery': {
-      id: '/_authenticated/pharmacy/delivery'
-      path: '/delivery'
-      fullPath: '/pharmacy/delivery'
-      preLoaderRoute: typeof AuthenticatedPharmacyDeliveryRouteImport
-      parentRoute: typeof AuthenticatedPharmacyRouteRoute
-    }
-    '/_authenticated/pharmacy/dashboard': {
-      id: '/_authenticated/pharmacy/dashboard'
-      path: '/dashboard'
-      fullPath: '/pharmacy/dashboard'
-      preLoaderRoute: typeof AuthenticatedPharmacyDashboardRouteImport
-      parentRoute: typeof AuthenticatedPharmacyRouteRoute
-    }
-    '/_authenticated/pharmacy/customers': {
-      id: '/_authenticated/pharmacy/customers'
-      path: '/customers'
-      fullPath: '/pharmacy/customers'
-      preLoaderRoute: typeof AuthenticatedPharmacyCustomersRouteImport
-      parentRoute: typeof AuthenticatedPharmacyRouteRoute
-    }
-    '/_authenticated/pharmacy/analytics': {
-      id: '/_authenticated/pharmacy/analytics'
-      path: '/analytics'
-      fullPath: '/pharmacy/analytics'
-      preLoaderRoute: typeof AuthenticatedPharmacyAnalyticsRouteImport
-      parentRoute: typeof AuthenticatedPharmacyRouteRoute
-    }
-    '/_authenticated/patient/upload-report': {
-      id: '/_authenticated/patient/upload-report'
-      path: '/upload-report'
-      fullPath: '/patient/upload-report'
-      preLoaderRoute: typeof AuthenticatedPatientUploadReportRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/upload-prescription': {
-      id: '/_authenticated/patient/upload-prescription'
-      path: '/upload-prescription'
-      fullPath: '/patient/upload-prescription'
-      preLoaderRoute: typeof AuthenticatedPatientUploadPrescriptionRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/timeline': {
-      id: '/_authenticated/patient/timeline'
-      path: '/timeline'
-      fullPath: '/patient/timeline'
-      preLoaderRoute: typeof AuthenticatedPatientTimelineRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/support': {
-      id: '/_authenticated/patient/support'
-      path: '/support'
-      fullPath: '/patient/support'
-      preLoaderRoute: typeof AuthenticatedPatientSupportRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/search': {
-      id: '/_authenticated/patient/search'
-      path: '/search'
-      fullPath: '/patient/search'
-      preLoaderRoute: typeof AuthenticatedPatientSearchRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/reminders': {
-      id: '/_authenticated/patient/reminders'
-      path: '/reminders'
-      fullPath: '/patient/reminders'
-      preLoaderRoute: typeof AuthenticatedPatientRemindersRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/records': {
-      id: '/_authenticated/patient/records'
-      path: '/records'
-      fullPath: '/patient/records'
-      preLoaderRoute: typeof AuthenticatedPatientRecordsRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/profile': {
-      id: '/_authenticated/patient/profile'
-      path: '/profile'
-      fullPath: '/patient/profile'
-      preLoaderRoute: typeof AuthenticatedPatientProfileRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/orders': {
-      id: '/_authenticated/patient/orders'
-      path: '/orders'
-      fullPath: '/patient/orders'
-      preLoaderRoute: typeof AuthenticatedPatientOrdersRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/medicine': {
-      id: '/_authenticated/patient/medicine'
-      path: '/medicine'
-      fullPath: '/patient/medicine'
-      preLoaderRoute: typeof AuthenticatedPatientMedicineRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/labs': {
-      id: '/_authenticated/patient/labs'
-      path: '/labs'
-      fullPath: '/patient/labs'
-      preLoaderRoute: typeof AuthenticatedPatientLabsRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/hospitals': {
-      id: '/_authenticated/patient/hospitals'
-      path: '/hospitals'
-      fullPath: '/patient/hospitals'
-      preLoaderRoute: typeof AuthenticatedPatientHospitalsRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/emergency': {
-      id: '/_authenticated/patient/emergency'
-      path: '/emergency'
-      fullPath: '/patient/emergency'
-      preLoaderRoute: typeof AuthenticatedPatientEmergencyRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/doctors': {
-      id: '/_authenticated/patient/doctors'
-      path: '/doctors'
-      fullPath: '/patient/doctors'
-      preLoaderRoute: typeof AuthenticatedPatientDoctorsRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/dashboard': {
-      id: '/_authenticated/patient/dashboard'
-      path: '/dashboard'
-      fullPath: '/patient/dashboard'
-      preLoaderRoute: typeof AuthenticatedPatientDashboardRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/appointments': {
-      id: '/_authenticated/patient/appointments'
-      path: '/appointments'
-      fullPath: '/patient/appointments'
-      preLoaderRoute: typeof AuthenticatedPatientAppointmentsRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/patient/ai-assistant': {
-      id: '/_authenticated/patient/ai-assistant'
-      path: '/ai-assistant'
-      fullPath: '/patient/ai-assistant'
-      preLoaderRoute: typeof AuthenticatedPatientAiAssistantRouteImport
-      parentRoute: typeof AuthenticatedPatientRouteRoute
-    }
-    '/_authenticated/lab/reports': {
-      id: '/_authenticated/lab/reports'
-      path: '/reports'
-      fullPath: '/lab/reports'
-      preLoaderRoute: typeof AuthenticatedLabReportsRouteImport
-      parentRoute: typeof AuthenticatedLabRouteRoute
-    }
-    '/_authenticated/lab/payments': {
-      id: '/_authenticated/lab/payments'
-      path: '/payments'
-      fullPath: '/lab/payments'
-      preLoaderRoute: typeof AuthenticatedLabPaymentsRouteImport
-      parentRoute: typeof AuthenticatedLabRouteRoute
-    }
-    '/_authenticated/lab/dashboard': {
-      id: '/_authenticated/lab/dashboard'
-      path: '/dashboard'
-      fullPath: '/lab/dashboard'
-      preLoaderRoute: typeof AuthenticatedLabDashboardRouteImport
-      parentRoute: typeof AuthenticatedLabRouteRoute
-    }
-    '/_authenticated/lab/collection': {
-      id: '/_authenticated/lab/collection'
-      path: '/collection'
-      fullPath: '/lab/collection'
-      preLoaderRoute: typeof AuthenticatedLabCollectionRouteImport
-      parentRoute: typeof AuthenticatedLabRouteRoute
-    }
-    '/_authenticated/lab/bookings': {
-      id: '/_authenticated/lab/bookings'
-      path: '/bookings'
-      fullPath: '/lab/bookings'
-      preLoaderRoute: typeof AuthenticatedLabBookingsRouteImport
-      parentRoute: typeof AuthenticatedLabRouteRoute
-    }
-    '/_authenticated/hospital/staff': {
-      id: '/_authenticated/hospital/staff'
-      path: '/staff'
-      fullPath: '/hospital/staff'
-      preLoaderRoute: typeof AuthenticatedHospitalStaffRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/settings': {
-      id: '/_authenticated/hospital/settings'
-      path: '/settings'
-      fullPath: '/hospital/settings'
-      preLoaderRoute: typeof AuthenticatedHospitalSettingsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/reviews': {
-      id: '/_authenticated/hospital/reviews'
-      path: '/reviews'
-      fullPath: '/hospital/reviews'
-      preLoaderRoute: typeof AuthenticatedHospitalReviewsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/records': {
-      id: '/_authenticated/hospital/records'
-      path: '/records'
-      fullPath: '/hospital/records'
-      preLoaderRoute: typeof AuthenticatedHospitalRecordsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/profile': {
-      id: '/_authenticated/hospital/profile'
-      path: '/profile'
-      fullPath: '/hospital/profile'
-      preLoaderRoute: typeof AuthenticatedHospitalProfileRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/pharmacy': {
-      id: '/_authenticated/hospital/pharmacy'
+    '/_authenticated/pharmacy': {
+      id: '/_authenticated/pharmacy'
       path: '/pharmacy'
-      fullPath: '/hospital/pharmacy'
-      preLoaderRoute: typeof AuthenticatedHospitalPharmacyRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
+      fullPath: '/pharmacy'
+      preLoaderRoute: typeof AuthenticatedPharmacyRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/hospital/patients': {
-      id: '/_authenticated/hospital/patients'
-      path: '/patients'
-      fullPath: '/hospital/patients'
-      preLoaderRoute: typeof AuthenticatedHospitalPatientsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    '/demo/$kind': {
+      id: '/demo/$kind'
+      path: '/demo/$kind'
+      fullPath: '/demo/$kind'
+      preLoaderRoute: typeof DemoKindRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/hospital/notifications': {
-      id: '/_authenticated/hospital/notifications'
-      path: '/notifications'
-      fullPath: '/hospital/notifications'
-      preLoaderRoute: typeof AuthenticatedHospitalNotificationsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/laboratory': {
-      id: '/_authenticated/hospital/laboratory'
-      path: '/laboratory'
-      fullPath: '/hospital/laboratory'
-      preLoaderRoute: typeof AuthenticatedHospitalLaboratoryRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/emergency': {
-      id: '/_authenticated/hospital/emergency'
-      path: '/emergency'
-      fullPath: '/hospital/emergency'
-      preLoaderRoute: typeof AuthenticatedHospitalEmergencyRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/doctors': {
-      id: '/_authenticated/hospital/doctors'
-      path: '/doctors'
-      fullPath: '/hospital/doctors'
-      preLoaderRoute: typeof AuthenticatedHospitalDoctorsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/departments': {
-      id: '/_authenticated/hospital/departments'
-      path: '/departments'
-      fullPath: '/hospital/departments'
-      preLoaderRoute: typeof AuthenticatedHospitalDepartmentsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/dashboard': {
-      id: '/_authenticated/hospital/dashboard'
+    '/_authenticated/admin/dashboard': {
+      id: '/_authenticated/admin/dashboard'
       path: '/dashboard'
-      fullPath: '/hospital/dashboard'
-      preLoaderRoute: typeof AuthenticatedHospitalDashboardRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/billing': {
-      id: '/_authenticated/hospital/billing'
-      path: '/billing'
-      fullPath: '/hospital/billing'
-      preLoaderRoute: typeof AuthenticatedHospitalBillingRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/beds': {
-      id: '/_authenticated/hospital/beds'
-      path: '/beds'
-      fullPath: '/hospital/beds'
-      preLoaderRoute: typeof AuthenticatedHospitalBedsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/appointments': {
-      id: '/_authenticated/hospital/appointments'
-      path: '/appointments'
-      fullPath: '/hospital/appointments'
-      preLoaderRoute: typeof AuthenticatedHospitalAppointmentsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/analytics': {
-      id: '/_authenticated/hospital/analytics'
-      path: '/analytics'
-      fullPath: '/hospital/analytics'
-      preLoaderRoute: typeof AuthenticatedHospitalAnalyticsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/hospital/admissions': {
-      id: '/_authenticated/hospital/admissions'
-      path: '/admissions'
-      fullPath: '/hospital/admissions'
-      preLoaderRoute: typeof AuthenticatedHospitalAdmissionsRouteImport
-      parentRoute: typeof AuthenticatedHospitalRouteRoute
-    }
-    '/_authenticated/doctor/video': {
-      id: '/_authenticated/doctor/video'
-      path: '/video'
-      fullPath: '/doctor/video'
-      preLoaderRoute: typeof AuthenticatedDoctorVideoRouteImport
-      parentRoute: typeof AuthenticatedDoctorRouteRoute
-    }
-    '/_authenticated/doctor/profile': {
-      id: '/_authenticated/doctor/profile'
-      path: '/profile'
-      fullPath: '/doctor/profile'
-      preLoaderRoute: typeof AuthenticatedDoctorProfileRouteImport
-      parentRoute: typeof AuthenticatedDoctorRouteRoute
-    }
-    '/_authenticated/doctor/prescriptions': {
-      id: '/_authenticated/doctor/prescriptions'
-      path: '/prescriptions'
-      fullPath: '/doctor/prescriptions'
-      preLoaderRoute: typeof AuthenticatedDoctorPrescriptionsRouteImport
-      parentRoute: typeof AuthenticatedDoctorRouteRoute
-    }
-    '/_authenticated/doctor/patients': {
-      id: '/_authenticated/doctor/patients'
-      path: '/patients'
-      fullPath: '/doctor/patients'
-      preLoaderRoute: typeof AuthenticatedDoctorPatientsRouteImport
-      parentRoute: typeof AuthenticatedDoctorRouteRoute
-    }
-    '/_authenticated/doctor/earnings': {
-      id: '/_authenticated/doctor/earnings'
-      path: '/earnings'
-      fullPath: '/doctor/earnings'
-      preLoaderRoute: typeof AuthenticatedDoctorEarningsRouteImport
-      parentRoute: typeof AuthenticatedDoctorRouteRoute
-    }
-    '/_authenticated/doctor/dashboard': {
-      id: '/_authenticated/doctor/dashboard'
-      path: '/dashboard'
-      fullPath: '/doctor/dashboard'
-      preLoaderRoute: typeof AuthenticatedDoctorDashboardRouteImport
-      parentRoute: typeof AuthenticatedDoctorRouteRoute
-    }
-    '/_authenticated/doctor/calendar': {
-      id: '/_authenticated/doctor/calendar'
-      path: '/calendar'
-      fullPath: '/doctor/calendar'
-      preLoaderRoute: typeof AuthenticatedDoctorCalendarRouteImport
-      parentRoute: typeof AuthenticatedDoctorRouteRoute
-    }
-    '/_authenticated/admin/users': {
-      id: '/_authenticated/admin/users'
-      path: '/users'
-      fullPath: '/admin/users'
-      preLoaderRoute: typeof AuthenticatedAdminUsersRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/tests': {
-      id: '/_authenticated/admin/tests'
-      path: '/tests'
-      fullPath: '/admin/tests'
-      preLoaderRoute: typeof AuthenticatedAdminTestsRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/pharmacies': {
-      id: '/_authenticated/admin/pharmacies'
-      path: '/pharmacies'
-      fullPath: '/admin/pharmacies'
-      preLoaderRoute: typeof AuthenticatedAdminPharmaciesRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/medicines': {
-      id: '/_authenticated/admin/medicines'
-      path: '/medicines'
-      fullPath: '/admin/medicines'
-      preLoaderRoute: typeof AuthenticatedAdminMedicinesRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/labs': {
-      id: '/_authenticated/admin/labs'
-      path: '/labs'
-      fullPath: '/admin/labs'
-      preLoaderRoute: typeof AuthenticatedAdminLabsRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/hospitals': {
-      id: '/_authenticated/admin/hospitals'
-      path: '/hospitals'
-      fullPath: '/admin/hospitals'
-      preLoaderRoute: typeof AuthenticatedAdminHospitalsRouteImport
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/doctors': {
@@ -1747,12 +1334,425 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminDoctorsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
-    '/_authenticated/admin/dashboard': {
-      id: '/_authenticated/admin/dashboard'
-      path: '/dashboard'
-      fullPath: '/admin/dashboard'
-      preLoaderRoute: typeof AuthenticatedAdminDashboardRouteImport
+    '/_authenticated/admin/hospitals': {
+      id: '/_authenticated/admin/hospitals'
+      path: '/hospitals'
+      fullPath: '/admin/hospitals'
+      preLoaderRoute: typeof AuthenticatedAdminHospitalsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/labs': {
+      id: '/_authenticated/admin/labs'
+      path: '/labs'
+      fullPath: '/admin/labs'
+      preLoaderRoute: typeof AuthenticatedAdminLabsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/medicines': {
+      id: '/_authenticated/admin/medicines'
+      path: '/medicines'
+      fullPath: '/admin/medicines'
+      preLoaderRoute: typeof AuthenticatedAdminMedicinesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/pharmacies': {
+      id: '/_authenticated/admin/pharmacies'
+      path: '/pharmacies'
+      fullPath: '/admin/pharmacies'
+      preLoaderRoute: typeof AuthenticatedAdminPharmaciesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/tests': {
+      id: '/_authenticated/admin/tests'
+      path: '/tests'
+      fullPath: '/admin/tests'
+      preLoaderRoute: typeof AuthenticatedAdminTestsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/users': {
+      id: '/_authenticated/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AuthenticatedAdminUsersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/doctor/calendar': {
+      id: '/_authenticated/doctor/calendar'
+      path: '/calendar'
+      fullPath: '/doctor/calendar'
+      preLoaderRoute: typeof AuthenticatedDoctorCalendarRouteImport
+      parentRoute: typeof AuthenticatedDoctorRouteRoute
+    }
+    '/_authenticated/doctor/dashboard': {
+      id: '/_authenticated/doctor/dashboard'
+      path: '/dashboard'
+      fullPath: '/doctor/dashboard'
+      preLoaderRoute: typeof AuthenticatedDoctorDashboardRouteImport
+      parentRoute: typeof AuthenticatedDoctorRouteRoute
+    }
+    '/_authenticated/doctor/earnings': {
+      id: '/_authenticated/doctor/earnings'
+      path: '/earnings'
+      fullPath: '/doctor/earnings'
+      preLoaderRoute: typeof AuthenticatedDoctorEarningsRouteImport
+      parentRoute: typeof AuthenticatedDoctorRouteRoute
+    }
+    '/_authenticated/doctor/patients': {
+      id: '/_authenticated/doctor/patients'
+      path: '/patients'
+      fullPath: '/doctor/patients'
+      preLoaderRoute: typeof AuthenticatedDoctorPatientsRouteImport
+      parentRoute: typeof AuthenticatedDoctorRouteRoute
+    }
+    '/_authenticated/doctor/prescriptions': {
+      id: '/_authenticated/doctor/prescriptions'
+      path: '/prescriptions'
+      fullPath: '/doctor/prescriptions'
+      preLoaderRoute: typeof AuthenticatedDoctorPrescriptionsRouteImport
+      parentRoute: typeof AuthenticatedDoctorRouteRoute
+    }
+    '/_authenticated/doctor/profile': {
+      id: '/_authenticated/doctor/profile'
+      path: '/profile'
+      fullPath: '/doctor/profile'
+      preLoaderRoute: typeof AuthenticatedDoctorProfileRouteImport
+      parentRoute: typeof AuthenticatedDoctorRouteRoute
+    }
+    '/_authenticated/doctor/video': {
+      id: '/_authenticated/doctor/video'
+      path: '/video'
+      fullPath: '/doctor/video'
+      preLoaderRoute: typeof AuthenticatedDoctorVideoRouteImport
+      parentRoute: typeof AuthenticatedDoctorRouteRoute
+    }
+    '/_authenticated/hospital/admissions': {
+      id: '/_authenticated/hospital/admissions'
+      path: '/admissions'
+      fullPath: '/hospital/admissions'
+      preLoaderRoute: typeof AuthenticatedHospitalAdmissionsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/analytics': {
+      id: '/_authenticated/hospital/analytics'
+      path: '/analytics'
+      fullPath: '/hospital/analytics'
+      preLoaderRoute: typeof AuthenticatedHospitalAnalyticsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/appointments': {
+      id: '/_authenticated/hospital/appointments'
+      path: '/appointments'
+      fullPath: '/hospital/appointments'
+      preLoaderRoute: typeof AuthenticatedHospitalAppointmentsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/beds': {
+      id: '/_authenticated/hospital/beds'
+      path: '/beds'
+      fullPath: '/hospital/beds'
+      preLoaderRoute: typeof AuthenticatedHospitalBedsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/billing': {
+      id: '/_authenticated/hospital/billing'
+      path: '/billing'
+      fullPath: '/hospital/billing'
+      preLoaderRoute: typeof AuthenticatedHospitalBillingRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/dashboard': {
+      id: '/_authenticated/hospital/dashboard'
+      path: '/dashboard'
+      fullPath: '/hospital/dashboard'
+      preLoaderRoute: typeof AuthenticatedHospitalDashboardRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/departments': {
+      id: '/_authenticated/hospital/departments'
+      path: '/departments'
+      fullPath: '/hospital/departments'
+      preLoaderRoute: typeof AuthenticatedHospitalDepartmentsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/doctors': {
+      id: '/_authenticated/hospital/doctors'
+      path: '/doctors'
+      fullPath: '/hospital/doctors'
+      preLoaderRoute: typeof AuthenticatedHospitalDoctorsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/emergency': {
+      id: '/_authenticated/hospital/emergency'
+      path: '/emergency'
+      fullPath: '/hospital/emergency'
+      preLoaderRoute: typeof AuthenticatedHospitalEmergencyRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/laboratory': {
+      id: '/_authenticated/hospital/laboratory'
+      path: '/laboratory'
+      fullPath: '/hospital/laboratory'
+      preLoaderRoute: typeof AuthenticatedHospitalLaboratoryRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/notifications': {
+      id: '/_authenticated/hospital/notifications'
+      path: '/notifications'
+      fullPath: '/hospital/notifications'
+      preLoaderRoute: typeof AuthenticatedHospitalNotificationsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/patients': {
+      id: '/_authenticated/hospital/patients'
+      path: '/patients'
+      fullPath: '/hospital/patients'
+      preLoaderRoute: typeof AuthenticatedHospitalPatientsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/pharmacy': {
+      id: '/_authenticated/hospital/pharmacy'
+      path: '/pharmacy'
+      fullPath: '/hospital/pharmacy'
+      preLoaderRoute: typeof AuthenticatedHospitalPharmacyRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/profile': {
+      id: '/_authenticated/hospital/profile'
+      path: '/profile'
+      fullPath: '/hospital/profile'
+      preLoaderRoute: typeof AuthenticatedHospitalProfileRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/records': {
+      id: '/_authenticated/hospital/records'
+      path: '/records'
+      fullPath: '/hospital/records'
+      preLoaderRoute: typeof AuthenticatedHospitalRecordsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/reviews': {
+      id: '/_authenticated/hospital/reviews'
+      path: '/reviews'
+      fullPath: '/hospital/reviews'
+      preLoaderRoute: typeof AuthenticatedHospitalReviewsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/settings': {
+      id: '/_authenticated/hospital/settings'
+      path: '/settings'
+      fullPath: '/hospital/settings'
+      preLoaderRoute: typeof AuthenticatedHospitalSettingsRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/hospital/staff': {
+      id: '/_authenticated/hospital/staff'
+      path: '/staff'
+      fullPath: '/hospital/staff'
+      preLoaderRoute: typeof AuthenticatedHospitalStaffRouteImport
+      parentRoute: typeof AuthenticatedHospitalRouteRoute
+    }
+    '/_authenticated/lab/bookings': {
+      id: '/_authenticated/lab/bookings'
+      path: '/bookings'
+      fullPath: '/lab/bookings'
+      preLoaderRoute: typeof AuthenticatedLabBookingsRouteImport
+      parentRoute: typeof AuthenticatedLabRouteRoute
+    }
+    '/_authenticated/lab/collection': {
+      id: '/_authenticated/lab/collection'
+      path: '/collection'
+      fullPath: '/lab/collection'
+      preLoaderRoute: typeof AuthenticatedLabCollectionRouteImport
+      parentRoute: typeof AuthenticatedLabRouteRoute
+    }
+    '/_authenticated/lab/dashboard': {
+      id: '/_authenticated/lab/dashboard'
+      path: '/dashboard'
+      fullPath: '/lab/dashboard'
+      preLoaderRoute: typeof AuthenticatedLabDashboardRouteImport
+      parentRoute: typeof AuthenticatedLabRouteRoute
+    }
+    '/_authenticated/lab/payments': {
+      id: '/_authenticated/lab/payments'
+      path: '/payments'
+      fullPath: '/lab/payments'
+      preLoaderRoute: typeof AuthenticatedLabPaymentsRouteImport
+      parentRoute: typeof AuthenticatedLabRouteRoute
+    }
+    '/_authenticated/lab/reports': {
+      id: '/_authenticated/lab/reports'
+      path: '/reports'
+      fullPath: '/lab/reports'
+      preLoaderRoute: typeof AuthenticatedLabReportsRouteImport
+      parentRoute: typeof AuthenticatedLabRouteRoute
+    }
+    '/_authenticated/patient/ai-assistant': {
+      id: '/_authenticated/patient/ai-assistant'
+      path: '/ai-assistant'
+      fullPath: '/patient/ai-assistant'
+      preLoaderRoute: typeof AuthenticatedPatientAiAssistantRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/appointments': {
+      id: '/_authenticated/patient/appointments'
+      path: '/appointments'
+      fullPath: '/patient/appointments'
+      preLoaderRoute: typeof AuthenticatedPatientAppointmentsRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/dashboard': {
+      id: '/_authenticated/patient/dashboard'
+      path: '/dashboard'
+      fullPath: '/patient/dashboard'
+      preLoaderRoute: typeof AuthenticatedPatientDashboardRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/doctors': {
+      id: '/_authenticated/patient/doctors'
+      path: '/doctors'
+      fullPath: '/patient/doctors'
+      preLoaderRoute: typeof AuthenticatedPatientDoctorsRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/emergency': {
+      id: '/_authenticated/patient/emergency'
+      path: '/emergency'
+      fullPath: '/patient/emergency'
+      preLoaderRoute: typeof AuthenticatedPatientEmergencyRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/hospitals': {
+      id: '/_authenticated/patient/hospitals'
+      path: '/hospitals'
+      fullPath: '/patient/hospitals'
+      preLoaderRoute: typeof AuthenticatedPatientHospitalsRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/labs': {
+      id: '/_authenticated/patient/labs'
+      path: '/labs'
+      fullPath: '/patient/labs'
+      preLoaderRoute: typeof AuthenticatedPatientLabsRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/medicine': {
+      id: '/_authenticated/patient/medicine'
+      path: '/medicine'
+      fullPath: '/patient/medicine'
+      preLoaderRoute: typeof AuthenticatedPatientMedicineRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/orders': {
+      id: '/_authenticated/patient/orders'
+      path: '/orders'
+      fullPath: '/patient/orders'
+      preLoaderRoute: typeof AuthenticatedPatientOrdersRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/profile': {
+      id: '/_authenticated/patient/profile'
+      path: '/profile'
+      fullPath: '/patient/profile'
+      preLoaderRoute: typeof AuthenticatedPatientProfileRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/records': {
+      id: '/_authenticated/patient/records'
+      path: '/records'
+      fullPath: '/patient/records'
+      preLoaderRoute: typeof AuthenticatedPatientRecordsRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/reminders': {
+      id: '/_authenticated/patient/reminders'
+      path: '/reminders'
+      fullPath: '/patient/reminders'
+      preLoaderRoute: typeof AuthenticatedPatientRemindersRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/search': {
+      id: '/_authenticated/patient/search'
+      path: '/search'
+      fullPath: '/patient/search'
+      preLoaderRoute: typeof AuthenticatedPatientSearchRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/support': {
+      id: '/_authenticated/patient/support'
+      path: '/support'
+      fullPath: '/patient/support'
+      preLoaderRoute: typeof AuthenticatedPatientSupportRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/timeline': {
+      id: '/_authenticated/patient/timeline'
+      path: '/timeline'
+      fullPath: '/patient/timeline'
+      preLoaderRoute: typeof AuthenticatedPatientTimelineRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/upload-prescription': {
+      id: '/_authenticated/patient/upload-prescription'
+      path: '/upload-prescription'
+      fullPath: '/patient/upload-prescription'
+      preLoaderRoute: typeof AuthenticatedPatientUploadPrescriptionRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/patient/upload-report': {
+      id: '/_authenticated/patient/upload-report'
+      path: '/upload-report'
+      fullPath: '/patient/upload-report'
+      preLoaderRoute: typeof AuthenticatedPatientUploadReportRouteImport
+      parentRoute: typeof AuthenticatedPatientRouteRoute
+    }
+    '/_authenticated/pharmacy/analytics': {
+      id: '/_authenticated/pharmacy/analytics'
+      path: '/analytics'
+      fullPath: '/pharmacy/analytics'
+      preLoaderRoute: typeof AuthenticatedPharmacyAnalyticsRouteImport
+      parentRoute: typeof AuthenticatedPharmacyRouteRoute
+    }
+    '/_authenticated/pharmacy/customers': {
+      id: '/_authenticated/pharmacy/customers'
+      path: '/customers'
+      fullPath: '/pharmacy/customers'
+      preLoaderRoute: typeof AuthenticatedPharmacyCustomersRouteImport
+      parentRoute: typeof AuthenticatedPharmacyRouteRoute
+    }
+    '/_authenticated/pharmacy/dashboard': {
+      id: '/_authenticated/pharmacy/dashboard'
+      path: '/dashboard'
+      fullPath: '/pharmacy/dashboard'
+      preLoaderRoute: typeof AuthenticatedPharmacyDashboardRouteImport
+      parentRoute: typeof AuthenticatedPharmacyRouteRoute
+    }
+    '/_authenticated/pharmacy/delivery': {
+      id: '/_authenticated/pharmacy/delivery'
+      path: '/delivery'
+      fullPath: '/pharmacy/delivery'
+      preLoaderRoute: typeof AuthenticatedPharmacyDeliveryRouteImport
+      parentRoute: typeof AuthenticatedPharmacyRouteRoute
+    }
+    '/_authenticated/pharmacy/inventory': {
+      id: '/_authenticated/pharmacy/inventory'
+      path: '/inventory'
+      fullPath: '/pharmacy/inventory'
+      preLoaderRoute: typeof AuthenticatedPharmacyInventoryRouteImport
+      parentRoute: typeof AuthenticatedPharmacyRouteRoute
+    }
+    '/_authenticated/pharmacy/orders': {
+      id: '/_authenticated/pharmacy/orders'
+      path: '/orders'
+      fullPath: '/pharmacy/orders'
+      preLoaderRoute: typeof AuthenticatedPharmacyOrdersRouteImport
+      parentRoute: typeof AuthenticatedPharmacyRouteRoute
+    }
+    '/_authenticated/pharmacy/payments': {
+      id: '/_authenticated/pharmacy/payments'
+      path: '/payments'
+      fullPath: '/pharmacy/payments'
+      preLoaderRoute: typeof AuthenticatedPharmacyPaymentsRouteImport
+      parentRoute: typeof AuthenticatedPharmacyRouteRoute
     }
     '/_authenticated/admin/users/$userId': {
       id: '/_authenticated/admin/users/$userId'
