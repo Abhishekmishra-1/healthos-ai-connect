@@ -1,0 +1,5 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { PortalDataView, SimpleStatus } from "@/components/hospital/portal-data-view";
+import { hospitalStaff } from "@/lib/hospital-portal-data";
+export const Route = createFileRoute("/_authenticated/hospital/staff")({ component: HospitalStaff });
+function HospitalStaff() { return <PortalDataView title="Staff & roles" description="Manage the people who keep every shift running smoothly." rows={hospitalStaff.map((person, index) => ({ ...person, id: `staff-${index}` }))} addLabel="Add staff member" columns={[{ key: "name", label: "Staff member", render: (row) => <div><p className="font-semibold">{row.name}</p><p className="text-xs text-muted-foreground">{row.role}</p></div> }, { key: "department", label: "Department" }, { key: "schedule", label: "Schedule" }, { key: "status", label: "Status", render: (row) => <SimpleStatus status={row.status} /> }]} onAdd={() => undefined} />; }
