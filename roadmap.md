@@ -1,0 +1,6 @@
+- [ ] Confirm existing auth/role and provider catalog behavior; reconcile requested routes with current routes.
+- [ ] Add secure provider profiles, verification workflow, private document access, and lab test catalog storage.
+- [ ] Build doctor onboarding/dashboard and profile editing.
+- [ ] Build laboratory onboarding/dashboard and test management; preserve `/lab` compatibility.
+- [ ] Add admin review actions and approved-only patient discovery.
+- [ ] Verify role isolation, provider workflows, build, and available signed-in flows; report blockers honestly.

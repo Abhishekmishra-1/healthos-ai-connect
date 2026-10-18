@@ -1,46 +1,18 @@
+# MEDOOGLE AI role authentication and provider portals
 
-This is a very large scope — realistically 3–4 weeks of engineering. I'll break it into shippable phases so we can validate each before piling on the next. Please confirm the phase order (or tell me to compress).
+## Goal
+Repair role-based login and access without removing existing patient features, then add secure doctor and laboratory onboarding, profile verification, and laboratory test management.
 
-## Phase 1 — Foundation (this turn)
-- Enable Lovable Cloud (Supabase-backed auth, DB, storage).
-- Auth: email/password + Google sign-in. Public `/auth` route. Managed `_authenticated` layout.
-- DB schema + RLS + storage buckets (private) for:
-  - `profiles` (patient info)
-  - `prescriptions` (file + extracted JSON)
-  - `lab_reports` (file + extracted JSON)
-  - `medicine_reminders` (name, dose, schedule, before/after food)
-  - `health_events` (timeline entries)
-  - `user_roles` + `has_role()` (patient / pharmacy / admin)
-- Storage buckets: `prescriptions`, `lab-reports` — private, per-user path policies.
+## Work
+1. **Trace and align access:** Confirm current auth and database behavior; make role redirects derive only from assigned database roles, cover all existing roles, preserve existing URLs, and enforce doctor/laboratory/admin boundaries in route guards and database policies.
+2. **Provider data and private files:** Add doctor profiles, laboratory profiles, and laboratory-owned test records with account ownership, draft/submission/approval/rejection states, public visibility only after approval, and narrowly scoped row access. Set up private verification-document storage with per-owner/admin access and upload limits/type validation.
+3. **Doctor portal:** Add separate registration entry and a sectioned profile workflow, draft save, verification submission, completion/status display, edit/resubmit, rejection reason, public preview, and logout while keeping appointments out unless already connected.
+4. **Laboratory portal:** Add separate registration entry and dashboard for profile setup, verification documents, collection availability, and laboratory-owned test create/edit/search/activation and public preview. Preserve `/lab` and provide the requested `/laboratory` destination.
+5. **Admin and patient surfaces:** Add secure review/approve/reject/request-correction and listing activation controls; only approved active providers/tests appear in patient discovery with public fees/prices.
+6. **Verify:** Run the relevant tests, review build/runtime signals, and exercise available public/authenticated flows. Report which real backend scenarios could not be exercised if no suitable account/session is available.
 
-## Phase 2 — Patient app
-Routes under `_authenticated/`:
-- `/app` Dashboard: latest prescription card, latest report card, next reminder, AI insights strip, big red Emergency button (tel: 108 + share location).
-- `/app/upload-prescription` — upload → server fn calls Lovable AI (Gemini vision) → extract medicines, dosage, food timing, side effects (plain English) + disclaimer. Save file + JSON.
-- `/app/upload-report` — upload → AI summarizes, flags abnormal values, suggests doctor questions.
-- `/app/timeline` — chronological events (uploads, reminders taken).
-- `/app/reminders` — CRUD + times + before/after food.
-- `/app/profile` — name, DOB, blood group, allergies, emergency contact.
-- Premium Apple-style UI reusing existing tokens; sidebar nav via shadcn sidebar.
-
-## Phase 3 — Pharmacy Portal
-- Pharmacy registration form + `pharmacies` table with `approved` flag (admin-approved before login access to portal).
-- Layout `_authenticated/pharmacy/*` gated by `has_role('pharmacy')` + approval.
-- Pages: Dashboard (KPIs + charts via recharts), Inventory (CRUD, CSV upload, low-stock/expiry alerts), Orders (status workflow), Customers, Analytics, Medicine Requests, Payments, Settings, Support.
-- Tables: `pharmacies`, `inventory`, `orders`, `order_items`, `customers`, `payments`, `medicine_requests`, `delivery` — all with RLS scoped to `pharmacy_id`.
-- AI: server fns for stock prediction, demand forecast, expiry alerts, sales insights (Gemini, using inventory + orders summaries).
-
-## Phase 4 — Patient ↔ Pharmacy integration
-- Medicine search across approved pharmacies with stock, distance (haversine), rating, ETA.
-- Order placement flow from patient → pharmacy inbox.
-
-## Technical notes
-- Stack stays TanStack Start (not Next.js — the request said Next but the project is TanStack; I'll keep TanStack unless you want a rewrite).
-- AI via Lovable AI Gateway, `google/gemini-3-flash-preview` for vision + text.
-- All file uploads use signed URLs; AI runs in `createServerFn` with `requireSupabaseAuth`.
-- Dark mode toggle, framer-motion for transitions, recharts for analytics.
-
-## What I'll do right now if you approve
-Execute **Phase 1 + Phase 2** end-to-end in this turn (auth, schema, storage, all 6 patient pages, AI prescription + report analysis). Phases 3 and 4 in follow-up turns because the pharmacy portal alone is ~15 screens and needs its own review cycle.
-
-Reply "go" to start Phase 1+2, or tell me a different split (e.g. "pharmacy portal first", or "just auth + dashboard shell this turn").
+## Technical approach
+- Reuse Lovable Cloud auth and existing roles, profiles, route shells, catalog pages, and database structures where they fit; do not trust signup metadata to grant a role.
+- Apply additive database changes through the managed migration workflow with explicit grants before RLS and ownership-scoped policies. Keep role assignment and verification actions server/database enforced.
+- Store identity-linked provider details; never expose private contact data or verification files in public listings. Use private storage and authorization checks rather than public file URLs.
+- Preserve current patient functionality and existing `/lab` links. Do not present demo rows or disconnected appointment/payment actions as live data.
