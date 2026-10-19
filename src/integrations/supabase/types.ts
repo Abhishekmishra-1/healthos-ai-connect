@@ -166,9 +166,19 @@ export type Database = {
           address: string | null
           city: string | null
           created_at: string
+          description: string | null
+          district: string | null
+          home_collection: boolean
+          home_collection_areas: string | null
+          home_collection_charge: number | null
           id: string
+          lab_type: string | null
+          maps_url: string | null
           name: string
           phone: string | null
+          pincode: string | null
+          services: string | null
+          state: string | null
           updated_at: string
         }
         Insert: {
@@ -176,9 +186,19 @@ export type Database = {
           address?: string | null
           city?: string | null
           created_at?: string
+          description?: string | null
+          district?: string | null
+          home_collection?: boolean
+          home_collection_areas?: string | null
+          home_collection_charge?: number | null
           id?: string
+          lab_type?: string | null
+          maps_url?: string | null
           name: string
           phone?: string | null
+          pincode?: string | null
+          services?: string | null
+          state?: string | null
           updated_at?: string
         }
         Update: {
@@ -186,9 +206,19 @@ export type Database = {
           address?: string | null
           city?: string | null
           created_at?: string
+          description?: string | null
+          district?: string | null
+          home_collection?: boolean
+          home_collection_areas?: string | null
+          home_collection_charge?: number | null
           id?: string
+          lab_type?: string | null
+          maps_url?: string | null
           name?: string
           phone?: string | null
+          pincode?: string | null
+          services?: string | null
+          state?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -772,6 +802,311 @@ export type Database = {
         }
         Relationships: []
       }
+      provider_doctor_profiles: {
+        Row: {
+          additional_certificates: Json
+          available_days: string | null
+          biography: string | null
+          certificate_path: string | null
+          city: string | null
+          clinic_name: string | null
+          created_at: string
+          designation: string | null
+          district: string | null
+          experience_years: number
+          expertise: string | null
+          followup_fee: number | null
+          full_name: string
+          id: string
+          in_person_available: boolean
+          in_person_fee: number | null
+          issuing_authority: string | null
+          languages: string | null
+          maps_url: string | null
+          medical_category: string | null
+          online_available: boolean
+          online_fee: number | null
+          owner_user_id: string
+          phone: string | null
+          pincode: string | null
+          practice_address: string | null
+          preferred_contact: string | null
+          profile_photo_path: string | null
+          qualifications: string | null
+          registered_email: string | null
+          registration_number: string | null
+          rejection_reason: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          specialty: string | null
+          state: string | null
+          status: string
+          submitted_at: string | null
+          updated_at: string
+          working_hours: string | null
+        }
+        Insert: {
+          additional_certificates?: Json
+          available_days?: string | null
+          biography?: string | null
+          certificate_path?: string | null
+          city?: string | null
+          clinic_name?: string | null
+          created_at?: string
+          designation?: string | null
+          district?: string | null
+          experience_years?: number
+          expertise?: string | null
+          followup_fee?: number | null
+          full_name?: string
+          id?: string
+          in_person_available?: boolean
+          in_person_fee?: number | null
+          issuing_authority?: string | null
+          languages?: string | null
+          maps_url?: string | null
+          medical_category?: string | null
+          online_available?: boolean
+          online_fee?: number | null
+          owner_user_id: string
+          phone?: string | null
+          pincode?: string | null
+          practice_address?: string | null
+          preferred_contact?: string | null
+          profile_photo_path?: string | null
+          qualifications?: string | null
+          registered_email?: string | null
+          registration_number?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          specialty?: string | null
+          state?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          working_hours?: string | null
+        }
+        Update: {
+          additional_certificates?: Json
+          available_days?: string | null
+          biography?: string | null
+          certificate_path?: string | null
+          city?: string | null
+          clinic_name?: string | null
+          created_at?: string
+          designation?: string | null
+          district?: string | null
+          experience_years?: number
+          expertise?: string | null
+          followup_fee?: number | null
+          full_name?: string
+          id?: string
+          in_person_available?: boolean
+          in_person_fee?: number | null
+          issuing_authority?: string | null
+          languages?: string | null
+          maps_url?: string | null
+          medical_category?: string | null
+          online_available?: boolean
+          online_fee?: number | null
+          owner_user_id?: string
+          phone?: string | null
+          pincode?: string | null
+          practice_address?: string | null
+          preferred_contact?: string | null
+          profile_photo_path?: string | null
+          qualifications?: string | null
+          registered_email?: string | null
+          registration_number?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          specialty?: string | null
+          state?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          working_hours?: string | null
+        }
+        Relationships: []
+      }
+      provider_lab_profiles: {
+        Row: {
+          accreditation_certificate_path: string | null
+          accreditation_details: string | null
+          address: string | null
+          business_email: string | null
+          business_phone: string | null
+          certificate_path: string | null
+          city: string | null
+          contact_person: string | null
+          cover_path: string | null
+          created_at: string
+          description: string | null
+          district: string | null
+          home_collection: boolean
+          home_collection_areas: string | null
+          home_collection_charge: number | null
+          id: string
+          issuing_authority: string | null
+          lab_name: string
+          lab_type: string | null
+          logo_path: string | null
+          maps_url: string | null
+          opening_hours: string | null
+          owner_user_id: string
+          pincode: string | null
+          registration_number: string | null
+          rejection_reason: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          services: string | null
+          state: string | null
+          status: string
+          submitted_at: string | null
+          updated_at: string
+          weekly_schedule: string | null
+        }
+        Insert: {
+          accreditation_certificate_path?: string | null
+          accreditation_details?: string | null
+          address?: string | null
+          business_email?: string | null
+          business_phone?: string | null
+          certificate_path?: string | null
+          city?: string | null
+          contact_person?: string | null
+          cover_path?: string | null
+          created_at?: string
+          description?: string | null
+          district?: string | null
+          home_collection?: boolean
+          home_collection_areas?: string | null
+          home_collection_charge?: number | null
+          id?: string
+          issuing_authority?: string | null
+          lab_name?: string
+          lab_type?: string | null
+          logo_path?: string | null
+          maps_url?: string | null
+          opening_hours?: string | null
+          owner_user_id: string
+          pincode?: string | null
+          registration_number?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          services?: string | null
+          state?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          weekly_schedule?: string | null
+        }
+        Update: {
+          accreditation_certificate_path?: string | null
+          accreditation_details?: string | null
+          address?: string | null
+          business_email?: string | null
+          business_phone?: string | null
+          certificate_path?: string | null
+          city?: string | null
+          contact_person?: string | null
+          cover_path?: string | null
+          created_at?: string
+          description?: string | null
+          district?: string | null
+          home_collection?: boolean
+          home_collection_areas?: string | null
+          home_collection_charge?: number | null
+          id?: string
+          issuing_authority?: string | null
+          lab_name?: string
+          lab_type?: string | null
+          logo_path?: string | null
+          maps_url?: string | null
+          opening_hours?: string | null
+          owner_user_id?: string
+          pincode?: string | null
+          registration_number?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          services?: string | null
+          state?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          weekly_schedule?: string | null
+        }
+        Relationships: []
+      }
+      provider_lab_tests: {
+        Row: {
+          active: boolean
+          category: string | null
+          created_at: string
+          description: string | null
+          discounted_price: number | null
+          fasting_instructions: string | null
+          home_collection: boolean
+          home_collection_charge: number | null
+          id: string
+          lab_id: string
+          name: string
+          prescription_required: boolean
+          price: number
+          sample_type: string | null
+          turnaround_time: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          discounted_price?: number | null
+          fasting_instructions?: string | null
+          home_collection?: boolean
+          home_collection_charge?: number | null
+          id?: string
+          lab_id: string
+          name: string
+          prescription_required?: boolean
+          price: number
+          sample_type?: string | null
+          turnaround_time?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          discounted_price?: number | null
+          fasting_instructions?: string | null
+          home_collection?: boolean
+          home_collection_charge?: number | null
+          id?: string
+          lab_id?: string
+          name?: string
+          prescription_required?: boolean
+          price?: number
+          sample_type?: string | null
+          turnaround_time?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_lab_tests_lab_id_fkey"
+            columns: ["lab_id"]
+            isOneToOne: false
+            referencedRelation: "provider_lab_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       role_requests: {
         Row: {
           created_at: string
@@ -851,6 +1186,22 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      is_provider_doctor_published: {
+        Args: { p_doctor_id: string }
+        Returns: boolean
+      }
+      is_provider_lab_published: {
+        Args: { p_lab_id: string }
+        Returns: boolean
+      }
+      review_doctor_application: {
+        Args: { p_decision: string; p_profile_id: string; p_reason?: string }
+        Returns: undefined
+      }
+      review_lab_application: {
+        Args: { p_decision: string; p_profile_id: string; p_reason?: string }
+        Returns: undefined
       }
     }
     Enums: {
