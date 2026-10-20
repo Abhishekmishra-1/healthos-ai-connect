@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
-import { BarChart3, CalendarCheck, TestTube, FileText, Wallet } from "lucide-react";
+import { User, ListChecks, BarChart3, CalendarCheck, TestTube, FileText, Wallet } from "lucide-react";
 import { RoleShell, type NavItem } from "@/components/site/role-shell";
 const nav: NavItem[] = [
   { to: "/lab/dashboard", label: "Dashboard", icon: BarChart3 },
@@ -8,6 +8,8 @@ const nav: NavItem[] = [
   { to: "/lab/collection", label: "Sample Collection", icon: TestTube },
   { to: "/lab/reports", label: "Reports", icon: FileText },
   { to: "/lab/payments", label: "Payments", icon: Wallet },
+  { to: "/lab/tests", label: "My Tests", icon: ListChecks },
+  { to: "/lab/profile", label: "Profile & Verification", icon: User },
 ];
 export const Route = createFileRoute("/_authenticated/lab")({
   beforeLoad: async ({ location }) => {
@@ -21,5 +23,5 @@ export const Route = createFileRoute("/_authenticated/lab")({
     }
     if (!data) throw redirect({ to: "/dashboard" });
   },
-  component: () => <RoleShell roleLabel="Lab" sideNav={nav} bottomNav={nav} profileTo="/lab/dashboard" />,
+  component: () => <RoleShell roleLabel="Lab" sideNav={nav} bottomNav={[nav[0], nav[1], nav[5], nav[6]]} profileTo="/lab/profile" />,
 });

@@ -19,6 +19,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as HospitalLoginRouteImport } from './routes/hospital-login'
+import { Route as LaboratoryRouteImport } from './routes/laboratory'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -41,6 +42,7 @@ import { Route as AuthenticatedAdminMedicinesRouteImport } from './routes/_authe
 import { Route as AuthenticatedAdminPharmaciesRouteImport } from './routes/_authenticated/admin/pharmacies'
 import { Route as AuthenticatedAdminTestsRouteImport } from './routes/_authenticated/admin/tests'
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
+import { Route as AuthenticatedAdminVerificationsRouteImport } from './routes/_authenticated/admin/verifications'
 import { Route as AuthenticatedDoctorCalendarRouteImport } from './routes/_authenticated/doctor/calendar'
 import { Route as AuthenticatedDoctorDashboardRouteImport } from './routes/_authenticated/doctor/dashboard'
 import { Route as AuthenticatedDoctorEarningsRouteImport } from './routes/_authenticated/doctor/earnings'
@@ -70,7 +72,9 @@ import { Route as AuthenticatedLabBookingsRouteImport } from './routes/_authenti
 import { Route as AuthenticatedLabCollectionRouteImport } from './routes/_authenticated/lab/collection'
 import { Route as AuthenticatedLabDashboardRouteImport } from './routes/_authenticated/lab/dashboard'
 import { Route as AuthenticatedLabPaymentsRouteImport } from './routes/_authenticated/lab/payments'
+import { Route as AuthenticatedLabProfileRouteImport } from './routes/_authenticated/lab/profile'
 import { Route as AuthenticatedLabReportsRouteImport } from './routes/_authenticated/lab/reports'
+import { Route as AuthenticatedLabTestsRouteImport } from './routes/_authenticated/lab/tests'
 import { Route as AuthenticatedPatientAiAssistantRouteImport } from './routes/_authenticated/patient/ai-assistant'
 import { Route as AuthenticatedPatientAppointmentsRouteImport } from './routes/_authenticated/patient/appointments'
 import { Route as AuthenticatedPatientDashboardRouteImport } from './routes/_authenticated/patient/dashboard'
@@ -144,6 +148,11 @@ const FeaturesRoute = FeaturesRouteImport.update({
 const HospitalLoginRoute = HospitalLoginRouteImport.update({
   id: '/hospital-login',
   path: '/hospital-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaboratoryRoute = LaboratoryRouteImport.update({
+  id: '/laboratory',
+  path: '/laboratory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -265,6 +274,12 @@ const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminVerificationsRoute =
+  AuthenticatedAdminVerificationsRouteImport.update({
+    id: '/verifications',
+    path: '/verifications',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedDoctorCalendarRoute =
   AuthenticatedDoctorCalendarRouteImport.update({
     id: '/calendar',
@@ -439,9 +454,19 @@ const AuthenticatedLabPaymentsRoute =
     path: '/payments',
     getParentRoute: () => AuthenticatedLabRouteRoute,
   } as any)
+const AuthenticatedLabProfileRoute = AuthenticatedLabProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedLabRouteRoute,
+} as any)
 const AuthenticatedLabReportsRoute = AuthenticatedLabReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
+  getParentRoute: () => AuthenticatedLabRouteRoute,
+} as any)
+const AuthenticatedLabTestsRoute = AuthenticatedLabTestsRouteImport.update({
+  id: '/tests',
+  path: '/tests',
   getParentRoute: () => AuthenticatedLabRouteRoute,
 } as any)
 const AuthenticatedPatientAiAssistantRoute =
@@ -605,6 +630,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
   '/hospital-login': typeof HospitalLoginRoute
+  '/laboratory': typeof LaboratoryRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
@@ -627,6 +653,7 @@ export interface FileRoutesByFullPath {
   '/admin/pharmacies': typeof AuthenticatedAdminPharmaciesRoute
   '/admin/tests': typeof AuthenticatedAdminTestsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRouteWithChildren
+  '/admin/verifications': typeof AuthenticatedAdminVerificationsRoute
   '/doctor/calendar': typeof AuthenticatedDoctorCalendarRoute
   '/doctor/dashboard': typeof AuthenticatedDoctorDashboardRoute
   '/doctor/earnings': typeof AuthenticatedDoctorEarningsRoute
@@ -656,7 +683,9 @@ export interface FileRoutesByFullPath {
   '/lab/collection': typeof AuthenticatedLabCollectionRoute
   '/lab/dashboard': typeof AuthenticatedLabDashboardRoute
   '/lab/payments': typeof AuthenticatedLabPaymentsRoute
+  '/lab/profile': typeof AuthenticatedLabProfileRoute
   '/lab/reports': typeof AuthenticatedLabReportsRoute
+  '/lab/tests': typeof AuthenticatedLabTestsRoute
   '/patient/ai-assistant': typeof AuthenticatedPatientAiAssistantRoute
   '/patient/appointments': typeof AuthenticatedPatientAppointmentsRoute
   '/patient/dashboard': typeof AuthenticatedPatientDashboardRoute
@@ -693,6 +722,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
   '/hospital-login': typeof HospitalLoginRoute
+  '/laboratory': typeof LaboratoryRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
@@ -715,6 +745,7 @@ export interface FileRoutesByTo {
   '/admin/pharmacies': typeof AuthenticatedAdminPharmaciesRoute
   '/admin/tests': typeof AuthenticatedAdminTestsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRouteWithChildren
+  '/admin/verifications': typeof AuthenticatedAdminVerificationsRoute
   '/doctor/calendar': typeof AuthenticatedDoctorCalendarRoute
   '/doctor/dashboard': typeof AuthenticatedDoctorDashboardRoute
   '/doctor/earnings': typeof AuthenticatedDoctorEarningsRoute
@@ -744,7 +775,9 @@ export interface FileRoutesByTo {
   '/lab/collection': typeof AuthenticatedLabCollectionRoute
   '/lab/dashboard': typeof AuthenticatedLabDashboardRoute
   '/lab/payments': typeof AuthenticatedLabPaymentsRoute
+  '/lab/profile': typeof AuthenticatedLabProfileRoute
   '/lab/reports': typeof AuthenticatedLabReportsRoute
+  '/lab/tests': typeof AuthenticatedLabTestsRoute
   '/patient/ai-assistant': typeof AuthenticatedPatientAiAssistantRoute
   '/patient/appointments': typeof AuthenticatedPatientAppointmentsRoute
   '/patient/dashboard': typeof AuthenticatedPatientDashboardRoute
@@ -783,6 +816,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
   '/hospital-login': typeof HospitalLoginRoute
+  '/laboratory': typeof LaboratoryRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
@@ -805,6 +839,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/pharmacies': typeof AuthenticatedAdminPharmaciesRoute
   '/_authenticated/admin/tests': typeof AuthenticatedAdminTestsRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRouteWithChildren
+  '/_authenticated/admin/verifications': typeof AuthenticatedAdminVerificationsRoute
   '/_authenticated/doctor/calendar': typeof AuthenticatedDoctorCalendarRoute
   '/_authenticated/doctor/dashboard': typeof AuthenticatedDoctorDashboardRoute
   '/_authenticated/doctor/earnings': typeof AuthenticatedDoctorEarningsRoute
@@ -834,7 +869,9 @@ export interface FileRoutesById {
   '/_authenticated/lab/collection': typeof AuthenticatedLabCollectionRoute
   '/_authenticated/lab/dashboard': typeof AuthenticatedLabDashboardRoute
   '/_authenticated/lab/payments': typeof AuthenticatedLabPaymentsRoute
+  '/_authenticated/lab/profile': typeof AuthenticatedLabProfileRoute
   '/_authenticated/lab/reports': typeof AuthenticatedLabReportsRoute
+  '/_authenticated/lab/tests': typeof AuthenticatedLabTestsRoute
   '/_authenticated/patient/ai-assistant': typeof AuthenticatedPatientAiAssistantRoute
   '/_authenticated/patient/appointments': typeof AuthenticatedPatientAppointmentsRoute
   '/_authenticated/patient/dashboard': typeof AuthenticatedPatientDashboardRoute
@@ -873,6 +910,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/features'
     | '/hospital-login'
+    | '/laboratory'
     | '/login'
     | '/partners'
     | '/pricing'
@@ -895,6 +933,7 @@ export interface FileRouteTypes {
     | '/admin/pharmacies'
     | '/admin/tests'
     | '/admin/users'
+    | '/admin/verifications'
     | '/doctor/calendar'
     | '/doctor/dashboard'
     | '/doctor/earnings'
@@ -924,7 +963,9 @@ export interface FileRouteTypes {
     | '/lab/collection'
     | '/lab/dashboard'
     | '/lab/payments'
+    | '/lab/profile'
     | '/lab/reports'
+    | '/lab/tests'
     | '/patient/ai-assistant'
     | '/patient/appointments'
     | '/patient/dashboard'
@@ -961,6 +1002,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/features'
     | '/hospital-login'
+    | '/laboratory'
     | '/login'
     | '/partners'
     | '/pricing'
@@ -983,6 +1025,7 @@ export interface FileRouteTypes {
     | '/admin/pharmacies'
     | '/admin/tests'
     | '/admin/users'
+    | '/admin/verifications'
     | '/doctor/calendar'
     | '/doctor/dashboard'
     | '/doctor/earnings'
@@ -1012,7 +1055,9 @@ export interface FileRouteTypes {
     | '/lab/collection'
     | '/lab/dashboard'
     | '/lab/payments'
+    | '/lab/profile'
     | '/lab/reports'
+    | '/lab/tests'
     | '/patient/ai-assistant'
     | '/patient/appointments'
     | '/patient/dashboard'
@@ -1050,6 +1095,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/features'
     | '/hospital-login'
+    | '/laboratory'
     | '/login'
     | '/partners'
     | '/pricing'
@@ -1072,6 +1118,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/pharmacies'
     | '/_authenticated/admin/tests'
     | '/_authenticated/admin/users'
+    | '/_authenticated/admin/verifications'
     | '/_authenticated/doctor/calendar'
     | '/_authenticated/doctor/dashboard'
     | '/_authenticated/doctor/earnings'
@@ -1101,7 +1148,9 @@ export interface FileRouteTypes {
     | '/_authenticated/lab/collection'
     | '/_authenticated/lab/dashboard'
     | '/_authenticated/lab/payments'
+    | '/_authenticated/lab/profile'
     | '/_authenticated/lab/reports'
+    | '/_authenticated/lab/tests'
     | '/_authenticated/patient/ai-assistant'
     | '/_authenticated/patient/appointments'
     | '/_authenticated/patient/dashboard'
@@ -1140,6 +1189,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   FeaturesRoute: typeof FeaturesRoute
   HospitalLoginRoute: typeof HospitalLoginRoute
+  LaboratoryRoute: typeof LaboratoryRoute
   LoginRoute: typeof LoginRoute
   PartnersRoute: typeof PartnersRoute
   PricingRoute: typeof PricingRoute
@@ -1220,6 +1270,13 @@ declare module '@tanstack/react-router' {
       path: '/hospital-login'
       fullPath: '/hospital-login'
       preLoaderRoute: typeof HospitalLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laboratory': {
+      id: '/laboratory'
+      path: '/laboratory'
+      fullPath: '/laboratory'
+      preLoaderRoute: typeof LaboratoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -1374,6 +1431,13 @@ declare module '@tanstack/react-router' {
       path: '/users'
       fullPath: '/admin/users'
       preLoaderRoute: typeof AuthenticatedAdminUsersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/verifications': {
+      id: '/_authenticated/admin/verifications'
+      path: '/verifications'
+      fullPath: '/admin/verifications'
+      preLoaderRoute: typeof AuthenticatedAdminVerificationsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/doctor/calendar': {
@@ -1579,11 +1643,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLabPaymentsRouteImport
       parentRoute: typeof AuthenticatedLabRouteRoute
     }
+    '/_authenticated/lab/profile': {
+      id: '/_authenticated/lab/profile'
+      path: '/profile'
+      fullPath: '/lab/profile'
+      preLoaderRoute: typeof AuthenticatedLabProfileRouteImport
+      parentRoute: typeof AuthenticatedLabRouteRoute
+    }
     '/_authenticated/lab/reports': {
       id: '/_authenticated/lab/reports'
       path: '/reports'
       fullPath: '/lab/reports'
       preLoaderRoute: typeof AuthenticatedLabReportsRouteImport
+      parentRoute: typeof AuthenticatedLabRouteRoute
+    }
+    '/_authenticated/lab/tests': {
+      id: '/_authenticated/lab/tests'
+      path: '/tests'
+      fullPath: '/lab/tests'
+      preLoaderRoute: typeof AuthenticatedLabTestsRouteImport
       parentRoute: typeof AuthenticatedLabRouteRoute
     }
     '/_authenticated/patient/ai-assistant': {
@@ -1787,6 +1865,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminPharmaciesRoute: typeof AuthenticatedAdminPharmaciesRoute
   AuthenticatedAdminTestsRoute: typeof AuthenticatedAdminTestsRoute
   AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRouteWithChildren
+  AuthenticatedAdminVerificationsRoute: typeof AuthenticatedAdminVerificationsRoute
 }
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
@@ -1799,6 +1878,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminPharmaciesRoute: AuthenticatedAdminPharmaciesRoute,
     AuthenticatedAdminTestsRoute: AuthenticatedAdminTestsRoute,
     AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRouteWithChildren,
+    AuthenticatedAdminVerificationsRoute: AuthenticatedAdminVerificationsRoute,
   }
 
 const AuthenticatedAdminRouteRouteWithChildren =
@@ -1889,7 +1969,9 @@ interface AuthenticatedLabRouteRouteChildren {
   AuthenticatedLabCollectionRoute: typeof AuthenticatedLabCollectionRoute
   AuthenticatedLabDashboardRoute: typeof AuthenticatedLabDashboardRoute
   AuthenticatedLabPaymentsRoute: typeof AuthenticatedLabPaymentsRoute
+  AuthenticatedLabProfileRoute: typeof AuthenticatedLabProfileRoute
   AuthenticatedLabReportsRoute: typeof AuthenticatedLabReportsRoute
+  AuthenticatedLabTestsRoute: typeof AuthenticatedLabTestsRoute
 }
 
 const AuthenticatedLabRouteRouteChildren: AuthenticatedLabRouteRouteChildren = {
@@ -1897,7 +1979,9 @@ const AuthenticatedLabRouteRouteChildren: AuthenticatedLabRouteRouteChildren = {
   AuthenticatedLabCollectionRoute: AuthenticatedLabCollectionRoute,
   AuthenticatedLabDashboardRoute: AuthenticatedLabDashboardRoute,
   AuthenticatedLabPaymentsRoute: AuthenticatedLabPaymentsRoute,
+  AuthenticatedLabProfileRoute: AuthenticatedLabProfileRoute,
   AuthenticatedLabReportsRoute: AuthenticatedLabReportsRoute,
+  AuthenticatedLabTestsRoute: AuthenticatedLabTestsRoute,
 }
 
 const AuthenticatedLabRouteRouteWithChildren =
@@ -2012,6 +2096,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   FeaturesRoute: FeaturesRoute,
   HospitalLoginRoute: HospitalLoginRoute,
+  LaboratoryRoute: LaboratoryRoute,
   LoginRoute: LoginRoute,
   PartnersRoute: PartnersRoute,
   PricingRoute: PricingRoute,

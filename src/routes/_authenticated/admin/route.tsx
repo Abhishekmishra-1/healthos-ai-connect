@@ -1,11 +1,12 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, Stethoscope, Pill, FlaskConical, Hospital, Building2, TestTube2, Users } from "lucide-react";
+import { LayoutDashboard, Stethoscope, Pill, FlaskConical, Hospital, Building2, TestTube2, Users, ShieldCheck } from "lucide-react";
 import { RoleShell, type NavItem } from "@/components/site/role-shell";
 
 const nav: NavItem[] = [
   { to: "/admin/dashboard", label: "Overview", icon: LayoutDashboard },
   { to: "/admin/users", label: "Users", icon: Users },
+  { to: "/admin/verifications", label: "Verifications", icon: ShieldCheck },
   { to: "/admin/doctors", label: "Doctors", icon: Stethoscope },
   { to: "/admin/pharmacies", label: "Pharmacies", icon: Pill },
   { to: "/admin/labs", label: "Labs", icon: FlaskConical },
