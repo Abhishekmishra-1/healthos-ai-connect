@@ -43,6 +43,13 @@
       "when": 1792433545918,
       "tag": "0005_provider_profiles_verification",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793302829347,
+      "tag": "0006_fix_role_landing_bootstrap",
+      "breakpoints": true
     }
   ]
 }

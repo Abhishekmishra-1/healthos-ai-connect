@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { Sparkles, Loader2, User, Stethoscope, Pill, FlaskConical, Hospital, Mail, Phone } from "lucide-react";
 import { toast } from "sonner";
+import { pickPrimaryRole, dashboardFor } from "@/lib/role-landing";
 
 /** Turn Supabase auth errors into plain language for first-time users. */
 function friendlyAuthError(err: any): string {
