@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { Sparkles, Loader2, User, Stethoscope, Pill, FlaskConical, Hospital, Mail, Phone } from "lucide-react";
 import { toast } from "sonner";
+import { pickPrimaryRole, dashboardFor } from "@/lib/role-landing";
 
 /** Turn Supabase auth errors into plain language for first-time users. */
 function friendlyAuthError(err: any): string {
@@ -52,16 +53,10 @@ function AuthPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const roleMap: Record<string, string> = {
-      patient: "/patient/dashboard",
-      doctor: "/doctor/dashboard",
-      pharmacy: "/pharmacy/dashboard",
-      lab: "/lab/dashboard",
-      hospital: "/hospital/dashboard",
-    };
     const go = async (userId: string) => {
       // New accounts get their profile + patient access created here
-      // (roles are never granted from client metadata).
+      // (roles are never granted from client metadata). The RPC returns the
+      // user's highest-priority role.
       const { data: bootstrapped } = await supabase.rpc("bootstrap_current_user");
       if (safeRedirect) {
         navigate({ to: safeRedirect } as never);
@@ -69,10 +64,10 @@ function AuthPage() {
       }
       let r = (bootstrapped as string | null) ?? null;
       if (!r) {
-        const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId).limit(1).maybeSingle();
-        r = (data?.role as string) ?? "patient";
+        const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId);
+        r = pickPrimaryRole(((data ?? []) as { role: string }[]).map((row) => row.role));
       }
-      navigate({ to: roleMap[r] ?? "/patient/dashboard" });
+      navigate({ to: dashboardFor(r) });
     };
     supabase.auth.getSession().then(({ data }) => { if (data.session) go(data.session.user.id); });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => { if (session) go(session.user.id); });
@@ -96,7 +91,7 @@ function AuthPage() {
         toast.success(
           role === "patient"
             ? "Account created. You're signed in."
-            : "Account created as a patient. Your professional account request is pending admin approval.",
+            : `Account created. Welcome to your ${role.charAt(0).toUpperCase() + role.slice(1)} workspace.`,
         );
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });

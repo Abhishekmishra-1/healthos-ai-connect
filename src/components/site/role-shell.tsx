@@ -5,6 +5,7 @@ import { Sparkles, Menu, X, Search, Bell, LogOut, Accessibility, type LucideIcon
 import { cn } from "@/lib/utils";
 import { useElderlyMode } from "@/hooks/use-elderly-mode";
 import { ThemeToggle } from "@/components/site/theme-toggle";
+import { pickPrimaryRole, dashboardFor, ROLE_LABELS } from "@/lib/role-landing";
 
 export type NavItem = { to: string; label: string; icon: LucideIcon };
 
@@ -24,13 +25,18 @@ export function RoleShell({
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [roles, setRoles] = useState<string[]>([]);
   const elderly = useElderlyMode();
 
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getUser().then(async ({ data }) => {
       setEmail(data.user?.email ?? "");
       setName((((data.user?.user_metadata as any)?.full_name) ?? data.user?.email?.split("@")[0] ?? "") as string);
+      if (data.user) {
+        const { data: rr } = await supabase.from("user_roles").select("role").eq("user_id", data.user.id);
+        setRoles(((rr ?? []) as { role: string }[]).map((row) => row.role));
+      }
     });
   }, []);
 
@@ -97,6 +103,19 @@ export function RoleShell({
               >
                 <Accessibility className="h-5 w-5" />
               </button>
+              {roles.length > 1 && (
+                <select
+                  value={pickPrimaryRole(roles)}
+                  onChange={(e) => navigate({ to: dashboardFor(e.target.value) } as never)}
+                  aria-label="Switch workspace"
+                  title="Switch workspace"
+                  className="h-10 shrink-0 rounded-full border border-border/60 bg-secondary/50 px-3 text-sm font-medium outline-none focus:bg-background focus:ring-2 focus:ring-primary/40"
+                >
+                  {roles.map((r) => (
+                    <option key={r} value={r}>{ROLE_LABELS[r] ?? r}</option>
+                  ))}
+                </select>
+              )}
               <ThemeToggle />
               <button className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full hover:bg-secondary" aria-label="Notifications">
                 <Bell className="h-5 w-5" />
