@@ -91,7 +91,7 @@ function AuthPage() {
         toast.success(
           role === "patient"
             ? "Account created. You're signed in."
-            : "Account created as a patient. Your professional account request is pending admin approval.",
+            : `Account created. Welcome to your ${role.charAt(0).toUpperCase() + role.slice(1)} workspace.`,
         );
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
